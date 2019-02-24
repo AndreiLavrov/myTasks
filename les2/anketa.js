@@ -7,7 +7,8 @@ function profile() {
     var firstName, lastName, fatherName, dateOfBirth, userAgeYears, userAgeDays, userAgeYearsAfter,
         gender, retiree;
 
-    /*to check for empty line, cancel input, only letters*/
+    /*to check for empty line, cancel input, only letters...
+    * using 'while' for recall the case of incorrect input again*/
     function validate(res) {
 
         while (res === null || res === '' || res.search(/[^a-zA-Z]/g) >= 0)  {
@@ -17,7 +18,8 @@ function profile() {
         return res;
     }
 
-    /*revers and check length date of birth, for empty line, cancel input*/
+    /*revers and check length date of birth, for empty line, cancel input
+    * using 'while' for recall the case of incorrect input again*/
     function validDate(str) {
 
         var arr = str.split('.');
