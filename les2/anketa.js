@@ -7,12 +7,13 @@ function profile() {
     var firstName, lastName, fatherName, dateOfBirth, userAgeYears, userAgeDays, userAgeYearsAfter,
         gender, retiree;
 
+    var arrFullName = ['Andrei', 'Laurou', 'Valeryevich'];
     /*to check for empty line, cancel input, only letters...
     * using 'while' for recall the case of incorrect input again*/
-    function validate(res) {
+    function validate(res, inpName) {
 
         while (res === null || res === '' || res.search(/[^a-zA-Z]/g) >= 0)  {
-            res = prompt('Incorrect input, enter valid data ', 'Name');
+            res = prompt('Incorrect input, enter valid data ', inpName);
         }
 
         return res;
@@ -22,17 +23,16 @@ function profile() {
     * using 'while' for recall the case of incorrect input again*/
     function validDate(str) {
 
+        // var str = str;
         var arr = str.split('.');
+        var pattern = /([0-3]?[0-9])[\.]([0-1]?[0-9])[\.]\d{4}/g;
 
-        while (str === null || str === '' || isNaN(arr[0] + arr[1] + arr[2]) ||
-        arr[2].length > 4 || arr[1].length > 2 || arr[0].length > 2 ||
-        arr[0] > 31 ||  arr[1] > 12 || arr[2] > new Date().getFullYear()) {
+        while (str === null || str === '' || !pattern.test(str) || arr[2] > new Date().getFullYear()) {
 
-            arr = prompt('Incorrect input, enter valid data ', '18.06.1991').split('.');
+            str = prompt('Incorrect input, enter valid data ', '18.06.1991');
         }
 
         return arr.reverse();
-
     }
 
     /*create date object and translate milliseconds*/
@@ -59,9 +59,9 @@ function profile() {
         return (Years >= ageRetiree)? 'yes':'no';
     }
 
-    firstName =  validate(prompt('What is your first name?', 'Andrei') );
-    lastName = validate(prompt('What is your last name?', 'Laurou') );
-    fatherName = validate(prompt('What is your name on the father?', 'Valeryevich') );
+    firstName =  validate(prompt('What is your first name?', arrFullName[0]), arrFullName[0]);
+    lastName = validate(prompt('What is your last name?', arrFullName[1]), arrFullName[1]);
+    fatherName = validate(prompt('What is your name on the father?', arrFullName[2]), arrFullName[2]);
     dateOfBirth = validDate(prompt('What is your date of birth?', '18.06.1991'));
 
     getUserAge(dateOfBirth);
