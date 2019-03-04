@@ -67,15 +67,15 @@ function getRetiree (Years) {
 	fatherName = validate(prompt('What is your name on the father?', arrFullName[2] ), arrFullName[2] );
 	dateOfBirth = validDate(prompt('What is your date of birth?', '18.06.1991') );
 */
-getUserAge(dateOfBirth);
+/*getUserAge(dateOfBirth);
 
 gender = getGender();
-retiree = getRetiree(userAgeYears);
+retiree = getRetiree(userAgeYears);*/
 
-alert(` ваше ФИО: ${firstName} ${lastName} ${fatherName}\r\n` +
+/*alert(` ваше ФИО: ${firstName} ${lastName} ${fatherName}\r\n` +
         ` ваш возраст в годах: ${userAgeYears}\r\n` +
         ` ваш возраст в днях: ${userAgeDays}\r\n` +
         ` через 5 лет вам будет: ${userAgeYearsAfter}\r\n` +
         ` ваш пол: ${gender}\r\n` +
-        ` вы на пенсии: ${retiree}`);
+        ` вы на пенсии: ${retiree}`);*/
 
