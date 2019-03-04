@@ -103,3 +103,17 @@ describe('anketaTest.js -> getUserAge -> get user age  ', function () {
 
 });
 
+describe('anketaTest.js -> getRetiree -> get correct retiree  ', function () {
+
+	it('is not retired', function () {
+		let retAge = getRetiree(57);
+		expect(retAge).toEqual('no');
+	} );
+
+	it('is retired', function () {
+		let retAge = getRetiree(59);
+		expect(retAge).toEqual( 'yes');
+	} );
+
+
+});
