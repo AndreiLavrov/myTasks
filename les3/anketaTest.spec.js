@@ -1,4 +1,4 @@
-xdescribe('anketaTest.js -> validate -> result of data entry ', function () {
+describe('anketaTest.js -> validate -> result of data entry ', function () {
 	let myResul = false;
 	beforeEach(function () {
 
@@ -30,7 +30,7 @@ xdescribe('anketaTest.js -> validate -> result of data entry ', function () {
 	} );
 } );
 
-xdescribe('anketaTest.js -> validDate -> result of data entry ', function () {
+describe('anketaTest.js -> validDate -> result of data entry ', function () {
 	let myResul = false;
 	beforeEach(function () {
 
@@ -70,4 +70,36 @@ xdescribe('anketaTest.js -> validDate -> result of data entry ', function () {
 
 });
 
+describe('anketaTest.js -> getUserAge -> get user age  ', function () {
+	beforeEach(function () {
+		let userAgeDays;
+		let userAgeYears;
+		let userAgeYearsAfter;
+		let todayDate = ['2019', '03', '04'];
+
+		spyOn(window, 'getUserAge').and.callFake(function (param) {
+
+			let userDateOfBirth = new Date(param);
+			todayDate = new Date(todayDate);
+			userAgeDays = Math.floor((todayDate - userDateOfBirth) / 1000 / 60 / 60 / 24);
+			userAgeYears = Math.floor((todayDate - userDateOfBirth) / 1000 / 60 / 60 / 24 / 365.25);
+			userAgeYearsAfter = userAgeYears + 5;
+		});
+	});
+
+	getUserAge (['1991', '06', '18']);
+
+	it('userAgeDays', function () {
+		expect(userAgeDays).toEqual(10121);
+	} );
+
+	it('userAgeYears', function () {
+		expect(userAgeYears).toEqual(27);
+	} );
+
+	it('userAgeYearsAfter', function () {
+		expect(userAgeYearsAfter).toEqual(32);
+	} );
+
+});
 
