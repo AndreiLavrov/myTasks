@@ -38,7 +38,7 @@ function vowels2 (str) {
 }
 
 // не коректн. раб со знаками припин(требует регулярных выр.)
-function filter (str) {
+/*function filter (str) {
 	const arrBadWords = ['simple', 'Simple', 'native', 'Native', 'learning', 'Learning'];
 	const arrGoodWords = ['difficult', 'Difficult', 'foreign', 'Foreign', 'not learning', 'Not learning'];
 	const arr = str.split(' ');
@@ -49,6 +49,29 @@ function filter (str) {
 		}
 	} );
 	return arr.join(' ');
+}*/
+
+/* разбивает строку на элем. массива(нежелательное слово выступает в роли разделителя), собирает обратно(через желательное слово)
+решена проблемма с повторяющ. словами и знаками пунктуации*/
+function filter (str) {
+		const arrBadWords = ['simple', 'Simple', 'native', 'Native', 'learning', 'Learning'];
+		const arrGoodWords = ['difficult', 'Difficult', 'foreign', 'Foreign', 'not learning', 'Not learning'];
+
+		arrBadWords.forEach(function (item, i, arrBadWords) {
+				str = replBadWords (str, arrBadWords[i],  arrGoodWords[i]);
+		} );
+
+
+		return str;
+}
+
+// subfunction of the  'filter' (rebuilds the string)
+function replBadWords (str, badWord,  goodWord) {
+		let newStr = str;
+		if (str.includes(badWord) ) {
+				newStr = str.split(badWord).join(goodWord);
+		}
+		return newStr;
 }
 
 // it returns the total cost of all pruducts
@@ -80,7 +103,7 @@ function sumProducts () {
 	return sum(arrProducts);
 }
 
-// under the function 'sumProducts', perform addition
+// subfunction of the 'sumProducts', perform addition
 function sum (arrProducts) {
 	let sumProd = 0;
 	arrProducts.forEach(function (item, i, arrProducts) {
