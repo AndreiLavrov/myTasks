@@ -50,16 +50,9 @@ describe('homeTasks.js -> filter -> should replace bad words with preferred', fu
 		expect(res).toBe('not learning programming languages is very difficult and foreign languages is very difficult');
 	} );
 
-	/*it('should return preferred words stared with upper case', function () {
+	it('should return preferred words stared with upper case', function () {
 		const res = filter('Learning programming languages is very Simple and Native languages is very Simple');
 		expect(res).toBe('Not learning programming languages is very Difficult and Foreign languages is very Difficult');
-	} );*/
-} );
-
-describe('homeTasks.js -> sumProducts -> should it returns the total cost of all products ', function () {
-	it('should return preferred words', function () {
-		const res = sumProducts();
-		expect(res).toBe(3350);
 	} );
 } );
 

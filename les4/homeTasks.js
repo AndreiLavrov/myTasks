@@ -74,43 +74,57 @@ function replBadWords (str, badWord,  goodWord) {
 		return newStr;
 }
 
+
+// adds products to local storage
+function addProduct (name, id, units, numberOfUnits, costPerUnit) {
+		let cart;
+		if(localStorage.getItem('products')){
+				cart = JSON.parse(localStorage.getItem('products'));
+				cart.push({name, id, units, numberOfUnits, costPerUnit});
+				localStorage.setItem('products', JSON.stringify(cart));
+				return;
+		}
+
+		cart = [{name, id, units, numberOfUnits, costPerUnit}];
+		localStorage.setItem('products', JSON.stringify(cart));
+}
+
 // it returns the total cost of all pruducts
 function sumProducts () {
-	const arrProducts = [
-		{
-			name: 'ball',
-			id: 1,
-			units: 'unit',
-			numberOfUnits: 120,
-			costPerUnit: 10,
-		},
-		{
-			name: 'racket',
-			id: 2,
-			units: 'unit',
-			numberOfUnits: 100,
-			costPerUnit: 8,
-		},
-		{
-			name: 'skate',
-			id: 3,
-			units: 'unit',
-			numberOfUnits: 45,
-			costPerUnit: 30,
-		},
-	];
+		if (!localStorage.getItem('products')) {
+				console.log('there is no product');
+				return;
+		}
 
-	return sum(arrProducts);
+		let sumProd = 0;
+		let cart = JSON.parse(localStorage.getItem('products') ) ;
+		cart.forEach(function (item, i, arrProd) {
+				sumProd += +arrProd[i].costPerUnit * +arrProd[i].numberOfUnits;
+		} );
+
+		return sumProd;
 }
 
-// subfunction of the 'sumProducts', perform addition
-function sum (arrProducts) {
-	let sumProd = 0;
-	arrProducts.forEach(function (item, i, arrProducts) {
-		sumProd += +arrProducts[i].costPerUnit * +arrProducts[i].numberOfUnits;
-	} );
-	return sumProd;
-}
+//remove  products to local storage
+function removeProd (prod) {
+		if (!localStorage.getItem('products')) {
+				console.log('there is no product');
+				return;
+		}
+		if (prod) {
+				let dellProd = prod;
+				let cart = JSON.parse(localStorage.getItem('products') ) ;
 
-sumProducts();
+				cart.forEach(function (item, i, cart) {
+						if (cart[i].name === dellProd) {
+								cart.splice(i, 1);
+						}
+				} );
+				localStorage.setItem('products', JSON.stringify(cart));
+				return;
+
+		}
+
+		localStorage.removeItem('products');
+}
 

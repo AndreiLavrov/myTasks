@@ -2,4 +2,7 @@
 (a <= item && item <= b) а не (a <= item <= b)
 ' let sumProd = 0;' лучше, чем 'let sumProd;' задавать значение..
 str.split(badWord).join(goodWord); -слова в роле разделителей...ЗАМЕНИТЬ ненужные слова
+person['name'] === person.name  (var key = 'name'; person[key])  если имя свойства хранится в переменной (var key = "name"),
+ то единственный способ к нему обратиться – это квадратные скобки person[key].
+
 
