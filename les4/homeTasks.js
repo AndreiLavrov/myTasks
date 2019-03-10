@@ -87,6 +87,7 @@ function addProduct (name, id, units, numberOfUnits, costPerUnit) {
 
 		cart = [{name, id, units, numberOfUnits, costPerUnit}];
 		localStorage.setItem('products', JSON.stringify(cart));
+		return cart;
 }
 
 // it returns the total cost of all pruducts
