@@ -38,7 +38,7 @@ function vowels2 (str) {
 }
 
 // не коректн. раб со знаками припин(требует регулярных выр.)
-/*function filter (str) {
+/* function filter (str) {
 	const arrBadWords = ['simple', 'Simple', 'native', 'Native', 'learning', 'Learning'];
 	const arrGoodWords = ['difficult', 'Difficult', 'foreign', 'Foreign', 'not learning', 'Not learning'];
 	const arr = str.split(' ');
@@ -54,78 +54,75 @@ function vowels2 (str) {
 /* разбивает строку на элем. массива(нежелательное слово выступает в роли разделителя), собирает обратно(через желательное слово)
 решена проблемма с повторяющ. словами и знаками пунктуации*/
 function filter (str) {
-		const arrBadWords = ['simple', 'Simple', 'native', 'Native', 'learning', 'Learning'];
-		const arrGoodWords = ['difficult', 'Difficult', 'foreign', 'Foreign', 'not learning', 'Not learning'];
+	const arrBadWords = ['simple', 'Simple', 'native', 'Native', 'learning', 'Learning'];
+	const arrGoodWords = ['difficult', 'Difficult', 'foreign', 'Foreign', 'not learning', 'Not learning'];
 
-		arrBadWords.forEach(function (item, i, arrBadWords) {
-				str = replBadWords (str, arrBadWords[i],  arrGoodWords[i]);
-		} );
+	arrBadWords.forEach(function (item, i, arrBadWords) {
+		str = replBadWords(str, arrBadWords[i],  arrGoodWords[i] );
+	} );
 
-
-		return str;
+	return str;
 }
 
 // subfunction of the  'filter' (rebuilds the string)
 function replBadWords (str, badWord,  goodWord) {
-		let newStr = str;
-		if (str.includes(badWord) ) {
-				newStr = str.split(badWord).join(goodWord);
-		}
-		return newStr;
+	let newStr = str;
+	if (str.includes(badWord) ) {
+		newStr = str.split(badWord).join(goodWord);
+	}
+	return newStr;
 }
-
 
 // adds products to local storage
 function addProduct (name, id, units, numberOfUnits, costPerUnit) {
-		let cart;
-		if(localStorage.getItem('products')){
-				cart = JSON.parse(localStorage.getItem('products'));
-				cart.push({name, id, units, numberOfUnits, costPerUnit});
-				localStorage.setItem('products', JSON.stringify(cart));
-				return;
-		}
+	let cart;
+	if (localStorage.getItem('products') ) {
+		cart = JSON.parse(localStorage.getItem('products') );
+		cart.push( { name, id, units, numberOfUnits, costPerUnit } );
+		localStorage.setItem('products', JSON.stringify(cart) );
+		return;
+	}
 
-		cart = [{name, id, units, numberOfUnits, costPerUnit}];
-		localStorage.setItem('products', JSON.stringify(cart));
-		return cart;
+	cart = [{ name, id, units, numberOfUnits, costPerUnit }];
+	localStorage.setItem('products', JSON.stringify(cart) );
+	return cart;
 }
 
 // it returns the total cost of all pruducts
 function sumProducts () {
-		if (!localStorage.getItem('products')) {
-				console.log('there is no product');
-				return;
-		}
+	if (!localStorage.getItem('products') ) {
+		console.log('there is no product');
+		return;
+	}
 
-		let sumProd = 0;
-		let cart = JSON.parse(localStorage.getItem('products') ) ;
-		cart.forEach(function (item, i, arrProd) {
-				sumProd += +arrProd[i].costPerUnit * +arrProd[i].numberOfUnits;
-		} );
+	let sumProd = 0;
+	const cart = JSON.parse(localStorage.getItem('products') ) ;
+	cart.forEach(function (item, i, arrProd) {
+		sumProd += +arrProd[i].costPerUnit * +arrProd[i].numberOfUnits;
+	} );
 
-		return sumProd;
+	return sumProd;
 }
 
-//remove  products to local storage
+// remove  products to local storage
 function removeProd (prod) {
-		if (!localStorage.getItem('products')) {
-				console.log('there is no product');
-				return;
-		}
-		if (prod) {
-				let dellProd = prod;
-				let cart = JSON.parse(localStorage.getItem('products') ) ;
+	if (!localStorage.getItem('products') ) {
+		console.log('there is no product');
+		return;
+	}
+	if (prod) {
+		const dellProd = prod;
+		const cart = JSON.parse(localStorage.getItem('products') ) ;
 
-				cart.forEach(function (item, i, cart) {
-						if (cart[i].name === dellProd) {
-								cart.splice(i, 1);
-						}
-				} );
-				localStorage.setItem('products', JSON.stringify(cart));
-				return;
+		cart.forEach(function (item, i, cart) {
+			if (cart[i].name === dellProd) {
+				cart.splice(i, 1);
+			}
+		} );
+		localStorage.setItem('products', JSON.stringify(cart) );
+		return;
+	}
 
-		}
-
-		localStorage.removeItem('products');
+	localStorage.removeItem('products');
 }
 

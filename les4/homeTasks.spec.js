@@ -56,9 +56,7 @@ describe('homeTasks.js -> filter -> should replace bad words with preferred', fu
 	} );
 } );
 
-
-
-/*describe('homeTasks.js -> addProduct -> should it add products ', function () {
+/* describe('homeTasks.js -> addProduct -> should it add products ', function () {
 		beforeEach(function () {
 				let myLocSorage;
 				removeProd ();
@@ -79,50 +77,46 @@ describe('homeTasks.js -> filter -> should replace bad words with preferred', fu
 		} );
 } );*/
 
-/*describe('homeTasks.js -> addProduct -> should it add products ', function () {
-		let myLocSorage;
+describe('homeTasks.js -> addProduct -> should it add products ', function () {
+	let myLocSorage;
 
-		beforeEach(function () {
-
-				spyOn(localStorage, 'setItem').and.callFake(function(param) {
-						myLocSorage = param;
-						return myLocSorage;
-				});
-				spyOn(localStorage, 'getItem').and.callFake(function() {
-						return myLocSorage;
-
-				});
-		});
-
-		it('creat an item object', function () {
-				const res = addProduct("lemon",  "1",  "num", "32", "2");
-				const myObj = [{name: "lemon", id: "1", units: "num", numberOfUnits: "32", costPerUnit: "2"}];
-				expect(res).toEqual(myObj);
+	beforeEach(function () {
+		spyOn(localStorage, 'setItem').and.callFake(function (param) {
+			myLocSorage = param;
+			return myLocSorage;
 		} );
+		spyOn(localStorage, 'getItem').and.callFake(function () {
+			return myLocSorage;
+		} );
+	} );
 
-		it('creat an item object', function () {
+	it('creat an item object', function () {
+		const res = addProduct('lemon',  '1',  'num', '32', '2');
+		const myObj = [{ name: 'lemon', id: '1', units: 'num', numberOfUnits: '32', costPerUnit: '2' }];
+		expect(res).toEqual(myObj);
+	} );
+
+	/* it('creat an item object', function () {
 				const res = addProduct("apple",  "1",  "num", "32", "2");
 				const myObj = [{name: "lemon", id: "1", units: "num", numberOfUnits: "32", costPerUnit: "2"},
 												{name: "apple", id: "1", units: "num", numberOfUnits: "32", costPerUnit: "2"}];
 				expect(res).toEqual(myObj);
-		} );
-} );*/
-
+		} );*/
+} );
 /*
 describe('homeTasks.js -> sumProducts -> should it returns the total cost of all products ', function () {
 		beforeEach(function () {
 
 				spyOn(localStorage, 'getItem').and.callFake(function() {
-						return false;
-
+						return "[{"name":"lemon","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"}," +
+						"{"name":"apple","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"}]";
 				});
 		});
 		it('!!!!!!!', function () {
 				const res = sumProducts();
-				expect(res).toBe(false);
+				expect(res).toBe(128);
 	} );
-} );
-*/
+} );*/
 
 /*
 {name: "lemon", id: "1", units: "num", numberOfUnits: "32", costPerUnit: "2"},

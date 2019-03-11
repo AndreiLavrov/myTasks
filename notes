@@ -16,5 +16,6 @@ eslint
 jasmine
 moment!!!
 
+...code review ...
 localStorage testing            --- les4
 Cannot set property 'innerText' of null    -- les5
