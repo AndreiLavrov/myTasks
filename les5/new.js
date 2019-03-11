@@ -1,10 +1,11 @@
-function clock () {
-	const sec = new Date;
-	const tomorrow = new Date(sec.getFullYear(), sec.getMonth(), sec.getDate() + 1);
-	const secTom = Math.ceil( (tomorrow - new Date) / 1000);
+function clock (secNow, tomor) {
+	const sec = secNow || new Date();
+	const tomorrow = tomor || new Date(sec.getFullYear(), sec.getMonth(), sec.getDate() + 1);
+	const secTom =  (tomorrow - sec) / 1000;
 
 	const getTimer = document.getElementById('getTimer');
-	getTimer.innerText =  secTom;
+		 console.log(getTimer);
+	getTimer.innerText =  Math.ceil(secTom);
 	return secTom;
 }
 clock();
@@ -12,32 +13,31 @@ setInterval(clock, 1000);
 
 // cumbersome and not accurate way to solve
 function daysForBirthday () {
-	const clickInpBirthdey = document.getElementById('clickInpBirthdey');
+	const clickInpBirthday = document.getElementById('clickInpBirthday');
 	const day = document.getElementById('day');
-	let inpBirthdey;
+	const inpBirthday = document.getElementById('inpBirthday').value;
 
-	clickInpBirthdey.onclick = function () {
-		inpBirthdey = document.getElementById('inpBirthdey').value;
-
-		const nowDate = new Date();
-
-		const dateBirthday = new Date(inpBirthdey);
-		const momthBirthday = dateBirthday.getMonth();
-		const dayBirthday = dateBirthday.getDate();
-
-		const daysForBirthday = ( (new Date(nowDate.getFullYear(), momthBirthday, dayBirthday) ) - nowDate) / 1000 / 60 / 60 / 24;
-
-		day.innerText = Math.ceil( (daysForBirthday >= 0) ? daysForBirthday : 365.25 + daysForBirthday);
+	clickInpBirthday.onclick = () => {
+		count(day, inpBirthday);
 	};
 }
+// count days until birthday (parameters are used for testing..)
+function count (day, inpB, newD) {
+	const inpBirthday = inpB || document.getElementById('inpBirthday').value;
 
+	const nowDate = newD || new Date();
+	const dateBirthday = new Date(inpBirthday);
+	const monthBirthday = dateBirthday.getMonth();
+	const dayBirthday = dateBirthday.getDate();
+
+	const daysForBirthday = ( (new Date(nowDate.getFullYear(), monthBirthday, dayBirthday) ) - nowDate) / 1000 / 60 / 60 / 24;
+	const res = Math.ceil( (daysForBirthday >= 0) ? daysForBirthday : 365.25 + daysForBirthday);
+	day.innerText = res;
+	return res;
+}
 daysForBirthday();
 
 // moment.locale('ru');
-/*
-let md = moment(inpBirthdey);
-let mdNow = moment('18-06-1991', "MM-DD");
-let result = md.subtract(mdNow.format('l'));*/
 
 /* users = [{id: '1', name: 'Jack', dob: '1999-01-01'},
 		 			{id: '2', name: 'Tom', dob: '1992-01-01'},

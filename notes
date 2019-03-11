@@ -6,3 +6,13 @@ person['name'] === person.name  (var key = 'name'; person[key])  если имя
  то единственный способ к нему обратиться – это квадратные скобки person[key].
 
 
+
+
+
+
+
+                         для изучения !!
+eslint
+jasmine
+moment!!!
+Cannot set property 'innerText' of null
