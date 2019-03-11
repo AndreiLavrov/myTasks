@@ -32,9 +32,9 @@ describe('new.js -> count -> return the number of days until birthday', function
 	} );
 } );
 describe('new.js -> countM -> return the number of days until birthday', function () {
-		it('should return 99', function () {
-				const res = count('', '1991-06-18', new Date('2019-03-11') );
-				expect(res).toEqual(99);
-		} );
+	it('should return 99', function () {
+		const res = count('', '1991-06-18', new Date('2019-03-11') );
+		expect(res).toEqual(99);
+	} );
 } );
 
