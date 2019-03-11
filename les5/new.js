@@ -36,8 +36,34 @@ function count (day, inpB, newD) {
 	return res;
 }
 daysForBirthday();
+// count days until birthday  (more compact way)
+function daysForBirthdayMoment () {
+		moment.locale('ru');
 
-// moment.locale('ru');
+		const clickInpBirthday = document.getElementById('clickInpBirthday');
+		const day = document.getElementById('day');
+		const inpBirthday = document.getElementById('inpBirthday').value;
+
+		clickInpBirthday.onclick = () => {
+				countM(day, inpBirthday);
+		};
+}
+// count days until birthday with 'moment'(parameters are used for testing..)
+function countM (day, inpB, newD){
+		const inpBirthday = inpB || document.getElementById('inpBirthday').value;
+		let arrDate = inpBirthday.split('-');
+		let moentNow = moment();
+		let momentBirthday = moment({  month :arrDate[1] - 1, day :arrDate[2]});
+
+		let result = moment(momentBirthday).diff(moment(moentNow));
+		const days = Math.ceil(moment.duration(result).as('days') );
+		const res = Math.ceil( (days >= 0) ? days : 365.25 + days);
+		day.innerText = res;
+
+		return res;
+}
+daysForBirthdayMoment();
+
 
 /* users = [{id: '1', name: 'Jack', dob: '1999-01-01'},
 		 			{id: '2', name: 'Tom', dob: '1992-01-01'},

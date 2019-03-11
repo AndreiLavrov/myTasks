@@ -15,4 +15,6 @@ person['name'] === person.name  (var key = 'name'; person[key])  если имя
 eslint
 jasmine
 moment!!!
-Cannot set property 'innerText' of null
+
+localStorage testing            --- les4
+Cannot set property 'innerText' of null    -- les5
