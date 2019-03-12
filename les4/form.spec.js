@@ -5,7 +5,7 @@ describe('form.js -> form -> it checks the validity of the form', function () {
 	} );
 } );
 
-describe('form.js -> validInpName -> it delete input name(first and last)', function () {
+describe('form.js -> validInpName -> it remove the space in the input name(first and last)', function () {
 	it('should return name without spaces', function () {
 		const res = validInpName('  Laurou ');
 		expect(res).toBe('Laurou');
@@ -13,30 +13,30 @@ describe('form.js -> validInpName -> it delete input name(first and last)', func
 } );
 
 describe('form.js -> validLengthInpPassword -> it checks the validity of the password(long)', function () {
-	it('should return true', function () {
+	it('for a long password', function () {
 		const res = validLengthInpPassword('passw');
 		expect(res).toBeTruthy();
 	} );
 
-	it('should return false', function () {
+	it('for a short password', function () {
 		const res = validLengthInpPassword('pas');
-		expect(res).not.toBeTruthy();
+		expect(res).toBeFalsy();
 	} );
 } );
 
 describe('form.js -> validInpEmail -> it checks the validity of the Email(have "@") ', function () {
-	it('should return true', function () {
-		const res = validInpEmail('lawr@.ru');
+	it('the Email includes "@"', function () {
+		const res = validInpEmail('lavr@.ru');
 		expect(res).toBeTruthy();
 	} );
 
-	it('should return false', function () {
+	it('the Email not includes "@" ', function () {
 		const res = validInpEmail('pas');
 		expect(res).not.toBeTruthy();
 	} );
 
-	it('should return false', function () {
-		const res = validInpEmail('  pas');
+	it('the Email not includes space', function () {
+		const res = validInpEmail('  lavr@.ru');
 		expect(res).not.toBeTruthy();
 	} );
 } );

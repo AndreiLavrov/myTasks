@@ -5,7 +5,7 @@ function division (a, b) {
 	}
 	return `Делится с остатком  ${a % b}`;
 }
-// returns the number of vowels in the string
+// returns the number of vowels in the string(slowly way)
 function vowels (str) {
 	const arr = ['а', 'у', 'о', 'ы', 'и', 'э', 'я', 'ю', 'ё', 'е', 'А', 'У', 'О', 'Ы', 'И', 'Э', 'Я', 'Ю', 'Ё', 'Е'];
 	let vowels = 0;
@@ -51,7 +51,7 @@ function vowels2 (str) {
 	return arr.join(' ');
 }*/
 
-/* разбивает строку на элем. массива(нежелательное слово выступает в роли разделителя), собирает обратно(через желательное слово)
+/* разбивает строку на элем. массива(нежелательное слово выступает в роли разделителя), собирает обратно(через `желательное` слово)
 решена проблемма с повторяющ. словами и знаками пунктуации*/
 function filter (str) {
 	const arrBadWords = ['simple', 'Simple', 'native', 'Native', 'learning', 'Learning'];
@@ -73,6 +73,7 @@ function replBadWords (str, badWord,  goodWord) {
 	return newStr;
 }
 
+
 // adds products to local storage
 function addProduct (name, id, units, numberOfUnits, costPerUnit) {
 	let cart;
@@ -80,7 +81,7 @@ function addProduct (name, id, units, numberOfUnits, costPerUnit) {
 		cart = JSON.parse(localStorage.getItem('products') );
 		cart.push( { name, id, units, numberOfUnits, costPerUnit } );
 		localStorage.setItem('products', JSON.stringify(cart) );
-		return;
+		return cart;
 	}
 
 	cart = [{ name, id, units, numberOfUnits, costPerUnit }];
@@ -92,7 +93,7 @@ function addProduct (name, id, units, numberOfUnits, costPerUnit) {
 function sumProducts () {
 	if (!localStorage.getItem('products') ) {
 		console.log('there is no product');
-		return;
+		return 'there is no product';
 	}
 
 	let sumProd = 0;
@@ -108,7 +109,7 @@ function sumProducts () {
 function removeProd (prod) {
 	if (!localStorage.getItem('products') ) {
 		console.log('there is no product');
-		return;
+		return 'there is no product';
 	}
 	if (prod) {
 		const dellProd = prod;
@@ -120,7 +121,7 @@ function removeProd (prod) {
 			}
 		} );
 		localStorage.setItem('products', JSON.stringify(cart) );
-		return;
+		return cart;
 	}
 
 	localStorage.removeItem('products');

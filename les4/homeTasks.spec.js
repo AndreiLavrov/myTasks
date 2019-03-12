@@ -11,7 +11,7 @@ describe('homeTasks.js -> division -> division without remainder', function () {
 } );
 
 describe('homeTasks.js -> vowels -> returns the number of vowels in the string', function () {
-	it('should return correct number', function () {
+	it('should return correct number of vowels', function () {
 		const res = vowels('программировать просто или нет...');
 		expect(res).toBe(10);
 	} );
@@ -56,68 +56,79 @@ describe('homeTasks.js -> filter -> should replace bad words with preferred', fu
 	} );
 } );
 
-/* describe('homeTasks.js -> addProduct -> should it add products ', function () {
-		beforeEach(function () {
-				let myLocSorage;
-				removeProd ();
-
-				spyOn(localStorage, 'setItem').and.callFake(function(param) {
-						return myLocSorage = param;
-				});
-				spyOn(localStorage, 'getItem').and.callFake(function() {
-						return myLocSorage;
-
-				});
-		});
-
-		it('creat an item object', function () {
-				const res = addProduct("lemon",  "1",  "num", "32", "2");
-				const myObj = [{name: "lemon", id: "1", units: "num", numberOfUnits: "32", costPerUnit: "2"}];
-				expect(res).toEqual(myObj);
-		} );
-} );*/
 
 describe('homeTasks.js -> addProduct -> should it add products ', function () {
-	let myLocSorage;
-
-	beforeEach(function () {
-		spyOn(localStorage, 'setItem').and.callFake(function (param) {
-			myLocSorage = param;
-			return myLocSorage;
+		beforeEach(function () {
+				localStorage.removeItem('products');
 		} );
-		spyOn(localStorage, 'getItem').and.callFake(function () {
-			return myLocSorage;
-		} );
-	} );
 
-	it('creat an item object', function () {
+	it('add first product', function () {
 		const res = addProduct('lemon',  '1',  'num', '32', '2');
-		const myObj = [{ name: 'lemon', id: '1', units: 'num', numberOfUnits: '32', costPerUnit: '2' }];
-		expect(res).toEqual(myObj);
+		let cart = JSON.parse(localStorage.getItem('products') );
+		expect(res).toEqual(cart);
 	} );
 
-	/* it('creat an item object', function () {
+	 it('add second product', function () {
+	 			addProduct('lemon',  '1',  'num', '32', '2');
 				const res = addProduct("apple",  "1",  "num", "32", "2");
-				const myObj = [{name: "lemon", id: "1", units: "num", numberOfUnits: "32", costPerUnit: "2"},
-												{name: "apple", id: "1", units: "num", numberOfUnits: "32", costPerUnit: "2"}];
-				expect(res).toEqual(myObj);
-		} );*/
+			  let cart = JSON.parse(localStorage.getItem('products') );
+				expect(res).toEqual(cart);
+		} );
 } );
-/*
+
 describe('homeTasks.js -> sumProducts -> should it returns the total cost of all products ', function () {
 		beforeEach(function () {
-
-				spyOn(localStorage, 'getItem').and.callFake(function() {
-						return "[{"name":"lemon","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"}," +
-						"{"name":"apple","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"}]";
-				});
+				localStorage.removeItem('products');
 		});
-		it('!!!!!!!', function () {
+		it('if there are not products', function () {
 				const res = sumProducts();
-				expect(res).toBe(128);
+				expect(res).toBe('there is no product');
 	} );
-} );*/
 
-/*
-{name: "lemon", id: "1", units: "num", numberOfUnits: "32", costPerUnit: "2"},
-		{name: "apple", id: "1", units: "num", numberOfUnits: "32", costPerUnit: "2"}];*/
+		it('if there are products', function () {
+				addProduct('lemon',  '1',  'num', '32', '2');
+				addProduct("apple",  "1",  "num", "32", "2");
+
+				let sumProd = 0;
+				const cart = JSON.parse(localStorage.getItem('products') ) ;
+				cart.forEach(function (item, i, arrProd) {
+						sumProd += +arrProd[i].costPerUnit * +arrProd[i].numberOfUnits;
+				} );
+
+				const res = sumProducts();
+				expect(res).toBe(sumProd);
+		} );
+} );
+
+describe('homeTasks.js -> removeProd -> should remove products ', function () {
+		beforeEach(function () {
+				localStorage.removeItem('products');
+
+				// spyOn(localStorage, 'getItem').and.callFake(function() {
+				// 		return "[{"name":"lemon","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"}," +
+				// 		"{"name":"apple","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"}]";
+				// });
+		});
+		it('if there is no products ', function () {
+				const res = removeProd();
+				expect(res).toBe('there is no product');
+		} );
+
+		//    НЕ УСПЕЛ ДОДЕЛАТЬ 10 МИН РАБОТЫ
+		// xit(' all ', function () {
+		// 		addProduct('lemon',  '1',  'num', '32', '2');
+		// 		addProduct("apple",  "1",  "num", "32", "2");
+		// 		expect(res).toBe('there is no product');  // что имеет продукты
+		// 		const res = removeProd();
+		// 		expect(res).toBe('there is no product'); // что их нет
+		// }
+		//
+		// xit(' all ', function () {
+		// 		addProduct('lemon',  '1',  'num', '32', '2');
+		// 		addProduct("apple",  "1",  "num", "32", "2");
+		// 		expect(res).toBe('there is no product');  // что имеет продукты
+		// 		const res = removeProd('apple');
+		// 		expect(res).toBe('there is no product'); // что  нет именно 'apple'
+		// }
+
+		} );
