@@ -1,4 +1,4 @@
-
+// calculate population growth
 function populationGrow (pNow, percent, aug, p) {
 	var i = 0;
 
@@ -9,10 +9,12 @@ function populationGrow (pNow, percent, aug, p) {
 	return i;
 }
 
+// return true
 function isTriangle (a, b, c) {
 	return a < b + c;
 }
 
+// return the length of the shortest word(s) in string
 function findShort (str) {
 	const arrFromString = str.split(' ');
 	let shortest = 15;
@@ -25,6 +27,7 @@ function findShort (str) {
 	return shortest;
 }
 
+// returns the sum of all the multiples of 3 or 5 below the number passed in
 function solution (num) {
 	let i = 0;
 	let sum = 0;
@@ -37,6 +40,7 @@ function solution (num) {
 	return sum;
 }
 
+// remove all values from list a, which are present in list b
 function arrayDiff (arr1, arr2) {
 	for (var i = 0; i < arr2.length; i += 1) {
 		for (var n = 0; n < arr1.length; n += 1) {
@@ -46,7 +50,6 @@ function arrayDiff (arr1, arr2) {
 			}
 		}
 	}
-	console.log(arr1);
 	return arr1;
 }
 

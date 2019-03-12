@@ -28,13 +28,13 @@ function validate (res, inpName) {
     * using 'while' for recall the case of incorrect input again*/
 function validDate (str) {
 	// var str = str;
-	var arr = str.split('.');
+	var arr = [];
 	var pattern = /([0-3]?[0-9])[\.]([0-1]?[0-9])[\.]\d{4}/g;
 
 	while (str === null || str === '' || !pattern.test(str) || arr[2] > new Date().getFullYear() ) {
 		str = prompt('Incorrect input, enter valid data ', '18.06.1991');
 	}
-
+	arr = str.split('.');
 	return arr.reverse();
 }
 
@@ -67,12 +67,12 @@ function getRetiree (Years) {
 	fatherName = validate(prompt('What is your name on the father?', arrFullName[2] ), arrFullName[2] );
 	dateOfBirth = validDate(prompt('What is your date of birth?', '18.06.1991') );
 */
-/*getUserAge(dateOfBirth);
+/* getUserAge(dateOfBirth);
 
 gender = getGender();
 retiree = getRetiree(userAgeYears);*/
 
-/*alert(` ваше ФИО: ${firstName} ${lastName} ${fatherName}\r\n` +
+/* alert(` ваше ФИО: ${firstName} ${lastName} ${fatherName}\r\n` +
         ` ваш возраст в годах: ${userAgeYears}\r\n` +
         ` ваш возраст в днях: ${userAgeDays}\r\n` +
         ` через 5 лет вам будет: ${userAgeYearsAfter}\r\n` +

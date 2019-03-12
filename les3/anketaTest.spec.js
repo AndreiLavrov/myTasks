@@ -1,119 +1,225 @@
-describe('anketaTest.js -> validate -> result of data entry ', function () {
-	let myResul = false;
+describe('anketaTest.js -> validate -> checks the validity of the string ', function () {
 	beforeEach(function () {
-
-		spyOn(window, 'prompt').and.callFake(function(param) {
-			return myResul;
-		});
-	});
+		let count = 0;
+		spyOn(window, 'prompt').and.callFake(function (param) {
+			count += 1;
+			if (count === 2) {
+				return null;
+			}
+			return 'correctInput';
+		} );
+	} );
 
 	it('which are correct string', function () {
-		const result =  validate('string');
-		expect(result).toBe('string');
+		const result =  validate('correctInput', 'name');
+		expect(result).toBe('correctInput');
 	} );
 
 	it('which contains empty string(incorrect input and another request)', function () {
-
-		const result = validate('');
-		expect(result).toEqual(myResul);
-	} );
-	it('which contains the number(incorrect input and another request)', function () {
-
-		const result = validate(12);
-		expect(result).toEqual(myResul);
+		validate('', 'name');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', 'name');
 	} );
 
-	it('which are cancel by user(incorrect input and another request)', function () {
+	it('which contains empty string(incorrect input, another request until the correct value will be entered)', function () {
+		const result = validate('', 'name');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toBe('correctInput');
+	} );
 
-		const result = validate(null);
-		expect(result).toEqual(myResul);
+	it('which contains null(incorrect input and another request)', function () {
+		validate(null, 'name');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', 'name');
+	} );
+
+	it('which contains null(incorrect input, another request until the correct value will be entered)', function () {
+		const result = validate(null, 'name');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toBe('correctInput');
+	} );
+
+	it('which contains only letters(incorrect input and another request)', function () {
+		validate('w1', 'name');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', 'name');
+	} );
+
+	it('which contains only letters(incorrect input, another request until the correct value will be entered)', function () {
+		const result = validate('w1', 'name');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toBe('correctInput');
+	} );
+
+	it('which contains only letters(incorrect input and another request)', function () {
+		validate('.', 'name');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', 'name');
+	} );
+
+	it('which contains only letters(incorrect input, another request until the correct value will be entered)', function () {
+		const result = validate('.', 'name');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toBe('correctInput');
+	} );
+
+	it('which contains only letters(incorrect input and another request)', function () {
+		validate(',', 'name');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', 'name');
+	} );
+
+	it('which contains only letters(incorrect input, another request until the correct value will be entered)', function () {
+		const result = validate(',', 'name');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toBe('correctInput');
+	} );
+
+	it('which contains only letters(incorrect input and another request)', function () {
+		validate('?', 'name');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', 'name');
+	} );
+
+	it('which contains only letters(incorrect input, another request until the correct value will be entered)', function () {
+		const result = validate('?', 'name');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toBe('correctInput');
 	} );
 } );
 
 describe('anketaTest.js -> validDate -> result of data entry ', function () {
-	let myResul = false;
 	beforeEach(function () {
-
-		spyOn(window, 'prompt').and.callFake(function(param) {
-			return myResul;
-		});
-	});
+		let count = 0;
+		spyOn(window, 'prompt').and.callFake(function (param) {
+			count += 1;
+			if (count === 2) {
+				return null;
+			}
+			return '18.06.1991';
+		} );
+	} );
 
 	it('which are correct string', function () {
 		const result =  validDate('18.06.1991');
-		expect(result).toEqual(['1991', '06', '18']);
+		expect(result).toEqual( ['1991', '06', '18'] );
 	} );
 
 	it('which contains empty string(incorrect input and another request)', function () {
-
-		const result = validate('');
-		expect(result).toEqual(myResul);
+		validDate('');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', '18.06.1991');
 	} );
 
-	it('which are cancel by user(incorrect input and another request)', function () {
-
-		const result = validate(null);
-		expect(result).toEqual(myResul);
+	it('which contains empty string(incorrect input, another request until the correct value will be entered)', function () {
+		const result = validDate('');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toEqual( ['1991', '06', '18'] );
 	} );
 
-	it('which contains the incorrect number(incorrect input and another request)', function () {
-
-		const result = validate(12);
-		expect(result).toEqual(myResul);
+	it('which contains null(incorrect input and another request)', function () {
+		validDate(null);
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', '18.06.1991');
 	} );
 
-	it('which contains the incorrect(too large) year(incorrect input and another request)', function () {
-
-		const result = validate('18.06.2222');
-		expect(result).toEqual(myResul);
+	it('which contains null(incorrect input, another request until the correct value will be entered)', function () {
+		const result = validDate(null);
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toEqual( ['1991', '06', '18'] );
 	} );
 
-});
+	it('which not contains letters(incorrect input and another request)', function () {
+		validDate('w');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', '18.06.1991');
+	} );
+	it('which not contains letters(incorrect input, another request until the correct value will be entered)', function () {
+		const result = validDate('w');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toEqual( ['1991', '06', '18'] );
+	} );
+
+	it('which must not contains a question mark(incorrect input and another request)', function () {
+		validDate('?');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', '18.06.1991');
+	} );
+
+	it('which must not contains a question mark (incorrect input, another request until the correct value will be entered)', function () {
+		const result = validDate('?');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toEqual( ['1991', '06', '18'] );
+	} );
+
+	it('which must not contains commas (incorrect input and another request)', function () {
+		validDate(',');
+		expect(window.prompt).toHaveBeenCalled();
+		expect(window.prompt).toHaveBeenCalledWith('Incorrect input, enter valid data ', '18.06.1991');
+	} );
+
+	it('which must not contains commas (incorrect input, another request until the correct value will be entered)', function () {
+		const result = validDate(',');
+		expect(window.prompt.calls.count() ).toEqual(1);
+		expect(result).toEqual( ['1991', '06', '18'] );
+	} );
+} );
 
 describe('anketaTest.js -> getUserAge -> get user age  ', function () {
+	let birthday = ['1991', '06', '18'];
+	const todayDate = new Date();
+
+	it('correct count userAgeDays', function () {
+		birthday = ['1991', '06', '18'];
+		const usAge = Math.floor( (todayDate - new Date(birthday) ) / 1000 / 60 / 60 / 24);
+		getUserAge(birthday);
+		  expect(userAgeDays).toEqual(usAge);
+	} );
+
+	it('correct count userAgeYears', function () {
+		const usAgeYea = Math.floor( (todayDate - new Date(birthday) ) / 1000 / 60 / 60 / 24 / 365.25);
+		getUserAge(birthday);
+		expect(userAgeYears).toEqual(usAgeYea);
+	} );
+
+	it('correct count userAgeYearsAfter', function () {
+		getUserAge(birthday);
+		const usAgeYea = Math.floor( (todayDate - new Date(birthday) ) / 1000 / 60 / 60 / 24 / 365.25);
+		expect(userAgeYearsAfter).toEqual(usAgeYea + 5);
+	} );
+} );
+
+describe('anketaTest.js -> getGender -> get correct gender  ', function () {
 	beforeEach(function () {
-		let userAgeDays;
-		let userAgeYears;
-		let userAgeYearsAfter;
-		let todayDate = ['2019', '03', '04'];
-
-		spyOn(window, 'getUserAge').and.callFake(function (param) {
-
-			let userDateOfBirth = new Date(param);
-			todayDate = new Date(todayDate);
-			userAgeDays = Math.floor((todayDate - userDateOfBirth) / 1000 / 60 / 60 / 24);
-			userAgeYears = Math.floor((todayDate - userDateOfBirth) / 1000 / 60 / 60 / 24 / 365.25);
-			userAgeYearsAfter = userAgeYears + 5;
-		});
-	});
-
-	getUserAge (['1991', '06', '18']);
-
-	it('userAgeDays', function () {
-		expect(userAgeDays).toEqual(10121);
+		let count = false;
+		spyOn(window, 'confirm').and.callFake(function (param) {
+			if (count) {
+				return true;
+			}
+			count = true;
+			return false;
+		} );
 	} );
 
-	it('userAgeYears', function () {
-		expect(userAgeYears).toEqual(27);
+	it('male', function () {
+		const res = getGender();
+		expect(res).toBe(' female');
 	} );
 
-	it('userAgeYearsAfter', function () {
-		expect(userAgeYearsAfter).toEqual(32);
+	it('female', function () {
+		getGender();
+		const res = getGender();
+		expect(res).toBe(' male');
 	} );
-
-});
-
+} );
 describe('anketaTest.js -> getRetiree -> get correct retiree  ', function () {
-
 	it('is not retired', function () {
-		let retAge = getRetiree(57);
+		const retAge = getRetiree(57);
 		expect(retAge).toEqual('no');
 	} );
 
 	it('is retired', function () {
-		let retAge = getRetiree(59);
-		expect(retAge).toEqual( 'yes');
+		const retAge = getRetiree(59);
+		expect(retAge).toEqual('yes');
 	} );
-
-
-});
+} );
