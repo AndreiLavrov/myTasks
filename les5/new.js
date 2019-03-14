@@ -1,10 +1,10 @@
 function clock (secNow, tomor) {
 	const sec = secNow || new Date();
 	const tomorrow = tomor || new Date(sec.getFullYear(), sec.getMonth(), sec.getDate() + 1);
-	const secTom =  (tomorrow - sec) / 1000;
+	const secTom =  Math.ceil( (tomorrow - sec) / 1000);
 
 	const getTimer = document.getElementById('getTimer');
-	getTimer.innerText =  Math.ceil(secTom);
+	getTimer.innerText =  secTom;
 	return secTom;
 }
 clock();
@@ -35,6 +35,7 @@ function count (day, inpB, newD) {
 	return res;
 }
 daysForBirthday();
+
 // count days until birthday  (more compact way)
 function daysForBirthdayMoment () {
 	moment.locale('ru');
@@ -47,14 +48,15 @@ function daysForBirthdayMoment () {
 		countM(day, inpBirthday);
 	};
 }
+
 // count days until birthday with 'moment'(parameters are used for testing..)
-function countM (day, inpB, newD) {
+function countM (day, inpB, todayDate) {
 	const inpBirthday = inpB || document.getElementById('inpBirthday').value;
 	const arrDate = inpBirthday.split('-');
-	const moentNow = moment();
+	const momentNow = moment(todayDate) || moment();
 	const momentBirthday = moment( {  month: arrDate[1] - 1, day: arrDate[2] } );
 
-	const result = moment(momentBirthday).diff(moment(moentNow) );
+	const result = moment(momentBirthday).diff(momentNow);
 	const days = Math.ceil(moment.duration(result).as('days') );
 	const res = Math.ceil( (days >= 0) ? days : 365.25 + days);
 	day.innerText = res;
