@@ -50,14 +50,16 @@ and.stub    -   исходное поведение 'окурка' может б
 .calls.any(): возвращает, false если шпион вообще не был вызван, а затем true один раз произойдет хотя бы один вызов.
 .calls.count(): возвращает количество вызовов шпиона
 .calls.argsFor(index): возвращает аргументы, переданные на номер вызова index
+
 .calls.allArgs(): возвращает аргументы для всех вызовов
 .calls.all(): возвращает контекст (the this) и аргументы, переданные всем вызовам
 .calls.mostRecent(): возвращает контекст (the this) и аргументы для самого последнего вызова
 .calls.first(): возвращает контекст (the this) и аргументы для первого вызова
 .calls.first().object --  "object-свойство" устанавливается равным значению, thisкогда был вызван шпион
+expect(foo).toHaveBeenCalledWith(jasmine.any(Number), jasmine.any(Function));
+
 .calls.reset(): очищает все отслеживания для шпиона
 expect({}).toEqual(jasmine.any(Object));
 jasmine.objectContaining  -- когда ожидание заботится только об определенных парах ключ / значение в фактическом.
 jasmine.clock().install     jasmine.clock().tick    --- для таймаутов
-expect(foo).toHaveBeenCalledWith(jasmine.any(Number), jasmine.any(Function));
 

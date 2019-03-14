@@ -113,7 +113,7 @@ function removeProd (prod) {
 	}
 	if (prod) {
 		const dellProd = prod;
-		const cart = JSON.parse(localStorage.getItem('products') ) ;
+		const cart = JSON.parse(localStorage.getItem('products') );
 
 		cart.forEach(function (item, i, cart) {
 			if (cart[i].name === dellProd) {

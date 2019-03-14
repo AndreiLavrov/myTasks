@@ -1,11 +1,25 @@
 // не могу понять как исправить ошибку в spec 'Cannot set property 'innerText' of null..' :(
 
 describe('new.js -> clock -> return the number of seconds until tomorrow', function () {
-	it('should return 60', function () {
-		const res = clock(new Date(2019, 3, 10, 23, 59),  new Date(2019, 3, 11) );
-		// console.log(res);
-		expect(res).toEqual(60);
+
+
+	it('should return correct number', function () {
+			const tomorrow = new Date(2019, 3, 11);
+			const today = new Date(2019, 3, 10, 23, 59);
+
+		const res = clock(today, tomorrow);
+		expect(res).toBe(Math.ceil( (tomorrow - today / 1000)) );
 	} );
+
+		// it('should add to item on the page ', function () {
+		// 		const tomorrow = new Date(2019, 3, 11);
+		// 		const today = new Date(2019, 3, 10, 23, 59);
+		//
+		// 		const clockSec = clock(today, tomorrow);
+		// 		expect(res).toBe(Math.ceil( (tomorrow - today / 1000)) );
+		// 		const res = document.getElementById('getTimer');
+		// 		expect(res.valueOf()).toBe(clockSec);
+		// } );
 } );
 
 describe('new.js -> mySort -> return sorted array', function () {

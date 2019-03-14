@@ -103,32 +103,31 @@ describe('homeTasks.js -> sumProducts -> should it returns the total cost of all
 describe('homeTasks.js -> removeProd -> should remove products ', function () {
 		beforeEach(function () {
 				localStorage.removeItem('products');
-
-				// spyOn(localStorage, 'getItem').and.callFake(function() {
-				// 		return "[{"name":"lemon","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"}," +
-				// 		"{"name":"apple","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"}]";
-				// });
 		});
+
 		it('if there is no products ', function () {
 				const res = removeProd();
 				expect(res).toBe('there is no product');
 		} );
 
-		//    НЕ УСПЕЛ ДОДЕЛАТЬ 10 МИН РАБОТЫ
-		// xit(' all ', function () {
-		// 		addProduct('lemon',  '1',  'num', '32', '2');
-		// 		addProduct("apple",  "1",  "num", "32", "2");
-		// 		expect(res).toBe('there is no product');  // что имеет продукты
-		// 		const res = removeProd();
-		// 		expect(res).toBe('there is no product'); // что их нет
-		// }
-		//
-		// xit(' all ', function () {
-		// 		addProduct('lemon',  '1',  'num', '32', '2');
-		// 		addProduct("apple",  "1",  "num", "32", "2");
-		// 		expect(res).toBe('there is no product');  // что имеет продукты
-		// 		const res = removeProd('apple');
-		// 		expect(res).toBe('there is no product'); // что  нет именно 'apple'
-		// }
+		it(' all products', function () {
+				addProduct('lemon',  '1',  'num', '32', '2');
+				addProduct("apple",  "1",  "num", "32", "2");
+				expect((JSON.parse(localStorage.getItem('products') )).length).toBe(2);
+
+				removeProd();
+				expect(localStorage.getItem('products')).toBeFalsy();
+		});
+
+		it(' some products', function () {
+				addProduct('lemon',  '1',  'num', '32', '2');
+				addProduct("apple",  "1",  "num", "32", "2");
+				expect(JSON.parse(localStorage.getItem('products') ))
+						.toContain({"name":"apple","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"});
+
+				const res = removeProd('apple');
+				expect(JSON.parse(localStorage.getItem('products') ))
+						.not.toContain({"name":"apple","id":"1","units":"num","numberOfUnits":"32","costPerUnit":"2"});
+		});
 
 		} );
