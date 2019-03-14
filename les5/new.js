@@ -1,11 +1,27 @@
-function clock (secNow, tomor) {
-	const sec = secNow || new Date();
-	const tomorrow = tomor || new Date(sec.getFullYear(), sec.getMonth(), sec.getDate() + 1);
-	const secTom =  Math.ceil( (tomorrow - sec) / 1000);
+//  count seconds until birthday (parameters are used for testing..)
+// function clock (secNow, tomor) {
+// 	const sec = secNow || new Date();
+// 	const tomorrow = tomor || new Date(sec.getFullYear(), sec.getMonth(), sec.getDate() + 1);
+// 	const secTom =  Math.ceil( (tomorrow - sec) / 1000);
+//
+// 	const getTimer = document.getElementById('getTimer');
+// 	getTimer.innerText =  secTom;
+// 	return secTom;
+// }
+// clock();
+// setInterval(clock, 1000);
 
-	const getTimer = document.getElementById('getTimer');
-	getTimer.innerText =  secTom;
-	return secTom;
+//   count seconds until birthday by `moment`(parameters are used for testing..)
+moment.locale('ru');
+
+function clock (secNow, tomor) {
+		const sec = secNow || moment();
+		const tomorrow = tomor || moment().add(1, 'day').set('h', 0). set('m', 0).set('s', 0);
+		const secTom =  moment(tomorrow).diff(sec, 's');
+
+		const getTimer = document.getElementById('getTimer');
+		getTimer.innerText =  secTom;
+		return secTom;
 }
 clock();
 setInterval(clock, 1000);
@@ -50,7 +66,7 @@ function countM (day, inpBinpBirthday, todayDate) {
 
 	return res;
 }
-moment.locale('ru');
+
 const clickInpBirthday = document.getElementById('clickInpBirthday');
 const day =  document.getElementById('day');
 
