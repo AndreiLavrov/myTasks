@@ -16,18 +16,17 @@ person['name'] === person.name  (var key = 'name'; person[key])  если имя
 
 
                  для изучения !!
-eslint
-jasmine
-moment!!!
+eslint  (откоррект. настройки )
+jasmine  (норм)
+moment!!!  (изучить)
 koans
 
-
+*************** ВОПРОСЫ  ***********************
 tab настроить в webStorm
 spyOn(window, 'prompt').and.callFake(function(param) {
 			return false;});    вместо фальш раздельная строка не работает!  почему ??
 ...code review ...
-localStorage testing            --- les4
-Cannot set property 'innerText' of null    -- les5
+
 
 
 *************************** ESLINT ***********************

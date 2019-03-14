@@ -73,7 +73,6 @@ function replBadWords (str, badWord,  goodWord) {
 	return newStr;
 }
 
-
 // adds products to local storage
 function addProduct (name, id, units, numberOfUnits, costPerUnit) {
 	let cart;

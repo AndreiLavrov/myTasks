@@ -19,18 +19,18 @@ describe('new.js -> clock -> return the number of seconds until tomorrow', funct
 	} );
 } );
 
-describe('new.js -> count -> return the number of days until birthday', function () {
-	it('should return correct number', function () {
-		const res = count('', '1991-05-18', new Date('2019-02-11') );
-		expect(res).toEqual(96);
-	} );
-
-	it('should add to item on the page ', function () {
-		const day = document.getElementById('day');
-		const res = count(day, '1991-05-18', new Date('2019-02-11') );
-		expect(res).toEqual(+day.innerText);
-	} );
-} );
+// describe('new.js -> count -> return the number of days until birthday', function () {
+// 	it('should return correct number', function () {
+// 		const res = count('', '1991-05-18', new Date('2019-02-11') );
+// 		expect(res).toEqual(96);
+// 	} );
+//
+// 	it('should add to item on the page ', function () {
+// 		const day = document.getElementById('day');
+// 		const res = count(day, '1991-05-18', new Date('2019-02-11') );
+// 		expect(res).toEqual(+day.innerText);
+// 	} );
+// } );
 
 describe('new.js -> countM -> return the number of days until birthday', function () {
 	it('should return correct number', function () {

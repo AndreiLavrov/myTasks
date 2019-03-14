@@ -10,60 +10,54 @@ function clock (secNow, tomor) {
 clock();
 setInterval(clock, 1000);
 
-// cumbersome and not accurate way to solve
-function daysForBirthday () {
-	const clickInpBirthday = document.getElementById('clickInpBirthday');
-	const day = document.getElementById('day');
-	const inpBirthday = document.getElementById('inpBirthday').value;
 
-	clickInpBirthday.onclick = () => {
-		count(day, inpBirthday);
-	};
-}
 // count days until birthday (parameters are used for testing..)
-function count (day, inpB, newD) {
-	const inpBirthday = inpB || document.getElementById('inpBirthday').value;
+// function count (day, inpB, newD) {
+// 	const inpBirthday = inpB || document.getElementById('inpBirthday').value;
+//
+// 	const nowDate = newD || new Date();
+// 	const dateBirthday = new Date(inpBirthday);
+// 	const monthBirthday = dateBirthday.getMonth();
+// 	const dayBirthday = dateBirthday.getDate();
+//
+// 	const daysForBirthday = ( (new Date(nowDate.getFullYear(), monthBirthday, dayBirthday) ) - nowDate) / 1000 / 60 / 60 / 24;
+// 	const res = Math.ceil( (daysForBirthday >= 0) ? daysForBirthday : 365 + daysForBirthday);
+// 	day.innerText = res;
+// 	return res;
+// }
+//
+// const clickInpBirthday = document.getElementById('clickInpBirthday');
+// const day = document.getElementById('day');
+// const inpBirthday = document.getElementById('inpBirthday').value;
+//
+// clickInpBirthday.onclick = () => {
+// 		count(day, inpBirthday);
+// };
 
-	const nowDate = newD || new Date();
-	const dateBirthday = new Date(inpBirthday);
-	const monthBirthday = dateBirthday.getMonth();
-	const dayBirthday = dateBirthday.getDate();
-
-	const daysForBirthday = ( (new Date(nowDate.getFullYear(), monthBirthday, dayBirthday) ) - nowDate) / 1000 / 60 / 60 / 24;
-	const res = Math.ceil( (daysForBirthday >= 0) ? daysForBirthday : 365.25 + daysForBirthday);
-	day.innerText = res;
-	return res;
-}
-daysForBirthday();
-
-// count days until birthday  (more compact way)
-function daysForBirthdayMoment () {
-	moment.locale('ru');
-
-	const clickInpBirthday = document.getElementById('clickInpBirthday');
-	const day = document.getElementById('day');
-	const inpBirthday = document.getElementById('inpBirthday').value;
-
-	clickInpBirthday.onclick = () => {
-		countM(day, inpBirthday);
-	};
-}
 
 // count days until birthday with 'moment'(parameters are used for testing..)
-function countM (day, inpB, todayDate) {
-	const inpBirthday = inpB || document.getElementById('inpBirthday').value;
-	const arrDate = inpBirthday.split('-');
+function countM (day, inpBinpBirthday, todayDate) {
+		const inpB  = inpBinpBirthday || document.getElementById('inpBirthday').value;
 	const momentNow = moment(todayDate) || moment();
-	const momentBirthday = moment( {  month: arrDate[1] - 1, day: arrDate[2] } );
+	const inpMomBirthday = moment(inpB);
+	const month = inpMomBirthday.get('month');
 
-	const result = moment(momentBirthday).diff(momentNow);
-	const days = Math.ceil(moment.duration(result).as('days') );
-	const res = Math.ceil( (days >= 0) ? days : 365.25 + days);
+		const date = inpMomBirthday.get('date');
+	const momentBirthday = moment().set('y', momentNow.get('year')).set('month', month).set('date', date );
+	const result = momentBirthday.diff(momentNow, 'day');
+	const res = (result >= 0) ? result : 365 + result;
 	day.innerText = res;
 
 	return res;
 }
-daysForBirthdayMoment();
+moment.locale('ru');
+const clickInpBirthday = document.getElementById('clickInpBirthday');
+const day =  document.getElementById('day');
+
+clickInpBirthday.onclick = () => {
+		countM(day);
+};
+
 
 /* users = [{id: '1', name: 'Jack', dob: '1999-01-01'},
 		 			{id: '2', name: 'Tom', dob: '1992-01-01'},

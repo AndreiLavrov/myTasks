@@ -48,7 +48,6 @@ function getUserAge (date) {
 	userAgeYearsAfter = userAgeYears + 5;
 }
 
-
 function getGender () {
 	if (confirm('is your gender -- male?') ) {
 		return ' male';
