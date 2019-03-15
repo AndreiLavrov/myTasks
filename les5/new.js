@@ -82,6 +82,10 @@ clickInpBirthday.onclick = () => {
  /*  sorts by specific properties*/
 function mySort (param1, param2, param3) {
 		 return param1.sort(function (a, b) {
+		 		if (a.param2 == 'dob') {
+						a[param2] = moment(a[param2]);
+						b[param2] = moment(b[param2]);
+				}
 				 if (a[param2] < b[param2] ) {
 						 return (param3 === 'asc') ? -1 : 1;
 				 }
