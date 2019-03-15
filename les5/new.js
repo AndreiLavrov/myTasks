@@ -1,4 +1,4 @@
-//  count seconds until birthday (parameters are used for testing..)
+ /*count seconds until birthday (parameters are used for testing..)*/
 // function clock (secNow, tomor) {
 // 	const sec = secNow || new Date();
 // 	const tomorrow = tomor || new Date(sec.getFullYear(), sec.getMonth(), sec.getDate() + 1);
@@ -11,12 +11,12 @@
 // clock();
 // setInterval(clock, 1000);
 
-//   count seconds until birthday by `moment`(parameters are used for testing..)
+/*  count seconds until birthday by `moment`(parameters are used for testing..)*/
 moment.locale('ru');
 
-function clock (secNow, tomor) {
+function clock (secNow) {
 		const sec = secNow || moment();
-		const tomorrow = tomor || moment().add(1, 'day').set('h', 0). set('m', 0).set('s', 0);
+		const tomorrow =  moment(sec).add(1, 'day').set('h', 0). set('m', 0).set('s', 0);
 		const secTom =  moment(tomorrow).diff(sec, 's');
 
 		const getTimer = document.getElementById('getTimer');
@@ -27,7 +27,7 @@ clock();
 setInterval(clock, 1000);
 
 
-// count days until birthday (parameters are used for testing..)
+/* count days until birthday (parameters are used for testing..)*/
 // function count (day, inpB, newD) {
 // 	const inpBirthday = inpB || document.getElementById('inpBirthday').value;
 //
@@ -51,7 +51,7 @@ setInterval(clock, 1000);
 // };
 
 
-// count days until birthday with 'moment'(parameters are used for testing..)
+/* count days until birthday with 'moment'(parameters are used for testing..)*/
 function countM (day, inpBinpBirthday, todayDate) {
 		const inpB  = inpBinpBirthday || document.getElementById('inpBirthday').value;
 	const momentNow = moment(todayDate) || moment();
@@ -79,7 +79,7 @@ clickInpBirthday.onclick = () => {
 		 			{id: '2', name: 'Tom', dob: '1992-01-01'},
 		 			{id: '3', name: 'Bob', dob: '2003-01-01'}];*/
 
-// sorts by specific properties
+ /*  sorts by specific properties*/
 function mySort (param1, param2, param3) {
 		 return param1.sort(function (a, b) {
 				 if (a[param2] < b[param2] ) {

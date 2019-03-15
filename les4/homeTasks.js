@@ -1,4 +1,7 @@
-// division without remainder
+/*division without remainder
+* @param a
+* @param b
+@returns {}*/
 function division (a, b) {
 	if (a % b === 0) {
 		return 'Делится';
