@@ -7,51 +7,49 @@ with step @step (default 1)
 */
 
 function sequence (start, step) {
-		var count = start || 0;
-		var myStep = step || 1;
-		var a = 0;
+	var count = start || 0;
+	var myStep = step || 1;
+	var a = 0;
 
-		return function () {
-
+	return function () {
 				  count += a;
 				  a = myStep;
 				 return count;
-		}
+	};
 }
 
- /*multiplication params */
-function mult(a, b, c, d) { return a * b * c * d; }
+/* multiplication params */
+function mult (a, b, c, d) {
+	return a * b * c * d;
+}
 /* multiplication with fixed params
 (caring)*/
-function  partitial(mult, a, b) {
-		return function myFun(c, d) {
-					return mult.call(null, a, b, c, d);
-		}
-};
+function  partitial (mult, a, b) {
+	return function myFun (c, d) {
+		return mult.call(null, a, b, c, d);
+	};
+}
 
-console.log(mult(2, 3, 4, 5)); // 120
+console.log(mult(2, 3, 4, 5) ); // 120
 mult23 = partitial(mult, 2, 3);
-console.log(mult23(4, 5)); //120
+console.log(mult23(4, 5) ); // 120
 
-
-/*used value of input
+/* used value of input
 @surname
 and @name
 @return string*/
 const elem = document.getElementById('elem');
 
-function func(surname, name) {
-		return alert(this.value + ', ' + surname + ' ' + name);
+function func (surname, name) {
+	return alert(`${this.value}, ${surname} ${name}`);
 }
 
-		 let obj = {
-				value: elem.value,
-		 }
+		 const obj = {
+	value: elem.value,
+		 };
 
 		 func =  func.bind(obj);
 
 // func('Иванов', 'Иван'); //тут должно вывести 'привет, Иванов Иван'
 // func('Петров', 'Петр'); //тут должно вывести 'привет, Петров Петр'
-
-
 
