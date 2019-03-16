@@ -22,6 +22,7 @@ moment!!!  (изучить)
 koans
 
 *************** ВОПРОСЫ  ***********************
+прав комментарии
 запустить код в панели
 tab настроить в webStorm
 spyOn(window, 'prompt').and.callFake(function(param) {
