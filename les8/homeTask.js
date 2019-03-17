@@ -98,20 +98,20 @@ function getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min)) + min;
 }
 const myTimerRandNum = setInterval(function f () {
+		const randomNum = getRandomInt(1, 1000);
 		try {
-				const rsndomNum = getRandomInt(1, 1000);
-				if(rsndomNum % 2 === 0) {
-						throw new SyntaxError("Ошибка в данных");
+				if(randomNum % 2 === 0) {
+						throw new Error("Ошибка в данных");
 				}
+				console.log(`success ${randomNum}`);
 		}catch (e) {
-				console.log(e.message);
-		}finally {
-				console.log(rsndomNum);
+				console.log(`${e} with ${randomNum}`);
 		}
 }, 1000);
+
 		setTimeout(function () {
 				clearInterval(myTimerRandNum);
-		})
+		}, 20000)
 // let myTim = new Timer(10);
 // console.log(myTim.start() );
 //
