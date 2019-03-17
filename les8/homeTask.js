@@ -6,17 +6,42 @@ let id = setInterval(function(){
 */
 
 
+//
+// function Timer (startNum ) {
+// 		let _startNum = startNum;
+// 		let _idInterval;
+// 		let _pauseIs = false;
+// 		this.start = function () {
+// 				_idInterval = setInterval(function(){
+// 						if (_startNum === 1) clearInterval(_idInterval);
+// 						return console.log(--_startNum);
+// 				}, 1000);
+// 				return _startNum;
+// 		}
+// 		this.pause = function () {
+// 				if (_pauseIs === false) {
+// 						clearInterval(_idInterval);
+// 						_pauseIs = true;
+// 				} else if (_pauseIs === true){
+// 						this.start();
+// 				}
+// 		}
+// 		this.stop = function () {
+// 				clearInterval(this.idInterval);
+// 		}
+// }
+
 
 function Timer (startNum ) {
-		let _startNum = startNum;
+		this.startNum = startNum;
 		let _idInterval;
 		let _pauseIs = false;
 		this.start = function () {
-				console.log(_startNum);
 				_idInterval = setInterval(function(){
-						if (_startNum === 1) clearInterval(_idInterval);
-						console.log(--_startNum);
+						if (this.startNum === 1) clearInterval(_idInterval);
+						return console.log(--this.startNum);
 				}, 1000);
+				return this.startNum;
 		}
 		this.pause = function () {
 				if (_pauseIs === false) {
@@ -31,15 +56,43 @@ function Timer (startNum ) {
 		}
 }
 
-const message = document.getElementById('message');
-const inputUser = document.getElementById('inputUser');
+let message = document.getElementById('message');
+let inputUser = document.getElementById('inputUser');
 const send = document.getElementById('send');
 const butStart = document.getElementById('start');
 butStart.onclick = function (e) {
-		message.innerText = `Измерение начнется через `;
+		let timer = new Timer(5);
+		timer.start = function () {
+				let self = this;
+				_idInterval = setInterval(function(){
+						if (self.startNum === 1) {
+								message.innerText = `Измерение...`;
+								clearInterval(_idInterval);
+								// здесь будет функция таймер
+								timerConterHeardBit (15);
+								return;
+						}
+						message.innerText = `Измерение начнется через ${--self.startNum }`;
+				}, 1000);
+				return self.startNum;
+		}
+		message.innerText = `Измерение начнется через ${timer.start()}`;
 };
+
+// та самая  функция таймер
+function timerConterHeardBit (tim) {
+		let time = setTimeout (function () {
+				message.innerText = `STOP!   enter your result`;
+		}, tim * 1000);
+
+}
+
+send.onclick = function (e) {
+		message.innerText = +inputUser.value * 4;
+}
+
 // let myTim = new Timer(10);
-// myTim.start();
+// console.log(myTim.start() );
 //
 // setTimeout(function () {
 // 		myTim.pause();
