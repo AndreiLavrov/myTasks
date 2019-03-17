@@ -91,6 +91,27 @@ send.onclick = function (e) {
 		message.innerText = +inputUser.value * 4;
 }
 
+
+
+
+function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
+}
+const myTimerRandNum = setInterval(function f () {
+		try {
+				const rsndomNum = getRandomInt(1, 1000);
+				if(rsndomNum % 2 === 0) {
+						throw new SyntaxError("Ошибка в данных");
+				}
+		}catch (e) {
+				console.log(e.message);
+		}finally {
+				console.log(rsndomNum);
+		}
+}, 1000);
+		setTimeout(function () {
+				clearInterval(myTimerRandNum);
+		})
 // let myTim = new Timer(10);
 // console.log(myTim.start() );
 //
