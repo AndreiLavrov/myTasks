@@ -10,15 +10,15 @@ function Timer (startNum) {
 	let _idInterval;
 	let _pauseIs = false;
 
-	this.start = function () {
-		_idInterval = setInterval(function () {
-			if (startNum === 1) {
-				clearInterval(_idInterval);
-			}
-			return console.log(--startNum);
-		}, 1000);
-		return console.log(startNum);
-	};
+		this.start = function () {
+				_idInterval = setInterval(function () {
+						if (startNum === 1) {
+								clearInterval(_idInterval);
+						}
+						return console.log(--startNum);
+				}, 1000);
+				return console.log(startNum);
+		};
 
 	this.pause = function () {
 		if (_pauseIs === false) {
@@ -61,6 +61,7 @@ function clickStart () {
 		}, 1000);
 		return self.startNum;
 	};
+
 	message.innerText = `Измерение начнется через ${timer.start()}`;
 };
 
