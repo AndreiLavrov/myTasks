@@ -38,17 +38,13 @@ console.log(mult23(4, 5) ); // 120
 @surname
 and @name
 @return string*/
-const elem = document.getElementById('elem');
+let elem = document.getElementById('elem');
 
 function func (surname, name) {
 	return alert(`${this.value}, ${surname} ${name}`);
 }
 
-		 const obj = {
-	value: elem.value,
-		 };
-
-		 func =  func.bind(obj);
+func =  func.bind(elem);
 
 // func('Иванов', 'Иван'); //тут должно вывести 'привет, Иванов Иван'
 // func('Петров', 'Петр'); //тут должно вывести 'привет, Петров Петр'

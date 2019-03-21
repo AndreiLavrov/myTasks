@@ -1,5 +1,5 @@
 
-/* constructor timer
+/* constructor timer in function style
 counts time @startNum
 has metods
 @start declered timer and return present value
@@ -9,6 +9,7 @@ function Timer (startNum) {
 	this.startNum = startNum;
 	let _idInterval;
 	let _pauseIs = false;
+
 	this.start = function () {
 		_idInterval = setInterval(function () {
 			if (startNum === 1) {
@@ -18,6 +19,7 @@ function Timer (startNum) {
 		}, 1000);
 		return console.log(startNum);
 	};
+
 	this.pause = function () {
 		if (_pauseIs === false) {
 			clearInterval(_idInterval);
@@ -27,17 +29,24 @@ function Timer (startNum) {
 			_pauseIs = false;
 		}
 	};
+
 	this.stop = function () {
 		clearInterval(_idInterval);
 	};
 }
+// const time = new Timer (10);
+// time.start();
+
+
 
 const message = document.getElementById('message');
 const inputUser = document.getElementById('inputUser');
 const send = document.getElementById('send');
 const butStart = document.getElementById('start');
 
-butStart.onclick = function clickStart () {
+butStart.onclick = clickStart;
+
+function clickStart () {
 	const timer = new Timer(5);
 	timer.start = function () {
 		const self = this;
@@ -46,8 +55,7 @@ butStart.onclick = function clickStart () {
 				message.innerText = 'Измерение...';
 				clearInterval(_idInterval);
 
-				timerCounterHeardBit(15);
-				return;
+				return timerCounterHeardBit(15);
 			}
 			message.innerText = `Измерение начнется через ${--self.startNum}`;
 		}, 1000);
@@ -63,13 +71,23 @@ function timerCounterHeardBit (tim) {
 	}, tim * 1000);
 }
 
-send.onclick = function (e) {
+send.onclick = function () {
 	message.innerText = `your pulse is ${+inputUser.value * 4} beats`;
 };
 
+
+/*
+ get the minimum and maximum values
+  displays random values
+ */
 function getRandomInt (min, max) {
 	return Math.floor(Math.random() * (max - min) ) + min;
 }
+
+/*
+returns in console integers,
+even numbers result in an error
+*/
 function checkNumEvenError () {
 	const myTimerRandNum = setInterval(function f () {
 		const randomNum = getRandomInt(1, 1000);
@@ -81,6 +99,7 @@ function checkNumEvenError () {
 		} catch (e) {
 			console.log(`${e} with ${randomNum}`);
 		}
+
 	}, 1000);
 
 	setTimeout(function () {
@@ -88,5 +107,5 @@ function checkNumEvenError () {
 	}, 20000);
 }
 
-// checkNumEvenError ();
+ //checkNumEvenError ();
 
