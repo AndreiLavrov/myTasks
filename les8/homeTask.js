@@ -59,15 +59,17 @@ function clickStart () {
 			}
 			message.innerText = `Измерение начнется через ${--self.startNum}`;
 		}, 1000);
+			message.innerText = `Измерение начнется через ${self.startNum}`;
 		return self.startNum;
 	};
 
-	message.innerText = `Измерение начнется через ${timer.start()}`;
-};
+		timer.start();
+	};
+
 
 // та самая  функция таймер
 function timerCounterHeardBit (tim) {
-	const time = setTimeout(function () {
+	setTimeout(function () {
 		message.innerText = 'STOP!   enter your result';
 	}, tim * 1000);
 }
@@ -75,38 +77,4 @@ function timerCounterHeardBit (tim) {
 send.onclick = function () {
 	message.innerText = `your pulse is ${+inputUser.value * 4} beats`;
 };
-
-
-/*
- get the minimum and maximum values
-  displays random values
- */
-function getRandomInt (min, max) {
-	return Math.floor(Math.random() * (max - min) ) + min;
-}
-
-/*
-returns in console integers,
-even numbers result in an error
-*/
-function checkNumEvenError () {
-	const myTimerRandNum = setInterval(function f () {
-		const randomNum = getRandomInt(1, 1000);
-		try {
-			if (randomNum % 2 === 0) {
-				throw new Error('Ошибка в данных');
-			}
-			console.log(`success ${randomNum}`);
-		} catch (e) {
-			console.log(`${e} with ${randomNum}`);
-		}
-
-	}, 1000);
-
-	setTimeout(function () {
-		clearInterval(myTimerRandNum);
-	}, 20000);
-}
-
- //checkNumEvenError ();
 
