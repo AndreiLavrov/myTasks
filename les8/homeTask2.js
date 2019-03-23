@@ -110,7 +110,8 @@ returns in console integers,
 even numbers result in an error
 */
 function checkNumEvenError () {
-		const myTimerRandNum = setInterval(function f () {
+
+		const myTimerRandNum = setInterval(function  () {
 				const randomNum = getRandomInt(1, 1000);
 				try {
 						if (randomNum % 2 === 0) {
@@ -120,7 +121,7 @@ function checkNumEvenError () {
 				} catch (e) {
 						console.log(`${e} with ${randomNum}`);
 				}
-				//console.log(`1`);
+
 		}, 1000);
 
 		setTimeout(function () {

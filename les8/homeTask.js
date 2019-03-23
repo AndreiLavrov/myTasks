@@ -39,7 +39,7 @@ function Timer (startNum) {
 
 
 
-const message = document.getElementById('message');
+//const message = document.getElementById('message');
 const inputUser = document.getElementById('inputUser');
 const send = document.getElementById('send');
 const butStart = document.getElementById('start');
