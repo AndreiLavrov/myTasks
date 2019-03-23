@@ -53,14 +53,12 @@ describe('sequence.js -> partitial -> multiplication  ', function () {
 } );
 
 describe('sequence.js -> func -> used value of input  ', function () {
-		beforeEach(function () {
-				let elem = document.getElementById('elem');
-				elem.value = 'привет';
+	beforeEach(function () {
+		const elem = document.getElementById('elem');
+		elem.value = 'привет';
 		spyOn(window, 'alert')
 			.and
 			.callFake(function (param) {
-
-
 				return param;
 			} );
 	} );
@@ -75,9 +73,9 @@ describe('sequence.js -> func -> used value of input  ', function () {
 		expect(res).toBe('привет, Петров Петр');
 	} );
 
-		it('should return changed value of input', function () {
-				elem.value = 'пока';
-				const res = func('Петров', 'Петр');
-				expect(res).toBe('пока, Петров Петр');
-		} );
+	it('should return changed value of input', function () {
+		elem.value = 'пока';
+		const res = func('Петров', 'Петр');
+		expect(res).toBe('пока, Петров Петр');
+	} );
 } );

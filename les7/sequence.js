@@ -38,7 +38,7 @@ console.log(mult23(4, 5) ); // 120
 @surname
 and @name
 @return string*/
-let elem = document.getElementById('elem');
+const elem = document.getElementById('elem');
 
 function func (surname, name) {
 	return alert(`${this.value}, ${surname} ${name}`);
