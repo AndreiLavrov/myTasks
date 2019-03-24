@@ -1,54 +1,51 @@
-function FormControl (type, id, validators) {
+
+function FormControl(type, id, validators) {
 	switch (type) {
-	case 'input':
-		return new FormControlInput(type, id, validators);
-		break;
+		case 'input':
+			return new FormControlInput(type, id, validators)
+			break;
 	}
 }
 
-function FormControlInput (type, id, validators) {
-	this.type = type;
-	this.id = id;
-	this.validators = validators;
-
+function FormControlInput(type, id, validators) {
 	this.control = getControl();
 	this.validationErrors = [];
-	this.isValid = getValidation.bind(this)();
 
 	const helper = new Helper();
+	this.isValid = getValidation.bind(this)();
 
-	this.addClass = helper.manipulatWithClass(helper.addClassMyFun);
-	this.removeClass = helper.manipulatWithClass(helper.removeClassMyFun);
+	this.addClass = helper.manipulatWithClass(this.control.classList, helper.addClassMyFun);
+	this.removeClass = helper.manipulatWithClass(this.control.classList, helper.removeClassMyFun);
 
-	this.startCheck = function () {
+	this.startCheck = function() {
 		this.isValid = getValidation.bind(this)();
 		console.log(this.isValid);
 
 		if (!this.isValid) {
-			this.addClass( ['error'] );
+			this.addClass(['error']);
 		} else {
-			this.removeClass( ['error'] );
+			this.removeClass(['error']);
 		}
 
 		const errorContainer = this.control.parentNode.querySelector('.error-list');
 		let text = '';
 		console.log(this.validationErrors);
-		this.validationErrors.forEach(function (error) {
+		this.validationErrors.forEach(function(error){
 			text += `<span>${error}</span><br />`;
-		} );
+		});
 
 		errorContainer.innerHTML = text;
 	};
 
 	function addValidError (self, validator, validationErrors) {
-		if (self.validationErrors.indexOf(validator.toString() ) === -1) {
-			return self.validationErrors.push(validator.toString() );
+		if (validationErrors.indexOf(validator.toString() ) === -1) {
+			return validationErrors.push(validator.toString() );
 		}
 	}
 
 	function removeValidError (self, errorIndex, validationErrors) {
 		if (errorIndex !== -1) {
-			return self.validationErrors.splice(errorIndex, 1);
+			return validationErrors.splice(errorIndex, 1);
 		}
 	}
 
@@ -73,18 +70,18 @@ function FormControlInput (type, id, validators) {
 
 	_init.bind(this)();
 
-	function _init () {
+	function _init() {
 		const self = this;
-		this.control.addEventListener('input', this.startCheck.bind(self) );
+		this.control.addEventListener('input', this.startCheck.bind(self));
 	}
 
-	function getControl () {
+	function getControl() {
 		let controls = document.getElementsByTagName(type);
 
 		controls = [].slice.call(controls, 0);
 
-		return controls.filter(function (control) {
+		return controls.filter(function(control){
 			return control.id === id;
-		} )[0];
+		})[0];
 	}
 }
