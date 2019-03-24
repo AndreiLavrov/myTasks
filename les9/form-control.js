@@ -1,117 +1,90 @@
-function FormControl(type, id, validators) {
-    switch (type) {
-        case 'input':
-        return new FormControlInput(type, id, validators)
-        break;
-    }
+function FormControl (type, id, validators) {
+	switch (type) {
+	case 'input':
+		return new FormControlInput(type, id, validators);
+		break;
+	}
 }
 
-function FormControlInput(type, id, validators) {
-    this.control = getControl();
-    this.validationErrors = [];
+function FormControlInput (type, id, validators) {
+	this.type = type;
+	this.id = id;
+	this.validators = validators;
 
-    this.isValid = getValidation.bind(this)();
+	this.control = getControl();
+	this.validationErrors = [];
+	this.isValid = getValidation.bind(this)();
 
-    this.addClass = function(classes) {
-        try {
-            if (!Array.isArray(classes)) {
-                throw new Error('Param should be an array of strings');
-            }
+	const helper = new Helper();
 
-            let classList = this.control.classList;
-            classes.forEach(function(item){
-                if (classList.contains(String(item))) {
-                    return false;
-                }
+	this.addClass = helper.manipulatWithClass(helper.addClassMyFun);
+	this.removeClass = helper.manipulatWithClass(helper.removeClassMyFun);
 
-                classList.add(String(item));
-            });
-        } catch (e) {
-            console.log(e.message);
-            return false;
-        }
+	this.startCheck = function () {
+		this.isValid = getValidation.bind(this)();
+		console.log(this.isValid);
 
-    };
+		if (!this.isValid) {
+			this.addClass( ['error'] );
+		} else {
+			this.removeClass( ['error'] );
+		}
 
-    this.removeClass = function(classes) {
-        try {
-            if (!Array.isArray(classes)) {
-                throw new Error('Param should be an array of strings');
-            }
+		const errorContainer = this.control.parentNode.querySelector('.error-list');
+		let text = '';
+		console.log(this.validationErrors);
+		this.validationErrors.forEach(function (error) {
+			text += `<span>${error}</span><br />`;
+		} );
 
-            let classList = this.control.classList;
-            console.log(classList);
-            classes.forEach(function(item){
-                if (classList.contains(String(item))) {
-                    classList.remove(String(item));
-                }
-                return true;
+		errorContainer.innerHTML = text;
+	};
 
-            });
-        } catch (e) {
-            console.log(e.message);
-            return false;
-        }
+	function addValidError (self, validator, validationErrors) {
+		if (self.validationErrors.indexOf(validator.toString() ) === -1) {
+			return self.validationErrors.push(validator.toString() );
+		}
+	}
 
-    };
+	function removeValidError (self, errorIndex, validationErrors) {
+		if (errorIndex !== -1) {
+			return self.validationErrors.splice(errorIndex, 1);
+		}
+	}
 
-    this.startCheck = function() {
-        this.isValid = getValidation.bind(this)();
-        console.log(this.isValid);
+	function getValidation () {
+		let isValid = true;
+		const self = this;
 
-        if (!this.isValid) {
-            this.addClass(['error']);
-        } else {
-            this.removeClass(['error']);
-        }
+		validators.forEach(function (item) {
+			const validator = new (window[item] )(3);
 
-        const errorContainer = this.control.parentNode.querySelector('.error-list');
-        let text = '';
-        console.log(this.validationErrors);
-        this.validationErrors.forEach(function(error){
-            text += `<span>${error}</span><br />`;
-        });
+			if (!(validator.test(self.control.value) ) ) {
+				isValid = false;
+				addValidError(self, validator, self.validationErrors);
+			} else {
+				const errorIndex = self.validationErrors.indexOf(validator.toString() );
+				removeValidError(self, errorIndex, self.validationErrors);
+			}
+		} );
 
-        errorContainer.innerHTML = text;
-    };
+		return isValid;
+	}
 
-    function getValidation() {
-        let isValid = true;
-        const self = this;
+	_init.bind(this)();
 
-        validators.forEach(function(item){
-            const validator = new (window[item])(3);
+	function _init () {
+		const self = this;
+		this.control.addEventListener('input', this.startCheck.bind(self) );
+	}
 
-            if (!(validator.test(self.control.value))) {
-                isValid = false;
-                if (self.validationErrors.indexOf(validator.toString()) === -1) {
-                    self.validationErrors.push(validator.toString());
-                }
-            } else {
-                let errorIndex = self.validationErrors.indexOf(validator.toString());
-                if (errorIndex !== -1) {
-                    self.validationErrors.splice(errorIndex, 1);
-                }
-            }
-        });
+	function getControl () {
+		let controls = document.getElementsByTagName(type);
 
-        return isValid;
-    }
+		controls = [].slice.call(controls, 0);
 
-    _init.bind(this)();
-
-    function _init() {
-        const self = this;
-        this.control.addEventListener('input', this.startCheck.bind(self));
-    }
-
-    function getControl() {
-        let controls = document.getElementsByTagName(type);
-
-        controls = [].slice.call(controls, 0);
-
-        return controls.filter(function(control){
-           return control.id === id;
-        })[0];
-    }
+		return controls.filter(function (control) {
+			return control.id === id;
+		} )[0];
+	}
 }
