@@ -1,0 +1,15 @@
+{
+  "posts": [
+    {
+      "title": "Title 2",
+      "author": "Authi 2",
+      "text": "Some text 2",
+      "id": 2
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": []
+}

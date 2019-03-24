@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HT lesson 7</title>
+</head>
+<body>
+<pre>
+1. Напиши функцию создания генератора sequence(start, step).
+Она при вызове возвращает другую функцию-генератор, которая при каждом вызове дает число на 1 больше, и так до бесконечности.
+Начальное число, с которого начинать отсчет, и шаг, задается при создании генератора. Шаг можно не указывать,
+тогда он будет равен одному. Начальное значение по умолчанию равно 0. Генераторов можно создать сколько угодно.
+
+var generator = sequence(10, 3);
+var generator2 = sequence(7, 1);
+
+console.log(generator()); // 10
+console.log(generator()); // 13
+
+console.log(generator2()); // 7
+
+console.log(generator()); // 16
+
+console.log(generator2()); // 8
+
+2. Дана функция function mult(a, b, c, d) { return a * b * c * d; }
+   Напиши функцию partial(fn, a1, a2, ....), которая позволяет зафиксировать один или несколько аргументов функции.
+   Не используя bind!
+
+   console.log(mult(2, 3, 4, 5)); // 120
+   mult23 = partitial(mult, 2, 3);
+   console.log(mult23(4, 5)); //120
+
+3.  Пусть дан следующий код
+    HTML:
+    <input id="elem" value="привет">
+
+    Js:
+    const elem = document.getElementById('elem');
+
+    function func(surname, name) {
+        alert(this.value + ', ' + surname + ' ' + name);
+    }
+
+    //Тут напишите конструкцию с bind()
+
+    func('Иванов', 'Иван'); //тут должно вывести 'привет, Иванов Иван'
+    func('Петров', 'Петр'); //тут должно вывести 'привет, Петров Петр'
+
+    Напишите в указанном месте конструкцию с методом bind() так,
+    чтобы this внутри функции func всегда указывал на инпут из переменной elem.
+
+</pre>
+</body>
+</html>

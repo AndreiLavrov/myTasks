@@ -1,0 +1,15 @@
+{
+  "name": "lesson_6",
+  "version": "1.0.0",
+  "description": "Budget APP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/http-server ./public_html -a localhost -p 8000 -c-1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
