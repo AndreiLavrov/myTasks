@@ -65,7 +65,7 @@ describe('homeTask2.js -> timerCounterHeardBit2 -> should    ', function () {
 	it('add string in page ', function () {
 		expect(message.innerText)
 			.toBe('');
-		timerCounterHeardBit2();
+		timerCounterHeardBit();
 
 		jasmine.clock().tick(15000);
 		expect(message.innerText)
@@ -75,7 +75,7 @@ describe('homeTask2.js -> timerCounterHeardBit2 -> should    ', function () {
 	it('add string in page after correct time ', function () {
 		expect(message.innerText)
 			.toBe('');
-		timerCounterHeardBit2();
+		timerCounterHeardBit();
 
 		jasmine.clock().tick(4000);
 		expect(message.innerText)
@@ -87,7 +87,7 @@ describe('homeTask2.js -> timerCounterHeardBit2 -> should    ', function () {
 	} );
 } );
 
-describe('homeTask2.js -> clickStart2 -> creat a new object  ', function () {
+describe('homeTask2.js -> clickStart -> creat a new object  ', function () {
 	beforeEach(function () {
 		jasmine.clock().install();
 		message.innerText = '';
@@ -100,7 +100,7 @@ describe('homeTask2.js -> clickStart2 -> creat a new object  ', function () {
 	it('add correct string in page ', function () {
 		expect(message.innerText)
 			.toBe('');
-		clickStart2();
+		clickStart();
 
 		jasmine.clock().tick(100);
 		expect(message.innerText)
@@ -116,7 +116,7 @@ describe('homeTask2.js -> clickStart2 -> creat a new object  ', function () {
 	it('add string in page after correct time ', function () {
 		expect(message.innerText)
 			.toBe('');
-		clickStart2();
+		clickStart();
 
 		jasmine.clock().tick(5000);
 		expect(message.innerText)
@@ -124,7 +124,7 @@ describe('homeTask2.js -> clickStart2 -> creat a new object  ', function () {
 	} );
 } );
 
-describe('homeTask2.js -> checkNumEvenError2 -> returns in console integers  ', function () {
+describe('homeTask2.js -> checkNumEvenError -> returns in console integers  ', function () {
 	let myConsLog = [];
 	beforeEach(function () {
 		spyOn(console, 'log')

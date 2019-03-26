@@ -1,25 +1,36 @@
-/* constructor timer in function style
-counts time @startNum
-has metods
-@start declered timer and return present value
-@pause pause timer and continue work with using value
-@stop stop timer */
+
+// task 1 *my first solution..
+/**
+ * @param startNum number time timer
+ * @constructor timer in function style
+ * has metods
+ * @start declered timer and return present value
+ * @pause pause timer and continue work with using value
+ * @stop stop timer
+ */
 function Timer2 (startNum) {
 	this.startNum = startNum;
 	let _idInterval;
-	let _pauseIs = false;
+	let _isPause = false;
 	let funSpetionWork;
 	const self = this;
-	let work = false;
 
+	/**
+	 * @param fun передается параметром функция, показ-ая конкретное действие с таймером(cons.log, innerText, )
+	 * @returns {*} fun
+	 */
 	this.start = function (fun) {
-		if (_pauseIs === false) {
+
+		//проверка на паузу, иначе возобновление отсчета сначала
+		if (_isPause === false) {
 			clearInterval(_idInterval);
-			self.startNum = startNum;
+			this.startNum = startNum;
 		} else {
-			_pauseIs = false;
+			_isPause = false;
 		}
 
+		/*  задаем функцию показ-ую конкретное действие с таймером в область видимости всего объекта.
+		Нужно для возобновления после паузы вызовом метода паузы а не старт*/
 		funSpetionWork = fun;
 
 		_idInterval = setInterval(function () {
@@ -34,14 +45,18 @@ function Timer2 (startNum) {
 		return funSpetionWork(this.startNum);
 	};
 
+	/**
+	 * отанавливает и возобновляет работу таймера
+	 * использует свойства объекта
+	 */
 	this.pause = function () {
-		if (_pauseIs === false) {
+		if (_isPause === false) {
 			clearInterval(_idInterval);
-			_pauseIs = true;
+			_isPause = true;
 			work = false;
-		} else if (_pauseIs === true && self.startNum > 0) {
-			self.start(funSpetionWork);
-			_pauseIs = false;
+		} else if (_isPause === true && this.startNum > 0) {
+			this.start(funSpetionWork);
+			_isPause = false;
 		}
 	};
 
@@ -52,20 +67,28 @@ function Timer2 (startNum) {
 const time = new Timer2(10);
 time.start(console.log);
 
+// task 2
 const message = document.getElementById('message');
 const inputUser = document.getElementById('inputUser');
 const send = document.getElementById('send');
 const butStart = document.getElementById('start');
 const butPause = document.getElementById('pause');
+
 const myTimer = new Timer2(5);
 const myTimerCounterHeardBit = new Timer2(15);
-butStart.onclick = clickStart2;
+
+butStart.onclick = clickStart;
+send.onclick = function () {
+	message.innerText = `your pulse is ${+inputUser.value * 4} beats`;
+};
+
+butPause.onclick = myTimer.pause;
 
 /* countdown to start measuring*/
-function clickStart2 () {
+function clickStart () {
 	myTimer.start(function (startNum) {
 		if (startNum <= 0) {
-			timerCounterHeardBit2();
+			timerCounterHeardBit();
 			return message.innerText = 'Измерение...';
 		}
 
@@ -74,7 +97,7 @@ function clickStart2 () {
 }
 
 /* pulse time measurement*/
-function timerCounterHeardBit2 () {
+function timerCounterHeardBit () {
 	myTimerCounterHeardBit.start(function (startNum) {
 		console.log(startNum);
 		if (startNum === 0) {
@@ -83,24 +106,23 @@ function timerCounterHeardBit2 () {
 	} );
 }
 
-send.onclick = function () {
-	message.innerText = `your pulse is ${+inputUser.value * 4} beats`;
-};
 
-butPause.onclick = myTimer.pause;
-
-/*
-get the minimum and maximum values
-displays random values
-*/
+//   task 3
+/**
+ * get the minimum and maximum values
+ * displays random values
+ * @param min
+ * @param max
+ * @returns {*}
+ */
 function getRandomInt (min, max) {
 	return Math.floor(Math.random() * (max - min) ) + min;
 }
 
-/*
-returns in console integers,
-even numbers result in an error
-*/
+/**
+ * returns in console integers,
+ * even numbers result in an error
+ */
 function checkNumEvenError () {
 	const myTimerRandNum = setInterval(function  () {
 		const randomNum = getRandomInt(1, 1000);

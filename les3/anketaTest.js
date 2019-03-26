@@ -64,7 +64,7 @@ function getRetiree (Years) {
 
 /* firstName =  validate(prompt('What is your first name?', arrFullName[0] ), arrFullName[0] );
 	lastName = validate(prompt('What is your last name?', arrFullName[1] ), arrFullName[1] );
-	fatherName = validate(prompt('What is your name on the father?', arrFullName[2] ), arrFullName[2] );
+	fatherName = validate(prompt('What is your name on the father?', arrFullName[prototipeStyle] ), arrFullName[prototipeStyle] );
 	dateOfBirth = validDate(prompt('What is your date of birth?', '18.06.1991') );
 */
 /* getUserAge(dateOfBirth);

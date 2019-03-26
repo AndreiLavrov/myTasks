@@ -14,7 +14,7 @@ x = function() {
 
 // describe(x);
 // describe(function() {
-//     alert(2);
+//     alert(prototipeStyle);
 // });
 
 function test() {

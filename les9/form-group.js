@@ -1,12 +1,15 @@
 function FormGroup(id) {
+    this._id = id;
     this.form = getForm();
     this.formControls = [];
-    let helper = new Helper();
+    const helper = new Helper();
+
 
      this.addClass = helper.manipulatWithClass(this.form.classList, helper.addClassMyFun);
 
      this.removeClass = helper.manipulatWithClass(this.form.classList, helper.removeClassMyFun);
 
+     // this.isValid = this._getStatus();
     this.isValid = getStatus.bind(this)();
 
     _init.bind(this)();
@@ -77,6 +80,13 @@ function FormGroup(id) {
 // FormGroup.prototype = Object.create(Helper.prototype);
 // FormGroup.prototype.constructor = FormGroup;
 
-
+// FormGroup.prototype._getForm =  function () {
+//     let forms = document.getElementsByTagName('form');
+//     forms = [].slice.call(forms, 0);
+//
+//     return forms.filter(function(item){
+//         return item.id === id;
+//     })[0];
+// }
 
 

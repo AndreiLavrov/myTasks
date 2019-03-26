@@ -6,7 +6,7 @@ describe('homeTasks.js -> division -> division without remainder', function () {
 
 	it('should return " не Делится"', function () {
 		const res = division(8, 3);
-		expect(res).toBe('Делится с остатком  2');
+		expect(res).toBe('Делится с остатком  prototipeStyle');
 	} );
 } );
 
@@ -62,14 +62,14 @@ describe('homeTasks.js -> addProduct -> should it add products ', function () {
 	} );
 
 	it('add first product', function () {
-		const res = addProduct('lemon',  '1',  'num', '32', '2');
+		const res = addProduct('lemon',  '1',  'num', '32', 'prototipeStyle');
 		const cart = JSON.parse(localStorage.getItem('products') );
 		expect(res).toEqual(cart);
 	} );
 
 	 it('add second product', function () {
-	 			addProduct('lemon',  '1',  'num', '32', '2');
-		const res = addProduct('apple',  '1',  'num', '32', '2');
+	 			addProduct('lemon',  '1',  'num', '32', 'prototipeStyle');
+		const res = addProduct('apple',  '1',  'num', '32', 'prototipeStyle');
 			  const cart = JSON.parse(localStorage.getItem('products') );
 		expect(res).toEqual(cart);
 	} );
@@ -85,8 +85,8 @@ describe('homeTasks.js -> sumProducts -> should it returns the total cost of all
 	} );
 
 	it('if there are products', function () {
-		addProduct('lemon',  '1',  'num', '32', '2');
-		addProduct('apple',  '1',  'num', '32', '2');
+		addProduct('lemon',  '1',  'num', '32', 'prototipeStyle');
+		addProduct('apple',  '1',  'num', '32', 'prototipeStyle');
 
 		let sumProd = 0;
 		const cart = JSON.parse(localStorage.getItem('products') ) ;
@@ -110,8 +110,8 @@ describe('homeTasks.js -> removeProd -> should remove products ', function () {
 	} );
 
 	it(' all products', function () {
-		addProduct('lemon',  '1',  'num', '32', '2');
-		addProduct('apple',  '1',  'num', '32', '2');
+		addProduct('lemon',  '1',  'num', '32', 'prototipeStyle');
+		addProduct('apple',  '1',  'num', '32', 'prototipeStyle');
 		expect( (JSON.parse(localStorage.getItem('products') ) ).length).toBe(2);
 
 		removeProd();
@@ -119,13 +119,13 @@ describe('homeTasks.js -> removeProd -> should remove products ', function () {
 	} );
 
 	it(' some products', function () {
-		addProduct('lemon',  '1',  'num', '32', '2');
-		addProduct('apple',  '1',  'num', '32', '2');
+		addProduct('lemon',  '1',  'num', '32', 'prototipeStyle');
+		addProduct('apple',  '1',  'num', '32', 'prototipeStyle');
 		expect(JSON.parse(localStorage.getItem('products') ) )
-			.toContain( { name: 'apple', id: '1', units: 'num', numberOfUnits: '32', costPerUnit: '2' } );
+			.toContain( { name: 'apple', id: '1', units: 'num', numberOfUnits: '32', costPerUnit: 'prototipeStyle' } );
 
 		const res = removeProd('apple');
 		expect(JSON.parse(localStorage.getItem('products') ) )
-			.not.toContain( { name: 'apple', id: '1', units: 'num', numberOfUnits: '32', costPerUnit: '2' } );
+			.not.toContain( { name: 'apple', id: '1', units: 'num', numberOfUnits: '32', costPerUnit: 'prototipeStyle' } );
 	} );
 } );

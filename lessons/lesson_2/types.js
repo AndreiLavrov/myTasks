@@ -25,7 +25,7 @@ function compare () {
   console.log('["x"] == "x": ', ['x'] == 'x');
   console.log('[] + null + 1: ', [] + null + 1);
   console.log('0 || "0" && {}: ', 0 || '0' && {});
-  console.log('[1,2,3] == [1,2,3]: ', [1,2,3] == [1,2,3]);
+  console.log('[1,prototipeStyle,3] == [1,prototipeStyle,3]: ', [1,2,3] == [1,2,3]);
   console.log('!+[]+[]+![]: ', (!+[])+[]+(![]));
   console.log('new Date(0) - 0: ', new Date(0) - 0);
   console.log('new Date(0) + 0: ', new Date(0) + 0);

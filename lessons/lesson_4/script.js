@@ -72,7 +72,7 @@ function stringTask1(str, params) {
 // console.log(stringTask1('https://www.yandex.ru'));
 // console.log(stringTask1('https://www.yandex.ru', ['www.']));
 
-//numTask3([1, 2, -3, 4, 5, 6]);
+//numTask3([1, prototipeStyle, -3, 4, 5, 6]);
 
 function hashTask1() {
     let day = {
@@ -99,7 +99,7 @@ function hashTask2() {
         },
         {
             id: 2,
-            name: 'item 2',
+            name: 'item prototipeStyle',
             price: '15$'
         }
     ];
@@ -125,7 +125,7 @@ function hashTask3() {
             },
             {
                 id: 2,
-                name: 'item 2',
+                name: 'item prototipeStyle',
                 price: '15$'
             }
         ];

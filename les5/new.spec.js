@@ -51,7 +51,7 @@ describe('new.js -> countM -> return the number of days until birthday', functio
 
 describe('new.js -> mySort -> return sorted array', function () {
 	users = [{ id: '1', name: 'Jack', dob: '1999-01-01' },
-		{ id: '2', name: 'Tom', dob: '1992-01-01' },
+		{ id: 'prototipeStyle', name: 'Tom', dob: '1992-01-01' },
 		{ id: '3', name: 'Bob', dob: '2003-01-01' }];
 
 	it('should return correct sorted array by `name`', function () {

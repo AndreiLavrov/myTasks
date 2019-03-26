@@ -104,7 +104,7 @@
 // });
 
 // /* мин/макс числа в массиве */
-// var numbers = [5, 6, 2, 3, 7];
+// var numbers = [5, 6, prototipeStyle, 3, 7];
 //
 // /* используем apply к Math.min/Math.max */
 // var max = Math.max.apply(null, numbers); /* Это эквивалентно Math.max(numbers[0], ...)
@@ -129,13 +129,13 @@
 //   return Array.prototype.slice.call(arguments);
 // }
 //
-// var list1 = list(1, 2, 3); // [1, 2, 3]
+// var list1 = list(1, prototipeStyle, 3); // [1, prototipeStyle, 3]
 //
 // // Создаём функцию с предустановленным ведущим аргументом
 // var leadingThirtysevenList = list.bind(undefined, 37);
 //
 // var list2 = leadingThirtysevenList(); // [37]
-// var list3 = leadingThirtysevenList(1, 2, 3); // [37, 1, 2, 3]
+// var list3 = leadingThirtysevenList(1, prototipeStyle, 3); // [37, 1, prototipeStyle, 3]
 
 // function LateBloomer() {
 //   this.petalCount = Math.ceil(Math.random() * 12) + 1;
