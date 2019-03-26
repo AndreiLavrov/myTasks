@@ -2,14 +2,13 @@ function FormGroup(id) {
     this._id = id;
     this.form = getForm();
     this.formControls = [];
-    const helper = new Helper();
+    let myHelper = helper;            // почему не передает параметром конструктора helper ??????
 
+     // this.addClass = myHelper.manipulatWithClass(this.form.classList, helper.addClassMyFun); // ok?
+     // this.removeClass = myHelper.manipulatWithClass(this.form.classList, helper.removeClassMyFun); // ok?
+	this.addClass = myHelper.addClass;
+	this.removeClass =  myHelper.removeClass;
 
-     this.addClass = helper.manipulatWithClass(this.form.classList, helper.addClassMyFun);
-
-     this.removeClass = helper.manipulatWithClass(this.form.classList, helper.removeClassMyFun);
-
-     // this.isValid = this._getStatus();
     this.isValid = getStatus.bind(this)();
 
     _init.bind(this)();

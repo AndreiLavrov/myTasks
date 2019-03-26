@@ -1,4 +1,3 @@
-
 function FormControl(type, id, validators) {
 	switch (type) {
 		case 'input':
@@ -11,11 +10,11 @@ function FormControlInput(type, id, validators) {
 	this.control = getControl();
 	this.validationErrors = [];
 
-	const helper = new Helper();
+	const myHelper = helper;
 	this.isValid = getValidation.bind(this)();
 
-	this.addClass = helper.manipulatWithClass(this.control.classList, helper.addClassMyFun);
-	this.removeClass = helper.manipulatWithClass(this.control.classList, helper.removeClassMyFun);
+	this.addClass = myHelper.addClassControl;
+	this.removeClass = myHelper.removeClassControl;
 
 	this.startCheck = function() {
 		this.isValid = getValidation.bind(this)();
@@ -58,10 +57,10 @@ function FormControlInput(type, id, validators) {
 
 			if (!(validator.test(self.control.value) ) ) {
 				isValid = false;
-				addValidError(self, validator, self.validationErrors);
+				return addValidError(self, validator, self.validationErrors);   // корректно ли работает такая замена куска кода функцией, нужен return ?
 			} else {
 				const errorIndex = self.validationErrors.indexOf(validator.toString() );
-				removeValidError(self, errorIndex, self.validationErrors);
+				return removeValidError(self, errorIndex, self.validationErrors);
 			}
 		} );
 

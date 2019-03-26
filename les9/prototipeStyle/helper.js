@@ -1,82 +1,129 @@
-function  Helper () {
+function  Helper () {}
+let helper = new Helper();
 
-	// verification code for adding or remove a class
-	this.manipulatWithClass = function (siteFrom, fun) {
-		return function (classes) {
-			try {
-				if (!Array.isArray(classes) ) {
-					throw new Error('Param should be an array of strings');
-				}
-				let classList = siteFrom;
-				classes.forEach(function (item) {
-					return fun(classList, item); // ??
-				} );
-			} catch (e) {
-				console.log(e.message);
+Helper.prototype.addClass = function(classes) {
+	try {
+		if (!Array.isArray(classes)) {
+			throw new Error('Param should be an array of strings');
+		}
+
+		let classList = this.form.classList;
+		classes.forEach(function(item){
+			if (classList.contains(String(item))) {
 				return false;
 			}
-		};
-	};
-// verification code for adding a class
-	this.addClassMyFun = function (classList, item) {
-		if (classList.contains(String(item) ) ) {
-			return false;
+
+			classList.add(String(item));
+		});
+	} catch (e) {
+		console.log(e.message);
+		return false;
+	}
+
+};
+
+
+Helper.prototype.addClassControl = function(classes) {
+	try {
+		if (!Array.isArray(classes)) {
+			throw new Error('Param should be an array of strings');
 		}
-		classList.add(String(item) );
-	};
 
-	// verification code for removing a class
-	this.removeClassMyFun = function (classList, item) {
-		if (classList.contains(String(item) ) ) {
-			classList.remove(String(item) );
-		}
-		return true;
-	};
-
-}
-function Helper2 () {
-
-
-	this.addClass = function(classes) {
-		try {
-			if (!Array.isArray(classes)) {
-				throw new Error('Param should be an array of strings');
+		let classList = this.control.classList;
+		classes.forEach(function(item){
+			if (classList.contains(String(item))) {
+				return false;
 			}
 
-			let classList = form.classList;
-			classes.forEach(function(item){
-				if (classList.contains(String(item))) {
-					return false;
-				}
+			classList.add(String(item));
+		});
+	} catch (e) {
+		console.log(e.message);
+		return false;
+	}
 
-				classList.add(String(item));
-			});
-		} catch (e) {
-			console.log(e.message);
-			return false;
+};
+
+Helper.prototype.removeClass = function(classes) {
+	try {
+		if (!Array.isArray(classes)) {
+			throw new Error('Param should be an array of strings');
 		}
 
-	};
-
-	this.removeClass = function(classes) {
-		try {
-			if (!Array.isArray(classes)) {
-				throw new Error('Param should be an array of strings');
+		let classList = this.form.classList;
+		classes.forEach(function(item){
+			if (classList.contains(String(item))) {
+				classList.remove(String(item));
 			}
 
-			let classList = form.classList;
-			classes.forEach(function(item){
-				if (classList.contains(String(item))) {
-					classList.remove(String(item));
-				}
+			return true;
 
-				return true;
+		});
+	} catch (e) {
+		console.log(e.message);
+		return false;
+	}
 
-			});
-		} catch (e) {
-			console.log(e.message);
-			return false;
+};
+Helper.prototype.removeClassControl = function(classes) {
+	try {
+		if (!Array.isArray(classes)) {
+			throw new Error('Param should be an array of strings');
 		}
 
-	};
-}
+		let classList = this.control.classList;
+		console.log(classList);
+		classes.forEach(function(item){
+			if (classList.contains(String(item))) {
+				classList.remove(String(item));
+			}
+			return true;
+
+		});
+	} catch (e) {
+		console.log(e.message);
+		return false;
+	}
+
+};
+
+
+
+//
+// function  Helper () {
+//
+// 	// verification code for adding or remove a class
+// 	Helper.prototype.manipulatWithClass = function (siteFrom, fun) {
+// 		return function (classes) {
+// 			try {
+// 				if (!Array.isArray(classes) ) {
+// 					throw new Error('Param should be an array of strings');
+// 				}
+// 				let classList = siteFrom;
+// 				classes.forEach(function (item) {
+// 					return fun(classList, item); // ??
+// 				} );
+// 			} catch (e) {
+// 				console.log(e.message);
+// 				return false;
+// 			}
+// 		};
+// 	};
+//
+// // verification code for adding a class
+// 	Helper.prototype.addClassMyFun = function (classList, item) {
+// 		if (classList.contains(String(item) ) ) {
+// 			return false;
+// 		}
+// 		classList.add(String(item) );
+// 	};
+//
+// 	// verification code for removing a class
+// 	Helper.prototype.removeClassMyFun = function (classList, item) {
+// 		if (classList.contains(String(item) ) ) {
+// 			classList.remove(String(item) );
+// 		}
+// 		return true;
+// 	};
+//
+// }
