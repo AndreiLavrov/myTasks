@@ -53,7 +53,7 @@ function Timer2 (startNum) {
 		if (_isPause === false) {
 			clearInterval(_idInterval);
 			_isPause = true;
-			work = false;
+
 		} else if (_isPause === true && this.startNum > 0) {
 			this.start(funSpetionWork);
 			_isPause = false;
@@ -64,6 +64,7 @@ function Timer2 (startNum) {
 		clearInterval(_idInterval);
 	};
 }
+
 const time = new Timer2(10);
 time.start(console.log);
 

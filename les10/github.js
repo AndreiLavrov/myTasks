@@ -3,8 +3,7 @@ let timerId;
 
 search.addEventListener('input', function (event) {
     if(event.target.value.trim() === '') {
-        return false;
-    }
+        return false;    }
 
     if (timerId) {
         clearTimeout(timerId);
