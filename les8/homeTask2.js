@@ -20,8 +20,7 @@ function Timer2 (startNum) {
 	 * @returns {*} fun
 	 */
 	this.start = function (fun) {
-
-		//проверка на паузу, иначе возобновление отсчета сначала
+		// проверка на паузу, иначе возобновление отсчета сначала
 		if (_isPause === false) {
 			clearInterval(_idInterval);
 			this.startNum = startNum;
@@ -53,7 +52,6 @@ function Timer2 (startNum) {
 		if (_isPause === false) {
 			clearInterval(_idInterval);
 			_isPause = true;
-
 		} else if (_isPause === true && this.startNum > 0) {
 			this.start(funSpetionWork);
 			_isPause = false;
@@ -106,7 +104,6 @@ function timerCounterHeardBit () {
 		}
 	} );
 }
-
 
 //   task 3
 /**

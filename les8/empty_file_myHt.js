@@ -43,7 +43,7 @@ function Timer (startNum, minNumTim) {
 }
 const objTimerInConsole = new Timer(10, 0);
 objTimerInConsole.start();
-setInterval(	function (){
+setInterval(function () {
 	return console.log(objTimerInConsole.startNum);
 }, 1000);
 
