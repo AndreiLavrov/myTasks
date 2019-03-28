@@ -1,13 +1,11 @@
 function CommonValidator (msg) {
 	this._errorMessage = msg || 'Common error message';
-
 }
 CommonValidator.prototype.toString = function () {
 	return this._errorMessage;
 };
 function Required () {
 	CommonValidator.call(this, 'This field is required.');
-
 }
 Required.prototype.test = function (value) {
 	return value.length > 0;

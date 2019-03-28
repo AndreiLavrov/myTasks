@@ -1,13 +1,13 @@
 
-function FormControl(type, id, validators) {
+function FormControl (type, id, validators) {
 	switch (type) {
-		case 'input':
-			return new FormControlInput(type, id, validators)
-			break;
+	case 'input':
+		return new FormControlInput(type, id, validators);
+		break;
 	}
 }
 
-function FormControlInput(type, id, validators) {
+function FormControlInput (type, id, validators) {
 	this.control = getControl();
 	this.validationErrors = [];
 
@@ -17,22 +17,22 @@ function FormControlInput(type, id, validators) {
 	this.addClass = myHelper.addClassControl;
 	this.removeClass = myHelper.removeClassControl;
 
-	this.startCheck = function() {
+	this.startCheck = function () {
 		this.isValid = getValidation.bind(this)();
 		console.log(this.isValid);
 
 		if (!this.isValid) {
-			this.addClass(['error']);
+			this.addClass( ['error'] );
 		} else {
-			this.removeClass(['error']);
+			this.removeClass( ['error'] );
 		}
 
 		const errorContainer = this.control.parentNode.querySelector('.error-list');
 		let text = '';
 		console.log(this.validationErrors);
-		this.validationErrors.forEach(function(error){
+		this.validationErrors.forEach(function (error) {
 			text += `<span>${error}</span><br />`;
-		});
+		} );
 
 		errorContainer.innerHTML = text;
 	};
@@ -59,10 +59,9 @@ function FormControlInput(type, id, validators) {
 			if (!(validator.test(self.control.value) ) ) {
 				isValid = false;
 				return addValidError(self, validator, self.validationErrors);   // корректно ли работает такая замена куска кода функцией, нужен return ?
-			} else {
-				const errorIndex = self.validationErrors.indexOf(validator.toString() );
-				return removeValidError(self, errorIndex, self.validationErrors);
 			}
+			const errorIndex = self.validationErrors.indexOf(validator.toString() );
+			return removeValidError(self, errorIndex, self.validationErrors);
 		} );
 
 		return isValid;
@@ -70,18 +69,18 @@ function FormControlInput(type, id, validators) {
 
 	_init.bind(this)();
 
-	function _init() {
+	function _init () {
 		const self = this;
-		this.control.addEventListener('input', this.startCheck.bind(self));
+		this.control.addEventListener('input', this.startCheck.bind(self) );
 	}
 
-	function getControl() {
+	function getControl () {
 		let controls = document.getElementsByTagName(type);
 
 		controls = [].slice.call(controls, 0);
 
-		return controls.filter(function(control){
+		return controls.filter(function (control) {
 			return control.id === id;
-		})[0];
+		} )[0];
 	}
 }

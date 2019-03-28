@@ -1,41 +1,39 @@
-// const get = document.getElementById('get');
-// let timerId;
-//
-// get.addEventListener('click', function (event) {
-//
-// 	if (timerId) {
-// 		clearTimeout(timerId);
-// 	}
-//
-// 	timerId = setTimeout(function(){
-// 		loadData();
-// 	}, 750);
-// });
-//
-// function loadData() {
-// 	const xhr = new XMLHttpRequest();
-// 	const url = `https://api.darksky.net/forecast/353f0be960fc98cb5eef4891d953ea8b/37.8267,-122.4233`;
-//
-// 	xhr.open('GET', `${url}?lang=ru`);
-//
-// 	xhr.send();
-//
-// 	xhr.onreadystatechange = function() {
-// 		if(xhr.readyState === 4 && xhr.status === 200) {
-// 			// console.log(JSON.parse(xhr.responseText));
-// 			renderData(JSON.parse(xhr.responseText));
-// 		}else {
-// 			alert(xhr.statusText);
-// 		}
-// 	};
-// }
-//
-// function renderData(data){
-// 	const container = document.getElementById('weatherResults');
-// 	container.innerHTML = '';
-//
-// 	container.innerHTML = data;
-// }
+// task 1
+
+const getWeather = document.getElementById('getWeather');
+let timerId;
+
+getWeather.addEventListener('click', loadData );
+
+function loadData() {
+	const xhr = new XMLHttpRequest();
+	const url = `https://api.darksky.net/forecast/353f0be960fc98cb5eef4891d953ea8b/37.8267,-122.4233`;
+
+	xhr.open('GET', `${url}?lang=ru`);
+
+	xhr.send();
+
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState === 4 && xhr.status === 200) {
+			// console.log(JSON.parse(xhr.responseText));
+			renderData(JSON.parse(xhr.responseText));
+		}else {
+			alert(xhr.statusText);
+		}
+	};
+}
+
+function renderData(data){
+	const container = document.getElementById('weatherResults');
+	container.innerHTML = '';
+
+	container.innerHTML = data;
+}
+
+
+
+/*
+// task2
 const url = 'http://localhost:3006';
 
 function MetodsAJAX () {}
@@ -90,5 +88,6 @@ MetodsAJAX.prototype.getData = function (url ) {
 		});
 	}
 }
+*/
 
 

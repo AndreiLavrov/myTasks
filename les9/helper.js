@@ -1,93 +1,84 @@
 function  Helper () {}
-let helper = new Helper();
+const helper = new Helper();
 
-	Helper.prototype.addClass = function(classes) {
-		try {
-			if (!Array.isArray(classes)) {
-				throw new Error('Param should be an array of strings');
-			}
-
-			let classList = this.form.classList;
-			classes.forEach(function(item){
-				if (classList.contains(String(item))) {
-					return false;
-				}
-
-				classList.add(String(item));
-			});
-		} catch (e) {
-			console.log(e.message);
-			return false;
+Helper.prototype.addClass = function (classes) {
+	try {
+		if (!Array.isArray(classes) ) {
+			throw new Error('Param should be an array of strings');
 		}
 
-	};
-
-
-Helper.prototype.addClassControl = function(classes) {
-		try {
-			if (!Array.isArray(classes)) {
-				throw new Error('Param should be an array of strings');
+		const classList = this.form.classList;
+		classes.forEach(function (item) {
+			if (classList.contains(String(item) ) ) {
+				return false;
 			}
 
-			let classList = this.control.classList;
-			classes.forEach(function(item){
-				if (classList.contains(String(item))) {
-					return false;
-				}
+			classList.add(String(item) );
+		} );
+	} catch (e) {
+		console.log(e.message);
+		return false;
+	}
+};
 
-				classList.add(String(item));
-			});
-		} catch (e) {
-			console.log(e.message);
-			return false;
+Helper.prototype.addClassControl = function (classes) {
+	try {
+		if (!Array.isArray(classes) ) {
+			throw new Error('Param should be an array of strings');
 		}
 
-	};
-
-Helper.prototype.removeClass = function(classes) {
-		try {
-			if (!Array.isArray(classes)) {
-				throw new Error('Param should be an array of strings');
+		const classList = this.control.classList;
+		classes.forEach(function (item) {
+			if (classList.contains(String(item) ) ) {
+				return false;
 			}
 
-			let classList = this.form.classList;
-			classes.forEach(function(item){
-				if (classList.contains(String(item))) {
-					classList.remove(String(item));
-				}
+			classList.add(String(item) );
+		} );
+	} catch (e) {
+		console.log(e.message);
+		return false;
+	}
+};
 
-				return true;
-
-			});
-		} catch (e) {
-			console.log(e.message);
-			return false;
+Helper.prototype.removeClass = function (classes) {
+	try {
+		if (!Array.isArray(classes) ) {
+			throw new Error('Param should be an array of strings');
 		}
 
-	};
-Helper.prototype.removeClassControl = function(classes) {
-		try {
-			if (!Array.isArray(classes)) {
-				throw new Error('Param should be an array of strings');
+		const classList = this.form.classList;
+		classes.forEach(function (item) {
+			if (classList.contains(String(item) ) ) {
+				classList.remove(String(item) );
 			}
 
-			let classList = this.control.classList;
-			console.log(classList);
-			classes.forEach(function(item){
-				if (classList.contains(String(item))) {
-					classList.remove(String(item));
-				}
-				return true;
-
-			});
-		} catch (e) {
-			console.log(e.message);
-			return false;
+			return true;
+		} );
+	} catch (e) {
+		console.log(e.message);
+		return false;
+	}
+};
+Helper.prototype.removeClassControl = function (classes) {
+	try {
+		if (!Array.isArray(classes) ) {
+			throw new Error('Param should be an array of strings');
 		}
 
-	};
-
-
+		const classList = this.control.classList;
+		console.log(classList);
+		classes.forEach(function (item) {
+			if (classList.contains(String(item) ) ) {
+				classList.remove(String(item) );
+			}
+			return true;
+		} );
+	} catch (e) {
+		console.log(e.message);
+		return false;
+	}
+};
 
 //
 // function  Helper () {
