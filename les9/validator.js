@@ -18,3 +18,11 @@ function MinLength (value) {
 		return value.length >= 7;
 	};
 }
+
+function ValidMail () {
+	CommonValidator.call(this, 'Email is not correct ');
+	this.test = function (value) {
+		return /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/.test(String(value) );
+	};
+}
+

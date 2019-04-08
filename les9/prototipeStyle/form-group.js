@@ -1,52 +1,19 @@
-function FormGroup (id) {
+
+function FormGroup (id, myHelper) {
+	this.myHelper = myHelper;
 	this._id = id;
+	this.formControls = [];
+
 	this.form = this._getForm();
 
-	this.formControls = [];
+	this.addClass = this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.addClassMyFun);      //  что не так, когда выносишь в прототип?
+	this.removeClass =  this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.removeClassMyFun);
+
 	this.isValid = this._getStatus.bind(this)();
 
 	this._init.bind(this)();
+
 }
-
-FormGroup.prototype.addClass = helper.addClass;
-FormGroup.prototype.removeClass =  helper.removeClass;
-
-FormGroup.prototype._getForm =  function () {
-	const self = this;
-	let forms = document.getElementsByTagName('form');
-	forms = [].slice.call(forms, 0);
-
-	return forms.filter(function (item) {
-		return item.id === self._id;
-	} )[0];
-};
-
-FormGroup.prototype.registerControls = function (control) {
-	this.formControls.push(control);
-	this.isValid = this._getStatus.bind(this)();
-};
-
-FormGroup.prototype._getStatus =  function () {
-	try {
-		if (this.formControls.length === 0) {
-			throw new Error('No detected form control elements');
-		}
-
-		let status = true;
-		console.log(this.formControls);
-		this.formControls.forEach(function (item) {
-			if (!item.isValid) {
-				status = false;
-				return false;
-			}
-		} );
-
-		return status;
-	} catch (e) {
-		console.log(e.message);
-		return true;
-	}
-};
 
 FormGroup.prototype._init = function () {
 	const self = this;
@@ -70,3 +37,44 @@ FormGroup.prototype._init = function () {
 		return false;
 	} );
 };
+
+FormGroup.prototype._getForm =  function () {
+	const self = this;
+	let forms = document.getElementsByTagName('form');
+	forms = [].slice.call(forms, 0);
+
+	return forms.filter(function (item) {
+		return item.id === self._id;
+	} )[0];
+};
+
+FormGroup.prototype.registerControls = function (control) {
+	this.formControls.push(control);
+	this.isValid = this._getStatus.bind(this)();
+};
+
+
+
+
+FormGroup.prototype._getStatus =  function () {
+	try {
+		if (this.formControls.length === 0) {
+			throw new Error('No detected form control elements');
+		}
+
+		let status = true;
+		console.log(this.formControls);
+		this.formControls.forEach(function (item) {
+			if (!item.isValid) {
+				status = false;
+				return false;
+			}
+		} );
+
+		return status;
+	} catch (e) {
+		console.log(e.message);
+		return true;
+	}
+};
+

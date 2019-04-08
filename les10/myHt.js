@@ -1,93 +1,154 @@
+
 // task 1
-
 const getWeather = document.getElementById('getWeather');
-let timerId;
+getWeather.addEventListener('click', loadData);
 
-getWeather.addEventListener('click', loadData );
-
-function loadData() {
-	const xhr = new XMLHttpRequest();
-	const url = `https://api.darksky.net/forecast/353f0be960fc98cb5eef4891d953ea8b/37.8267,-122.4233`;
-
-	xhr.open('GET', `${url}?lang=ru`);
-
-	xhr.send();
-
-	xhr.onreadystatechange = function() {
-		if(xhr.readyState === 4 && xhr.status === 200) {
-			// console.log(JSON.parse(xhr.responseText));
-			renderData(JSON.parse(xhr.responseText));
-		}else {
-			alert(xhr.statusText);
-		}
+async function loadData () {
+	const options = {
+		proxy: 'https://cors-anywhere.herokuapp.com/',
+		url: 'https://api.darksky.net/forecast/353f0be960fc98cb5eef4891d953ea8b/53.37356, 24.17112',
+		opts: '?lang=ru&units=si&exclude=currently, hourly, flags, minutely',
 	};
+
+	/**
+	 * old way of solving
+	 */
+	/* const xhr = new XMLHttpRequest();
+	xhr.open('GET', `${options.proxy}${options.url}${options.opts}`);
+	xhr.responseType = 'text';
+
+	xhr.onload = function() {
+
+		rendData(xhr.response);
+	}
+
+		xhr.onerror = function() {
+			alert(xhr.response);
+		}
+
+		xhr.send();
+		*/
+
+	/**
+	 * new way of solving by `fetch`
+	 */
+	fetch(`${options.proxy}${options.url}${options.opts}`)
+		.then(function (response) {
+			if (response.ok) {
+				return response.json();
+			}
+			throw new Error('Bad HTTP stuff..'); // почему не выдает эту ошибку, а ждет ошибки по таймеру(из-за ожидания очередного "then") ??
+		} )
+		.then(function (data) {
+			rendData(data);
+		} )
+		.catch( (err) => {
+			alert(err.message);
+		} );
+
+	/**
+	 * Another way
+	 * @type {Response}
+	 */
+	/* const response = await fetch(`${options.proxy}${options.url}${options.opts}`);
+	const data = await response.json();
+	rendData(data);*/
 }
 
-function renderData(data){
+function rendData (data) {
 	const container = document.getElementById('weatherResults');
 	container.innerHTML = '';
 
-	container.innerHTML = data;
+	const objWetherTomorrow = data.daily.data[1];
+	console.log(objWetherTomorrow);
+	showObjWetherTomor(objWetherTomorrow, container);
 }
 
-
-
-/*
-// task2
-const url = 'http://localhost:3006';
-
-function MetodsAJAX () {}
-const instance = new MetodsAJAX();
-MetodsAJAX.prototype.sendData =  function () {
-	const title = document.getElementById('title').value;
-	const author = document.getElementById('author').value;
-	const text = document.getElementById('text').value;
-
-	const data = {
-		title,
-		author,
-		text,
+function showObjWetherTomor (objWetherTomorrow, container) {
+	var options = {
+		month: 'long',
+		day: 'numeric',
+		weekday: 'long',
+		hour: 'numeric',
+		minute: 'numeric',
 	};
 
-	const xhr = new XMLHttpRequest();
-	xhr.open('POST', `${url}/posts`);
-
-	xhr.setRequestHeader('Content-Type', 'application/json');
-	xhr.send(JSON.stringify(data));
-
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === 4 && xhr.status === 201) {
-			console.log('Post was added');
+	for (const key in objWetherTomorrow) {
+		if (objWetherTomorrow[key] > 1000000000) {
+			objWetherTomorrow[key] = new Date(objWetherTomorrow[key] * 1000).toLocaleString('ru', options);
 		}
+		container.innerHTML += ` ${key} : ${objWetherTomorrow[key]} <br/>`;
 	}
 }
 
-MetodsAJAX.prototype.getData = function (url ) {
-	const xhr = new XMLHttpRequest();
-	xhr.open('GET', `${url}/posts`);
-	xhr.send();
 
-	xhr.onreadystatechange = function(){
-		if (xhr.readyState === 4 && xhr.status === 200) {
-			renderPosts(JSON.parse(xhr.responseText));
-			return true;
-		}
-	};
-	function renderPosts(data) {
-		data.forEach(function(post){
-			const div = document.createElement('div');
 
-			const tmp = `<h3><a onclick="getPost(${post.id})">${post.title}</a></h3>
+// task2        ***************************    task2      *******************************
+
+const instance = new MethodsAJAX();
+const url = 'http://localhost:3006/posts';
+const send = document.getElementById('send');
+send.addEventListener('click', sendOnePost);
+const funOnreject = err => alert(`${err} ${err.code}`);
+
+/**
+ * send post to server
+ */
+function sendOnePost () {
+	instance.sendData(url)
+		.then( (resp, url) =>	getPosts(url), funOnreject);
+}
+
+/**
+ * get posts by 'XHR'
+ * @param url
+ * return data from server and show it on the page
+ */
+function getPosts () {
+	instance.getDataXhr(url)
+		.then(data => renderPosts(data), funOnreject);
+}
+/**
+ * get posts by 'fetch'
+ * @param data
+ */
+// function getPosts() {
+//
+// 	instance.getDataFetch(`http://localhost:3006/posts`)
+// 		.then((data)=> renderPosts(data))
+// 		.catch( err => alert(err));
+// };
+
+
+function deleteData (id) {
+	instance.deleteData(url, id)
+		.then( () => getPosts(url), funOnreject);
+}
+
+function changePost (id) {
+	instance.changePost(url, id)
+		.then( () => getPosts(url), funOnreject);
+}
+
+
+function renderPosts (data) {
+	const divFromPosts = document.getElementById('divFromPosts');
+	divFromPosts.innerHTML = '';
+
+	data.forEach(function (post) {
+		const div = document.createElement('div');
+
+		const tmp = `<h3><a onclick="getPost(${post.id})">${post.title}</a></h3>
 <p>${post.text}</p>
 <span>${post.author}</span><br />
 <a onclick="changePost(${post.id})">Change Post</a><br />
-<a onclick="deletePost(${post.id})">Delete Post</a>
+<a onclick="deleteData(${post.id})">Delete Post</a>
 `;
-			div.innerHTML = tmp;
-			document.querySelector('body').appendChild(div);
-		});
-	}
+		div.innerHTML = tmp;
+		divFromPosts.appendChild(div);
+	} );
 }
-*/
+
+
 
 

@@ -1,53 +1,64 @@
-function FormGroup (id, myHelper) {
-	this._id = id;
-	this.form = getForm();
-	this.formControls = [];
 
-	this.addClass = myHelper.manipulatWithClass( this.form.classList, myHelper.addClassMyFun);
-	this.removeClass =  myHelper.manipulatWithClass( this.form.classList, myHelper.removeClassMyFun);
+export class FormGroup {
+	constructor (id, myHelper) {
+		this.myHelper = myHelper;
+		this._id = id;
+		this.formControls = [];
 
-	this.isValid = getStatus.bind(this)();
+		this.form = this._getForm();
 
-	_init.bind(this)();
+		this.addClass = this.myHelper.manipulatWithClass(this.form.classList, this.myHelper.addClassMyFun);   //  что не так, когда выносишь в прототип?
+		this.removeClass = this.myHelper.manipulatWithClass(this.form.classList, this.myHelper.removeClassMyFun);
 
-	function _init () {
+		this.isValid = this._getStatus.bind(this)();
+
+		this._init.bind(this)();
+
+	}
+
+
+	_init () {
 		const self = this;
 
 		this.form.addEventListener('submit', function (event) {
 			event.preventDefault();
 
-			self.isValid = getStatus.bind(self)();
+			self.isValid = self._getStatus.bind(self)();
 			if (self.isValid) {
-				self.removeClass( ['error'] );
+				self.removeClass(['error']);
 				console.log('Data was sent');
 				return true;
 			}
 
 			console.log('Form is not valid');
-			self.addClass( ['error'] );
+			self.addClass(['error']);
 			self.formControls.forEach(function (control) {
 				control.startCheck();
-			} );
+			});
 
 			return false;
-		} );
-	}
+		});
+	};
 
-	function getForm () {
+
+	_getForm () {
+		const self = this;
 		let forms = document.getElementsByTagName('form');
 		forms = [].slice.call(forms, 0);
 
 		return forms.filter(function (item) {
-			return item.id === id;
-		} )[0];
-	}
-
-	this.registerControls = function (control) {
-		this.formControls.push(control);
-		this.isValid = getStatus.bind(this)();
+			return item.id === self._id;
+		})[0];
 	};
 
-	function getStatus () {
+
+	registerControls (control) {
+		this.formControls.push(control);
+		this.isValid = this._getStatus.bind(this)();
+	};
+
+
+	_getStatus () {
 		try {
 			if (this.formControls.length === 0) {
 				throw new Error('No detected form control elements');
@@ -60,14 +71,13 @@ function FormGroup (id, myHelper) {
 					status = false;
 					return false;
 				}
-			} );
+			});
 
 			return status;
 		} catch (e) {
 			console.log(e.message);
 			return true;
 		}
-	}
+	};
+
 }
-
-

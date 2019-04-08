@@ -22,6 +22,31 @@ function MinLength (value) {
 
 
 
+//
+// class CommonValidator  {
+//
+// 	constructor (msg) {
+// 		this._errorMessage = msg || 'Common error message';
+// 	}
+//
+// 	toString  () {
+// 		return this._errorMessage;
+// 	};
+// }
+//
+// export  class Required extends  CommonValidator {
+// 	constructor (value) {
+// 		super('This field is required.');
+// 		//CommonValidator.call(this, 'This field is required.');
+// 	}
+//
+// 	test (value) {
+// 		return value.length > 0;
+// 	};
+// }
+
+
+
 
 
 

@@ -21,7 +21,7 @@ function Timer2 (startNum) {
 	 */
 	this.start = function (fun) {
 		// проверка на паузу, иначе возобновление отсчета сначала
-		if (_isPause === false) {
+		if (_isPause === false) {             // нужно ли выносить в отдельную функцию ???
 			clearInterval(_idInterval);
 			this.startNum = startNum;
 		} else {
@@ -54,7 +54,6 @@ function Timer2 (startNum) {
 			_isPause = true;
 		} else if (_isPause === true && this.startNum > 0) {
 			this.start(funSpetionWork);
-			_isPause = false;
 		}
 	};
 

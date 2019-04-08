@@ -1,21 +1,21 @@
 
-function FormControl (type, id, validators) {
+function FormControl (type, id, validators, myHelper) {
 	switch (type) {
 	case 'input':
-		return new FormControlInput(type, id, validators);
+		return new FormControlInput(type, id, validators, myHelper);
 		break;
 	}
 }
 
-function FormControlInput (type, id, validators) {
+function FormControlInput (type, id, validators, myHelper) {
 	this.control = getControl();
 	this.validationErrors = [];
 
-	const myHelper = helper;
 	this.isValid = getValidation.bind(this)();
 
-	this.addClass = myHelper.addClassControl;
-	this.removeClass = myHelper.removeClassControl;
+	this.addClass = myHelper.manipulatWithClass( this.control.classList, myHelper.addClassMyFun);
+	this.removeClass =  myHelper.manipulatWithClass( this.control.classList, myHelper.removeClassMyFun, true);
+
 
 	this.startCheck = function () {
 		this.isValid = getValidation.bind(this)();
