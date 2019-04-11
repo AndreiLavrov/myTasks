@@ -10,11 +10,14 @@
 		this.validationErrors = [];
 		this.isValid = this._getValidation.bind(this)(); // изначально лохонулся и обявил выше по коду чем validationErrors --  потратил пол дня:)
 
-		this.addClass = this.myHelper.manipulatWithClass(this.control.classList, this.myHelper.addClassMyFun);
-		this.removeClass = this.myHelper.manipulatWithClass(this.control.classList, this.myHelper.removeClassMyFun, true);
-
 		this._init.bind(this)();
 	}
+	 addClass () {
+		 return	this.myHelper.manipulatWithClass(this.control.classList, this.myHelper.addClassMyFun);   //  был вопрос "что не так, когда выносишь в прототип"?
+	 }
+	 removeClass () {
+		 return	this.myHelper.manipulatWithClass(this.control.classList, this.myHelper.removeClassMyFun, true);
+	 }
 
 	_getControl () {
 
@@ -28,13 +31,13 @@
 		})[0];
 	};
 
-	_addValidError (self, validator, validationErrors) {
+	static addValidError (self, validator, validationErrors) {
 		if (validationErrors.indexOf(validator.toString()) === -1) {
 			return validationErrors.push(validator.toString());
 		}
 	};
 
-	_removeValidError (self, errorIndex, validationErrors) {
+	static removeValidError (self, errorIndex, validationErrors) {
 		if (errorIndex !== -1) {
 			return validationErrors.splice(errorIndex, 1);
 		}
@@ -49,10 +52,10 @@
 
 			if (!(validator.test(self.control.value))) {
 				isValid = false;
-				return self._addValidError(self, validator, self.validationErrors);
+				return FormControlInput.addValidError(self, validator, self.validationErrors);
 			}
 			const errorIndex = self.validationErrors.indexOf(validator.toString());
-			return self._removeValidError(self, errorIndex, self.validationErrors);
+			return FormControlInput.removeValidError(self, errorIndex, self.validationErrors);
 		});
 
 		return isValid;
@@ -63,9 +66,9 @@
 		console.log(this.isValid);
 
 		if (!this.isValid) {
-			this.addClass(['error']);
+			this.addClass()(['error']);                         // добавил()
 		} else {
-			this.removeClass(['error']);
+			this.removeClass()(['error']);
 		}
 
 		const errorContainer = this.control.parentNode.querySelector('.error-list');

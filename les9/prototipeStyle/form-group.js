@@ -6,14 +6,22 @@ function FormGroup (id, myHelper) {
 
 	this.form = this._getForm();
 
-	this.addClass = this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.addClassMyFun);      //  что не так, когда выносишь в прототип?
-	this.removeClass =  this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.removeClassMyFun);
+	// this.addClass = this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.addClassMyFun);      //  что не так, когда выносишь в прототип?
+	// this.removeClass =  this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.removeClassMyFun);
 
 	this.isValid = this._getStatus.bind(this)();
 
 	this._init.bind(this)();
 
 }
+
+FormGroup.prototype.addClass = function () {
+	return this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.addClassMyFun);
+}      //  что не так, когда выносишь в прототип?
+FormGroup.prototype.removeClass =  function () {
+	return this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.removeClassMyFun);
+}
+
 
 FormGroup.prototype._init = function () {
 	const self = this;
@@ -23,13 +31,13 @@ FormGroup.prototype._init = function () {
 
 		self.isValid = self._getStatus.bind(self)();
 		if (self.isValid) {
-			self.removeClass( ['error'] );
+			self.removeClass()( ['error'] );                   // ()
 			console.log('Data was sent');
 			return true;
 		}
 
 		console.log('Form is not valid');
-		self.addClass( ['error'] );
+		self.addClass()( ['error'] );
 		self.formControls.forEach(function (control) {
 			control.startCheck();
 		} );

@@ -19,25 +19,26 @@ async function loadData () {
 
 	xhr.onload = function() {
 
-		rendData(xhr.response);
+		rendData(JSON.parse(xhr.response) );
 	}
 
 		xhr.onerror = function() {
 			alert(xhr.response);
 		}
 
-		xhr.send();
-		*/
+		xhr.send();*/
 
 	/**
 	 * new way of solving by `fetch`
 	 */
+	// разница в ошибках между ошибкой на сервере и ошибкой несостоявшейся связи с сервером. первая сробатывает сразу,
+	// а вторая ЖДЕТ ошибки 'net::ERR_CONNECTION_TIMED_OUT' и выводит "Failed to fetch" это из-за специфики fetch ??
+	// из-за promise??  как заставить возвращать сразу ошибку при не прав. url ??
 	fetch(`${options.proxy}${options.url}${options.opts}`)
 		.then(function (response) {
 			if (response.ok) {
 				return response.json();
 			}
-			throw new Error('Bad HTTP stuff..'); // почему не выдает эту ошибку, а ждет ошибки по таймеру(из-за ожидания очередного "then") ??
 		} )
 		.then(function (data) {
 			rendData(data);
@@ -106,7 +107,7 @@ function sendOnePost () {
  */
 function getPosts () {
 	instance.getDataXhr(url)
-		.then(data => renderPosts(data), funOnreject);
+		.then(data => renderPosts(data), funOnreject); // какая разница ипользовать catch или reject ??
 }
 /**
  * get posts by 'fetch'
@@ -142,8 +143,8 @@ function renderPosts (data) {
 <p>${post.text}</p>
 <span>${post.author}</span><br />
 <a onclick="changePost(${post.id})">Change Post</a><br />
-<a onclick="deleteData(${post.id})">Delete Post</a>
-`;
+<a onclick="deleteData(${post.id})">Delete Post</a>`;
+
 		div.innerHTML = tmp;
 		divFromPosts.appendChild(div);
 	} );

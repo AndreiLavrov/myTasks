@@ -6,10 +6,6 @@ export class FormGroup {
 		this.formControls = [];
 
 		this.form = this._getForm();
-
-		this.addClass = this.myHelper.manipulatWithClass(this.form.classList, this.myHelper.addClassMyFun);   //  что не так, когда выносишь в прототип?
-		this.removeClass = this.myHelper.manipulatWithClass(this.form.classList, this.myHelper.removeClassMyFun);
-
 		this.isValid = this._getStatus.bind(this)();
 
 		this._init.bind(this)();
@@ -17,21 +13,26 @@ export class FormGroup {
 	}
 
 
+	addClass () {
+		return	this.myHelper.manipulatWithClass(this.form.classList, this.myHelper.addClassMyFun);
+	}
+	removeClass () {
+		return	this.myHelper.manipulatWithClass(this.form.classList, this.myHelper.removeClassMyFun);
+	}
 	_init () {
 		const self = this;
-
 		this.form.addEventListener('submit', function (event) {
 			event.preventDefault();
 
 			self.isValid = self._getStatus.bind(self)();
 			if (self.isValid) {
-				self.removeClass(['error']);
+				self.removeClass()(['error']);                         // дополнительно ()
 				console.log('Data was sent');
 				return true;
 			}
 
 			console.log('Form is not valid');
-			self.addClass(['error']);
+			self.addClass()(['error']);                                   // дополнительно ()
 			self.formControls.forEach(function (control) {
 				control.startCheck();
 			});

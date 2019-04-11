@@ -1,6 +1,6 @@
+import { MinLength } from './minLeng.js';
+import { Required } from './validator.js';
 
- // import { Required } from './validator.js';
- // import { MinLength } from './minLeng.js';
 
 import { HelperClass } from './helperClass.js';
 import  { FormGroup } from  './form-group.js';

@@ -18,13 +18,18 @@ function FormControlInput (type, id, validators, myHelper) {
 	this.validationErrors = [];
 	this.isValid = this._getValidation.bind(this)(); // изначально лохонулся и обявил выше по коду чем validationErrors --  потратил пол дня:)
 
-	this.addClass = this.myHelper.manipulatWithClass( this.control.classList, this.myHelper.addClassMyFun);
-	this.removeClass =  this.myHelper.manipulatWithClass( this.control.classList, this.myHelper.removeClassMyFun, true);
+	// this.addClass = this.myHelper.manipulatWithClass( this.control.classList, this.myHelper.addClassMyFun);
+	// this.removeClass =  this.myHelper.manipulatWithClass( this.control.classList, this.myHelper.removeClassMyFun, true);
 
 
 	this._init.bind(this)();
 }
-
+FormControlInput.prototype.addClass = function () {
+	return this.myHelper.manipulatWithClass(this.control.classList, this.myHelper.addClassMyFun);
+}
+FormControlInput.prototype.removeClass = function () {
+	return this.myHelper.manipulatWithClass(this.control.classList, this.myHelper.removeClassMyFun, true);
+}
 
 FormControlInput.prototype._getControl = function () {
 
@@ -72,9 +77,9 @@ FormControlInput.prototype.startCheck = function () {
 	console.log(this.isValid);
 
 	if (!this.isValid) {
-		this.addClass( ['error'] );
+		this.addClass()( ['error'] );                                // ()
 	} else {
-		this.removeClass( ['error'] );
+		this.removeClass()( ['error'] );
 	}
 
 	const errorContainer = this.control.parentNode.querySelector('.error-list');

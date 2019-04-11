@@ -1,0 +1,148 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "carTire",
+      "price": 0,
+      "specs": {
+        "manufacturer": "Sony",
+        "storage": 16,
+        "os": "Android",
+        "camera": 15
+      },
+      "description": " Это только на первый взгляд все шины черные и круглые». Простой разговор о непростых покрышках ",
+      "content": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. ",
+      "rating": 4,
+      "image": {
+        "small": "assets/images/carTire.jpg",
+        "large": "assets/images/carTireLarge.jpg"
+      }
+    },
+    {
+      "id": 2,
+      "name": "chevrolet",
+      "price": 899,
+      "specs": {
+        "manufacturer": "Apple",
+        "storage": 16,
+        "os": "iOS",
+        "camera": 8
+      },
+      "description": "Редкий зверь. Мобильный офис Chevrolet Fantom Bus  ",
+      "content": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. ",
+      "rating": 4,
+      "image": {
+        "small": "assets/images/chevrolet.jpg",
+        "large": "assets/images/chevroletLarge.jpg"
+      }
+    },
+    {
+      "id": 3,
+      "name": "moto",
+      "price": 899,
+      "specs": {
+        "manufacturer": "HTC",
+        "storage": 32,
+        "os": "Android",
+        "camera": 5
+      },
+      "description": "Лихие взлеты и падения. В Несвиже состоялись соревнования по мотокроссу",
+      "content": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. ",
+      "rating": 4,
+      "image": {
+        "small": "assets/images/moto.jpg",
+        "large": "assets/images/motoLarge.jpg"
+      }
+    },
+    {
+      "id": 4,
+      "name": "rageRover",
+      "price": 899,
+      "specs": {
+        "manufacturer": "Samsung",
+        "storage": 32,
+        "os": "Android",
+        "camera": 12
+      },
+      "description": "Кто на старенького? Пробуем продать 12-летний Range Rover на авторынке",
+      "content": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. ",
+      "rating": 4,
+      "image": {
+        "small": "assets/images/rageRover.jpg",
+        "large": "assets/images/rageRoverLarge.jpg"
+      }
+    },
+    {
+      "id": 5,
+      "name": "carLitle",
+      "price": 450,
+      "specs": {
+        "manufacturer": "Nokia",
+        "storage": 16,
+        "os": "Windows",
+        "camera": 5
+      },
+      "description": "«Малолитражки из Европы очень хорошо продаются». Изучили ассортимент авторынка в Малиновке ",
+      "content": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. ",
+      "rating": 4,
+      "image": {
+        "small": "assets/images/carLitle.jpg",
+        "large": "assets/images/carLitleLarge.jpg"
+      }
+    },
+    {
+      "id": 6,
+      "name": "carYear",
+      "price": 399,
+      "specs": {
+        "manufacturer": "ZTE",
+        "storage": 32,
+        "os": "Android",
+        "camera": 12
+      },
+      "description": "Как выбирают автомобиль года в Беларуси ",
+      "content": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. ",
+      "rating": 4,
+      "image": {
+        "small": "assets/images/carYear.jpg",
+        "large": "assets/images/carYearLarge.jpg"
+      }
+    },
+    {
+      "id": 7,
+      "name": "lifan",
+      "price": 399,
+      "specs": {
+        "manufacturer": "Samsung",
+        "storage": 16,
+        "os": "Android",
+        "camera": 15
+      },
+      "description": "«Надо взвесить все плюсы и минусы». Правительство не спешит отделить техосмотр от «дорожного налога»",
+      "content": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. ",
+      "rating": 4,
+      "image": {
+        "small": "assets/images/lifan.jpg",
+        "large": "assets/images/lifanLarge.jpg"
+      }
+    },
+    {
+      "id": 8,
+      "name": "tech",
+      "price": 399,
+      "specs": {
+        "manufacturer": "Apple",
+        "storage": 16,
+        "os": "iOS",
+        "camera": 8
+      },
+      "description": "«Это только на первый взгляд все шины черные и круглые». Простой разговор о непростых покрышках",
+      "content": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. ",
+      "rating": 4,
+      "image": {
+        "small": "assets/images/tech.jpg",
+        "large": "assets/images/techLarge.jpg"
+      }
+    }
+  ]
+}

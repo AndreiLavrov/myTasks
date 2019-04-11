@@ -14,13 +14,13 @@ MethodsAJAX.prototype.getDataXhr = function (url) {
 	return new Promise(function(resolve, reject) {
 
 		let xhr = new XMLHttpRequest();
-		xhr.open('GET', url, true);
+		xhr.open('GET', url, true);      // 'true' для наглядности
 
 		xhr.onload = function() {
-			if (this.status == 200) {
+			if (this.status === 200) {
 				resolve(JSON.parse(this.response) );
 			} else {
-				var error = new Error(this.statusText);
+				const error = new Error(this.statusText);
 				error.code = this.status;
 				reject(error);
 			}
@@ -56,7 +56,7 @@ MethodsAJAX.prototype.sendData =  function (url) {
 		xhr.send(JSON.stringify(data));
 
 		xhr.onload = function() {
-			if (this.status == 201) {
+			if (this.status === 201) {
 				resolve(this, url);
 			} else {                                      // не использую функцию в борьбе с Copy Path т.к. код не такой объемный. Верно это ??
 				var error = new Error(this.statusText);
@@ -79,7 +79,7 @@ MethodsAJAX.prototype.deleteData = function(url, id) {
 		const xhr = new XMLHttpRequest();
 		xhr.open('DELETE', `${url}/${id}`);
 		xhr.onload = function() {
-			if (this.status == 200) {
+			if (this.status === 200) {
 				resolve(JSON.parse(this.response) );
 			} else {
 				var error = new Error(this.statusText);
@@ -106,7 +106,7 @@ MethodsAJAX.prototype.changePost = function(url, id) {
 		xhr.setRequestHeader('Content-Type', 'application/json');
 
 		xhr.onload = function() {
-			if (this.status == 200) {
+			if (this.status === 200) {
 				resolve(url);
 			} else {
 				var error = new Error(this.statusText);

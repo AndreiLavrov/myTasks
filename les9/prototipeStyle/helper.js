@@ -9,7 +9,8 @@ Helper.prototype.manipulatWithClass = function (siteFrom, fun, log) {
 				throw new Error('Param should be an array of strings');
 			}
 			let classList = siteFrom;
-			(log) ? console.log(classList) : null;
+			if (log) console.log(classList);
+
 
 			classes.forEach(function (item) {
 				return fun(classList, item); // ??

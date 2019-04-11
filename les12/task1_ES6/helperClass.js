@@ -39,21 +39,5 @@ export class HelperClass {
 		return true;
 	};
 
-	addClassControl (classList, item) {
-		if (classList.contains(String(item))) {
-			return false;
-		}
-
-		return classList.add(String(item));
-	}
-
-	removeClassControl (classList, item) {
-
-		if (classList.contains(String(item))) {
-			classList.remove(String(item));
-		}
-		return true;
-
-	}
 
 }
