@@ -98,61 +98,25 @@ header h2.tzine a{
 /*-------------------
 	All Products Page
 --------------------*/
-
-/*	Filter Form	*/
-
-.filters{
+.hiddenAbsolutely{
+	display: none;
+}
+/*	Search Form	*/
+.search{
+	display: block;
 	box-sizing: border-box;
 	padding: 5px 30px 30px;
-	width: 190px;
+	width: 60%;
 	background-color: #FFF;
 	border: 1px solid #DBE3E7;
-	border-radius: 3px;
+	border-radius: 5px;
 	box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
-	position: fixed;
-	text-align: left;
+	position: absolute;
+	text-align: center;
 	color: #2B2E31;
 	opacity: 0;
-	pointer-events: none;
 }
 
-.filters .filter-criteria{
-	display: block;
-	margin: 10px 0 10px;
-}
-
-.filters span{
-	font-size:14px;
-	display: block;
-	margin-bottom: 12px;
-	font-weight: bold;
-	margin-top: 20px;
-}
-
-.filters label{
-	display: block;
-	line-height: 1.4;
-	font-size: 15px;
-}
-
-.filters label input{
-	margin-right: 10px;
-}
-
-.filters button{
-	border-radius: 2px;
-	background-color:  #4BC34B;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
-	border: 0;
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 13px;
-	cursor: pointer;
-
-	width: 95px;
-	height: 32px;
-	margin-top: 10px;
-}
 
 
 /*	Products List	*/
@@ -162,15 +126,17 @@ header h2.tzine a{
 }
 
 .products-list{
+    display: block;
+
+	padding-top: 100px;
 	list-style:none;
-	margin-left:225px;
 	max-width: 1500px;
 	text-align: center;
-	padding: 0;
 	opacity: 0;
 	font-size: 0;
 }
 
+.search,
 .all-products.visible .products-list,
 .all-products.visible .filters,
 .all-products.visible h3{
@@ -179,7 +145,9 @@ header h2.tzine a{
 	pointer-events: auto;
 }
 
-.products-list > li{
+.products-list > div{
+	height: 500px;
+	width: 300px;
 	box-sizing:border-box;
 	display: inline-block;
 	cursor: pointer;
@@ -196,9 +164,10 @@ header h2.tzine a{
 
 	margin: 0 12px 14px 0;
 	padding: 25px;
+
 }
 
-.products-list > li.hidden{
+.products-list > div.hidden{
 	opacity: 0.2;
 	pointer-events: none;
 }
@@ -212,7 +181,7 @@ header h2.tzine a{
 
 	width: 275px;
 	margin-bottom: 25px;
-	padding: 20px 0;
+	padding: 20px;
 	box-sizing: border-box;
 }
 
@@ -243,14 +212,16 @@ header h2.tzine a{
 	line-height: 1.45;
 	white-space: normal;
 
-	max-width: 260px;
+	height: 100px;
+	width: 260px;
 	margin-bottom: 20px;
 
 	list-style: none;
 }
 
 .products-list .product-description li{
-	display: inline-block;
+/*//inline-*/
+	display: block;
 	margin-right: 5px;
 }
 
@@ -265,6 +236,7 @@ header h2.tzine a{
 /* Price and order button */
 
 .products-list button{
+	/*position: absolute;*/
 	border-radius: 2px;
 	background-color:  #87bae1;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
@@ -389,9 +361,75 @@ header h2.tzine a{
 	top: 15px;
 
 	font-size: 28px;
-	color: #555;
+	color: #b80c09;
 	cursor: pointer;
 }
+
+
+/*---------------------------
+	news Page
+----------------------------*/
+.news{
+	 z-index: 100;
+ }
+
+.overlay{
+	height: 20px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #282b2c;
+	transition: 0.6s;
+	z-index: 100;
+}
+
+.news.visible .overlay{
+	height: 100%;
+}
+
+.news-container{
+	box-sizing: border-box;
+	width: 760px;
+	height: 550px;
+	position: fixed;
+	left: 50%;
+	margin-left: -375px;
+	top: 50%;
+	margin-top: -275px;
+	pointer-events: none;
+
+	border-radius: 6px;
+	background-color:  #ffffff;
+
+	z-index: 102;
+	opacity: 0;
+	transition: 0.4s;
+
+}
+
+.news.visible .news-container{
+	opacity: 1;
+	transition: 1.4s;
+	pointer-events: auto;
+}
+
+.news-container h3{
+	margin-top: 20px;
+}
+
+.news-container img{
+	width: 100%;
+	height: 280px;
+	border-bottom: 3px solid #efefef;
+	border-radius: 5px 5px 0 0;
+}
+
+.news-container p{
+	line-height: 23px;
+	padding: 50px 45px;
+}
+
 
 
 /*---------------------------
@@ -415,4 +453,6 @@ header h2.tzine a{
 .error h3{
 	font-size: 40px;
 }
+
+
 

@@ -3,24 +3,30 @@ import { Observable } from "./observable";
 export class CheckboxService {
 	constructor () {
 		this._checkbox = document.querySelectorAll('.all-products input[type=checkbox]');
-         this._observable = new Observable();
-         this.filters = {};
-         this.setInitialState();  // set initial state filters
-         this.init();
+		this._observable = new Observable();
+
+		this.filters = {};
+		this.setInitialState();  // set initial state filters
+         //*******************************************
+      this.search = document.querySelector('.search');
+     // this.filters = '';
+      this.init();
 	}
 
 	init() {
-		this._checkbox.forEach((item) => {
-			item.addEventListener('click', this.onCheckboxClick.bind(self));
-		});
+      let self = this;
+      // ***
+      this.search.addEventListener('input', this.onCheckboxClick.bind(self));
+      /*this._checkbox.forEach((item) => {
+				item.addEventListener('click', this.onCheckboxClick.bind(self));
+			});
 
-		// button clear form
-		document.querySelector('.filters button').addEventListener('click', (event) => {
-            event.preventDefault();
-            this.filters = {};
-            this._observable.next('#');
-        });
-
+			// button clear form
+			document.querySelector('.filters button').addEventListener('click', (event) => {
+							event.preventDefault();
+							this.filters = {};
+							this._observable.next('#');
+					});*/
 	}
 
 	subscribe(fn) {   // subscribe on checkboks method
@@ -28,7 +34,7 @@ export class CheckboxService {
     }
 
 	onCheckboxClick(event) {      // checked checkbox
-        const target = event.target;
+        /*const target = event.target;
         const specName = target.getAttribute('name');  // name specification
 
         if (target.checked) {
@@ -46,11 +52,17 @@ export class CheckboxService {
                     delete this.filters[specName];
                 }
             }
-        }
-        this._observable.next(this.createQueryHash(this.filters));
+        }*/
+      // if(event.target.value.trim() === '') {                         // проверить на чило и т.д.
+      //     this.filters = '';
+      // }
+      //console.log(this._observable);
+      this.filters = event.target.value;
 
+      this._observable.next(this.createQueryHash(this.filters));
+      //console.log(this._observable);
     }
-	setInitialState() {
+    setInitialState() {   // добавляем в фильтры текущий фильтр из адресной строки
         if (location.hash.includes('#filters/')) {
             let filter = location.hash.split('#filter/')[1].trim();
             try {
@@ -60,7 +72,8 @@ export class CheckboxService {
             }
         }
     }
-	    createQueryHash(filters) {
+
+    createQueryHash(filters) {
         if (Object.keys(filters).length > 0) {
             return `#filter/${JSON.stringify(filters)}`;
         }
@@ -73,7 +86,17 @@ export class CheckboxService {
     }
 
     renderFilters(products, filter) {
-        const criteria = ['manufacturer', 'storage', 'os', 'camera'];
+			this.search.value = `${filter}`;
+
+
+        let result = [];
+        products.forEach((product) => {
+            if(product.name.includes(String(filter)) ) {
+                result.push(product);
+            }
+        });
+
+	    /*const criteria = ['manufacturer', 'storage', 'os', 'camera'];
         products = [...products];
         let result = [];
         let isFiltered = false;  // show used or no used criteria
@@ -112,11 +135,11 @@ export class CheckboxService {
                     }
                 })
             }
-        });
+        });*/
 
-        return result;
-    }
+            return result;
+        }
+
 
 
 }
-
