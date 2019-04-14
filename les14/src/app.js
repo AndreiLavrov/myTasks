@@ -6,13 +6,13 @@
 	 this.allNews = [];
 	 this.router = new Router();
 	 this.searchService = new SearchService();
-	 this.searchService.subscribe(this.onFilterChange); // subscribe on change searchService
-	 this.initSingleNewsPage();   // click to exit
-	 this.initNewsPage();               // click to exit
+	 this.searchService.subscribe(this.onFilterChange);
+	 this.initSingleNewsPage();
+	 this.initNewsPage();
 	 this.init();
  }
 
- init(){   // запустит прил. получ данные
+ init(){
 	 fetch('http://localhost:3006/news', { headers: {
 		 'Content-Type' : 'application/json'
 		 }})

@@ -1,12 +1,13 @@
 export class Router {
 	constructor (){
-		this.routes = {  // список роутов адреса в прилажении
+		this.routes = {
 			'404': ()=> {
 				console.log('Not found');
 			}
 		};
 
-		this.mainContentPages = document.querySelectorAll('.main-content .page');  // save all pages
+		// save all pages
+		this.mainContentPages = document.querySelectorAll('.main-content .page');
 
 		/**
 		 * react on event changed hash url
