@@ -58,7 +58,7 @@ function FormControlInput (type, id, validators, myHelper) {
 
 			if (!(validator.test(self.control.value) ) ) {
 				isValid = false;
-				return addValidError(self, validator, self.validationErrors);   // корректно ли работает такая замена куска кода функцией, нужен return ?
+				return addValidError(self, validator, self.validationErrors);
 			}
 			const errorIndex = self.validationErrors.indexOf(validator.toString() );
 			return removeValidError(self, errorIndex, self.validationErrors);

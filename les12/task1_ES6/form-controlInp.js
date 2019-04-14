@@ -1,19 +1,22 @@
 
  export class FormControlInput {
-	constructor (type, id, validators, myHelper) {
+
+	constructor (type, id, validators, myHelper, objValidators) {
 		this.myHelper = myHelper;
 		this._id = id;
 		this._type = type;
+
 		this._validators = validators;
 		this.control = this._getControl();
 
+		this.objValidators = objValidators;
 		this.validationErrors = [];
-		this.isValid = this._getValidation.bind(this)(); // изначально лохонулся и обявил выше по коду чем validationErrors --  потратил пол дня:)
+		this.isValid = this._getValidation.bind(this)();
 
 		this._init.bind(this)();
 	}
 	 addClass () {
-		 return	this.myHelper.manipulatWithClass(this.control.classList, this.myHelper.addClassMyFun);   //  был вопрос "что не так, когда выносишь в прототип"?
+		 return	this.myHelper.manipulatWithClass(this.control.classList, this.myHelper.addClassMyFun);
 	 }
 	 removeClass () {
 		 return	this.myHelper.manipulatWithClass(this.control.classList, this.myHelper.removeClassMyFun, true);
@@ -48,7 +51,7 @@
 		const self = this;
 
 		this._validators.forEach(function (item) {
-			const validator = new (window[item])(3);
+			const validator = new (self.objValidators[item]);                            //(window[item])(3)
 
 			if (!(validator.test(self.control.value))) {
 				isValid = false;

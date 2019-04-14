@@ -3,7 +3,7 @@ export class MethodsAJAX {
 
 	creatObgData () {
 		return {
-			title : document.getElementById('title').value,      // присвоение будет происходить в каждом экземпляре на лету ведь ??
+			title : document.getElementById('title').value,
 			author : document.getElementById('author').value,
 			text : document.getElementById('text').value,
 		};

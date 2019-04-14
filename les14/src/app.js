@@ -1,36 +1,34 @@
  import { Router } from './router';
- import { CheckboxService } from "./checkbox.service";
- import { Search } from './search';
+ import { SearchService } from "./search_service";
 
  class App {
  constructor (){
-	 this.products = [];  // news
+	 this.allNews = [];
 	 this.router = new Router();
-	 this.checkboxService = new CheckboxService();
-	 this.checkboxService.subscribe(this.onFilterChange); // subscribe on change checkboxService
-	 this.initSingleProductPage();   // click to exit
+	 this.searchService = new SearchService();
+	 this.searchService.subscribe(this.onFilterChange); // subscribe on change searchService
+	 this.initSingleNewsPage();   // click to exit
 	 this.initNewsPage();               // click to exit
 	 this.init();
  }
 
  init(){   // запустит прил. получ данные
-	 fetch('http://localhost:3006/products', { headers: {
+	 fetch('http://localhost:3006/news', { headers: {
 		 'Content-Type' : 'application/json'
 		 }})
 		 .then((res)=> res.json())
 		 .then((data)=> {
-			 this.products = data;
-			 this.generateAllProductsHTML(this.products);
-			 this.initRoutes();     // инициализир. роуты   // !
+			 this.allNews = data;
+			 this.generateAllNewsHTML(this.allNews);
+			 this.initRoutes();
 			 window.dispatchEvent(new HashChangeEvent('hashchange'));  // start application, init chang hash
-			 // this.getFilterString();
 		 })
  }
 
 	initRoutes() {      // add  rout in list
 		this.router.addRoute('', this.renderHomePage.bind(this));
 		this.router.addRoute('#filter', this.renderFilterResults.bind(this));
-		this.router.addRoute('#product', this.renderSingleProduct.bind(this));
+		this.router.addRoute('#singleNews', this.renderSingleNews.bind(this));
 		this.router.addRoute('#news', this.renderNews.bind(this));
 		this.router.addRoute('404', this.renderErrorPage.bind(this));
 	}
@@ -43,32 +41,32 @@
 	}
 
 	renderHomePage() {
-		this.renderProductsPage(this.products);
+		this.renderNewsPage(this.allNews);
 	}
 
 // фильтруем
- renderProductsPage(data) {
-	 const page = document.querySelector('.all-products');
-	 const pageList = document.querySelector('.products-list');             //+
-	 const allProducts = document.querySelectorAll('.all-products .products-list > div');    // div..
+	 renderNewsPage(data) {
+	 const page = document.querySelector('.all-news');
+	 const pageList = document.querySelector('.news-list');
+	 const allNews = document.querySelectorAll('.all-news .news-list > div');    // div..
 
-	 [...allProducts].forEach((product) => {
-		 product.classList.add('hidden');
+	 [...allNews].forEach((news) => {
+		 news.classList.add('hidden');
 	 });
 
-	 [...allProducts].forEach((product) => {
+	 [...allNews].forEach((news) => {       // sort products
 		 let every = data.every((item) => {
-		 		return (Number(product.dataset.index) !== Number(item.id));
+		 		return (Number(news.dataset.index) !== Number(item.id));
 		 } );
 
 		 if (every === true) {
-			 pageList.appendChild(product);
+			 pageList.appendChild(news);
 		 } else{
-			 product.classList.remove('hidden');
+			 news.classList.remove('hidden');
 		 }
 	 });
 
-	  page.classList.add('visible');           // заменить на ф-ию построения ноаого html с отфильтрован. элнм.
+	  page.classList.add('visible');
  }
 
 	renderFilterResults() {
@@ -80,33 +78,32 @@
 			return false;
 		}
 
-		const results = this.checkboxService.renderFilters(this.products, filter);        // основн фильтрация
-		this.renderProductsPage(results);
+		const results = this.searchService.renderFilters(this.allNews, filter);        // major filtration
+		this.renderNewsPage(results);
 	}
 
-	 initSingleProductPage() {
+	 initSingleNewsPage() {
 		 const self = this;
-		 this.singleProductPage = document.querySelector('.single-product');
-		 this.singleProductPage.addEventListener('click', (event) => {
-			 if (self.singleProductPage.classList.contains('visible')) {
+		 this.singleNewsPage = document.querySelector('.single-news');
+		 this.singleNewsPage.addEventListener('click', (event) => {
+			 if (self.singleNewsPage.classList.contains('visible')) {
 				 const clicked = event.target;
 
 				 if (clicked.classList.contains('close') || clicked.classList.contains('overlay')) {
-					 location.hash = self.checkboxService.getCurrentState();
+					 location.hash = self.searchService.getCurrentState();
 				 }
 			 }
 		 });
 	 }
 
-	 renderSingleProduct() {
-		 const page = document.querySelector('.single-product');
+	 renderSingleNews() {
+		 const page = document.querySelector('.single-news');
 		 const container = document.querySelector('.preview-large');
-		 const index = location.hash.split('#product/')[1].trim();
-		 if (this.products.length) {
-			 this.products.forEach((item) => {
+		 const index = location.hash.split('#singleNews/')[1].trim();
+		 if (this.allNews.length) {
+			 this.allNews.forEach((item) => {
 				 if (Number(item.id) === Number(index)) {
-					 // container.querySelector('h3').innerText = item.description;                   // description
-					 container.querySelector('img').setAttribute('src', item.image.small); //small
+					 container.querySelector('img').setAttribute('src', item.image.small);
 					 container.querySelector('p').innerText = item.description;
 				 }
 			 });
@@ -123,7 +120,7 @@
 				 const clicked = event.target;
 
 				 if (clicked.classList.contains('close') || clicked.classList.contains('overlay')) {
-					 location.hash = self.checkboxService.getCurrentState();
+					 location.hash = self.searchService.getCurrentState();
 				 }
 			 }
 		 });
@@ -133,11 +130,10 @@
 		 const page = document.querySelector('.news');
 		 const container = document.querySelector('.news-container');
 		 const index = location.hash.split('#news/')[1].trim();
-		 if (this.products.length) {
-			 this.products.forEach((item) => {
+		 if (this.allNews.length) {
+			 this.allNews.forEach((item) => {
 				 if (Number(item.id) === Number(index)) {
-					 // container.querySelector('h3').innerText = item.description;                   // description
-					 container.querySelector('img').setAttribute('src', item.image.large); //small
+					 container.querySelector('img').setAttribute('src', item.image.large);
 					 container.querySelector('p').innerText = item.content;
 				 }
 			 });
@@ -147,25 +143,26 @@
 	 }
 
  // add html(ul) in page
- generateAllProductsHTML(data) {
-	 const list = document.querySelector('.all-products .products-list');
-	 const theTemplateScript = document.getElementById('products-template').innerHTML;
+	 generateAllNewsHTML(data) {
+		 const list = document.querySelector('.all-news .news-list');
+		 const theTemplateScript = document.getElementById('news-template').innerHTML;
 
-	 //compile
-	 const theTemplate = Handlebars.compile(theTemplateScript);
-	 list.innerHTML = theTemplate(data);
-	 list.querySelectorAll('li').forEach((li) => {
-		 li.addEventListener('click', (event) => {
-			 event.preventDefault();
-			 window.location.hash = `product/${li.dataset.index}`;        // address page com. line (use 'dataset'!)
-		 })
-	 });
+		 //compile
+		 const theTemplate = Handlebars.compile(theTemplateScript);
+		 list.innerHTML = theTemplate(data);
+
+		 list.querySelectorAll('li').forEach((li) => {
+			 li.addEventListener('click', (event) => {
+				 event.preventDefault();
+				 window.location.hash = `singleNews/${li.dataset.index}`;
+			 })
+	 	});
 
 	 //  news
-	 list.querySelectorAll('button').forEach((but) => {
-		 but.addEventListener('click', (event) => {
-			 event.preventDefault();
-			 window.location.hash = `news/${but.dataset.index}`;        // address page com. line (use 'dataset'!)
+		 list.querySelectorAll('button').forEach((but) => {
+			 but.addEventListener('click', (event) => {
+				 event.preventDefault();
+				 window.location.hash = `news/${but.dataset.index}`;
 		 })
 	 });
  }

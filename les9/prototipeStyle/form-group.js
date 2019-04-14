@@ -6,9 +6,6 @@ function FormGroup (id, myHelper) {
 
 	this.form = this._getForm();
 
-	// this.addClass = this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.addClassMyFun);      //  что не так, когда выносишь в прототип?
-	// this.removeClass =  this.myHelper.manipulatWithClass( this.form.classList, this.myHelper.removeClassMyFun);
-
 	this.isValid = this._getStatus.bind(this)();
 
 	this._init.bind(this)();

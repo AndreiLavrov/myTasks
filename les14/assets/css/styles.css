@@ -98,9 +98,7 @@ header h2.tzine a{
 /*-------------------
 	All Products Page
 --------------------*/
-.hiddenAbsolutely{
-	display: none;
-}
+
 /*	Search Form	*/
 .search{
 	display: block;
@@ -117,15 +115,19 @@ header h2.tzine a{
 	opacity: 0;
 }
 
+.search-line span {
+    color: #1e7e34;
+    font-size: large;
+}
 
 
 /*	Products List	*/
 
-.all-products h3{
+.all-news h3{
 	opacity: 0;
 }
 
-.products-list{
+.news-list{
     display: block;
 
 	padding-top: 100px;
@@ -137,16 +139,16 @@ header h2.tzine a{
 }
 
 .search,
-.all-products.visible .products-list,
-.all-products.visible .filters,
-.all-products.visible h3{
+.all-news.visible .news-list,
+.all-news.visible .filters,
+.all-news.visible h3{
 	opacity: 1;
 	transition: 1s;
 	pointer-events: auto;
 }
 
-.products-list > div{
-	height: 500px;
+.news-list > div{
+	height: 400px;
 	width: 300px;
 	box-sizing:border-box;
 	display: inline-block;
@@ -167,44 +169,44 @@ header h2.tzine a{
 
 }
 
-.products-list > div.hidden{
+.news-list > div.hidden{
 	opacity: 0.2;
 	pointer-events: none;
 }
 
 /* The product image */
 
-.products-list .product-photo{
+.news-list .news-photo{
 	display: block;
 	text-align: center;
-	box-shadow : 0 0 20px 8px #f3f3f3 inset;
+	/*box-shadow : 0 0 20px 8px #f3f3f3 inset;*/
 
-	width: 275px;
+	width: 225px;
 	margin-bottom: 25px;
-	padding: 20px;
+	padding-left: 0px;
 	box-sizing: border-box;
 }
 
 /* The product name */
 
-.products-list h2{
-	display: block;
-	font-size: 18px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow:ellipsis;
-	max-width: 200px;
-	margin:0;
-}
+/*.products-list h2{*/
+	/*display: block;*/
+	/*font-size: 18px;*/
+	/*white-space: nowrap;*/
+	/*overflow: hidden;*/
+	/*text-overflow:ellipsis;*/
+	/*max-width: 200px;*/
+	/*margin:0;*/
+/*}*/
 
-.products-list h2 a{
-	text-decoration: none;
-	color: #2B2E31;
-}
+/*.products-list h2 a{*/
+	/*text-decoration: none;*/
+	/*color: #2B2E31;*/
+/*}*/
 
 /* Product description */
 
-.products-list .product-description{
+.news-list .news-description{
 	margin-top: 20px;
 
 	color: #5d5d5d;
@@ -219,23 +221,23 @@ header h2.tzine a{
 	list-style: none;
 }
 
-.products-list .product-description li{
+.news-list .news-description li{
 /*//inline-*/
 	display: block;
 	margin-right: 5px;
 }
 
-.products-list .product-description li:first-child{
+.news-list .news-description li:first-child{
 	display: block;
 }
 
-.products-list .product-description li span{
+.news-list .news-description li span{
 	font-weight: bold;
 }
 
 /* Price and order button */
 
-.products-list button{
+.news-list button{
 	/*position: absolute;*/
 	border-radius: 2px;
 	background-color:  #87bae1;
@@ -250,7 +252,7 @@ header h2.tzine a{
 	height: 32px;
 }
 
-.products-list .product-price{
+.news-list .news-price{
 	float: right;
 
 	color:  #4e4e4e;
@@ -261,18 +263,18 @@ header h2.tzine a{
 	margin: 0;
 }
 
-.products-list .highlight{
-	position: absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	background-color: rgba(0,0,0,0.1);
-	opacity: 0;
-	transition: 0.4s;
-}
+/*.products-list .highlight{*/
+	/*position: absolute;*/
+	/*top:0;*/
+	/*left:0;*/
+	/*width:100%;*/
+	/*height:100%;*/
+	/*background-color: rgba(0,0,0,0.1);*/
+	/*opacity: 0;*/
+	/*transition: 0.4s;*/
+/*}*/
 
-.products-list > li:hover .highlight{
+.news-list > li:hover .highlight{
 	opacity: 1;
 }
 
@@ -280,11 +282,11 @@ header h2.tzine a{
 
 @media (max-width: 800px){
 
-	.products-list .product-photo{
+	.news-list .news-photo{
 		width: 225px;
 	}
 
-	.products-list .product-description{
+	.news-list .news-description{
 		max-width: 225px;
 	}
 }
@@ -294,7 +296,7 @@ header h2.tzine a{
 	Single Product Page
 ----------------------------*/
 
-.single-product{
+.single-news{
 	z-index: 100;
 }
 
@@ -309,19 +311,19 @@ header h2.tzine a{
 	z-index: 100;
 }
 
-.single-product.visible .overlay{
+.single-news.visible .overlay{
 	height: 100%;
 }
 
 .preview-large{
 	box-sizing: border-box;
-	width: 760px;
-	height: 550px;
+	width: 560px;
+	height: 500px;
 	position: fixed;
-	left: 50%;
-	margin-left: -375px;
-	top: 50%;
-	margin-top: -275px;
+	left: 15%;
+	/*margin-left: -375px;*/
+	top: 5%;
+	/*margin-top: -275px;*/
 	pointer-events: none;
 
 	border-radius: 6px;
@@ -333,15 +335,15 @@ header h2.tzine a{
 
 }
 
-.single-product.visible .preview-large{
+.single-news.visible .preview-large{
 	opacity: 1;
 	transition: 1.4s;
 	pointer-events: auto;
 }
 
-.preview-large h3{
-	margin-top: 20px;
-}
+/*.preview-large h3{*/
+	/*margin-top: 20px;*/
+/*}*/
 
 .preview-large img{
 	width: 100%;
@@ -391,13 +393,14 @@ header h2.tzine a{
 .news-container{
 	box-sizing: border-box;
 	width: 760px;
-	height: 550px;
+	height: 100%;
 	position: fixed;
 	left: 50%;
 	margin-left: -375px;
 	top: 50%;
 	margin-top: -275px;
 	pointer-events: none;
+    overflow-y: scroll;
 
 	border-radius: 6px;
 	background-color:  #ffffff;
@@ -420,7 +423,7 @@ header h2.tzine a{
 
 .news-container img{
 	width: 100%;
-	height: 280px;
+	height: 380px;
 	border-bottom: 3px solid #efefef;
 	border-radius: 5px 5px 0 0;
 }

@@ -1,6 +1,7 @@
 function FormGroup (id, myHelper) {
 	this._id = id;
 	this.form = getForm();
+
 	this.formControls = [];
 
 	this.addClass = myHelper.manipulatWithClass( this.form.classList, myHelper.addClassMyFun);

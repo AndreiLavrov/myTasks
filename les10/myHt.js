@@ -75,7 +75,7 @@ function showObjWetherTomor (objWetherTomorrow, container) {
 	};
 
 	for (const key in objWetherTomorrow) {
-		if (objWetherTomorrow[key] > 1000000000) {
+		if (objWetherTomorrow[key] > 1000000000) {         // альтернатива проверки на дату в милисекундах ?
 			objWetherTomorrow[key] = new Date(objWetherTomorrow[key] * 1000).toLocaleString('ru', options);
 		}
 		container.innerHTML += ` ${key} : ${objWetherTomorrow[key]} <br/>`;
@@ -88,8 +88,10 @@ function showObjWetherTomor (objWetherTomorrow, container) {
 
 const instance = new MethodsAJAX();
 const url = 'http://localhost:3006/posts';
+
 const send = document.getElementById('send');
 send.addEventListener('click', sendOnePost);
+
 const funOnreject = err => alert(`${err} ${err.code}`);
 
 /**

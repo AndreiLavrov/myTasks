@@ -20,13 +20,13 @@ MethodsAJAX.prototype.getDataXhr = function (url) {
 			if (this.status === 200) {
 				resolve(JSON.parse(this.response) );
 			} else {
-				const error = new Error(this.statusText);
+				const error = new Error(this.statusText);  // отрабатывает ошибку на сервере, верно?
 				error.code = this.status;
 				reject(error);
 			}
 		};
 
-		xhr.onerror = function() {
+		xhr.onerror = function() {                   // отрабатывает ошибку связи с сервером, верно?
 			reject(new Error("Network Error"));
 		};
 
@@ -58,7 +58,7 @@ MethodsAJAX.prototype.sendData =  function (url) {
 		xhr.onload = function() {
 			if (this.status === 201) {
 				resolve(this, url);
-			} else {                                      // не использую функцию в борьбе с Copy Path т.к. код не такой объемный. Верно это ??
+			} else {                               // не использую функцию в борьбе с Copy Path т.к. код не такой объемный. Верно это ??
 				var error = new Error(this.statusText);
 				error.code = this.status;
 				reject(error);

@@ -27,7 +27,7 @@ export class Router {
 		this.routes[route] = action;
 	}
 
-	render(url){    // запуск перерисовку нужного роута для нужн страницы
+	render(url){
 		let temp = url.split('/')[0];
 		[...this.mainContentPages].forEach((page)=> {
 			page.classList.remove('visible')
