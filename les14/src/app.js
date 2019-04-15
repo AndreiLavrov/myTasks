@@ -53,9 +53,9 @@
 	 [...allNews].forEach((news) => {
 		 news.classList.add('hidden');
 	 });
-
-	 [...allNews].forEach((news) => {       // sort products
-		 let every = data.every((item) => {
+		 // надо переделать чтобы выбирало сразу коректный вариант !!!не добавлять дочерним элементом кучу ненужной инфы insertBefore
+	 [...allNews].forEach((news) => {
+	 	let every = data.every((item) => {
 		 		return (Number(news.dataset.index) !== Number(item.id));
 		 } );
 

@@ -1,14 +1,25 @@
 
 // task 1
+const instance = new MethodsAJAX();
+
 const getWeather = document.getElementById('getWeather');
 getWeather.addEventListener('click', loadData);
 
-async function loadData () {
+// async function loadData () {
+ function loadData () {    //  параметр === MouseEvent {isTrusted: true, screenX: 327, screenY: 115, clientX: 327, clientY: 12, …}
 	const options = {
 		proxy: 'https://cors-anywhere.herokuapp.com/',
 		url: 'https://api.darksky.net/forecast/353f0be960fc98cb5eef4891d953ea8b/53.37356, 24.17112',
 		opts: '?lang=ru&units=si&exclude=currently, hourly, flags, minutely',
 	};
+
+	 console.log(instance);
+
+	 instance.getDataFetch(`${options.proxy}${options.url}${options.opts}`)
+		 .then(data => rendData(data), funOnreject)
+		 .catch( (err) => {
+				 alert(err.message);
+		 } );
 
 	/**
 	 * old way of solving
@@ -34,7 +45,7 @@ async function loadData () {
 	// разница в ошибках между ошибкой на сервере и ошибкой несостоявшейся связи с сервером. первая сробатывает сразу,
 	// а вторая ЖДЕТ ошибки 'net::ERR_CONNECTION_TIMED_OUT' и выводит "Failed to fetch" это из-за специфики fetch ??
 	// из-за promise??  как заставить возвращать сразу ошибку при не прав. url ??
-	fetch(`${options.proxy}${options.url}${options.opts}`)
+	/*fetch(`${options.proxy}${options.url}${options.opts}`)
 		.then(function (response) {
 			if (response.ok) {
 				return response.json();
@@ -45,7 +56,7 @@ async function loadData () {
 		} )
 		.catch( (err) => {
 			alert(err.message);
-		} );
+		} );*/
 
 	/**
 	 * Another way
@@ -86,7 +97,7 @@ function showObjWetherTomor (objWetherTomorrow, container) {
 
 // task2        ***************************    task2      *******************************
 
-const instance = new MethodsAJAX();
+// const instance = new MethodsAJAX();
 const url = 'http://localhost:3006/posts';
 
 const send = document.getElementById('send');
