@@ -53,20 +53,19 @@
 	 [...allNews].forEach((news) => {
 		 news.classList.add('hidden');
 	 });
-		 // надо переделать чтобы выбирало сразу коректный вариант !!!не добавлять дочерним элементом кучу ненужной инфы insertBefore
-	 [...allNews].forEach((news) => {
-	 	let every = data.every((item) => {
-		 		return (Number(news.dataset.index) !== Number(item.id));
-		 } );
 
-		 if (every === true) {
-			 pageList.appendChild(news);
-		 } else{
-			 news.classList.remove('hidden');
-		 }
+	 [...allNews].forEach((news) => {
+			 data.forEach((item) => {
+				 if (Number(news.dataset.index) === Number(item.id)) {
+					 pageList.insertBefore(news, pageList.firstChild);
+					 news.classList.remove('hidden');
+				 }
+			 });
 	 });
 
-	  page.classList.add('visible');
+		 page.classList.add('visible');
+
+
  }
 
 	renderFilterResults() {

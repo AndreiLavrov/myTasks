@@ -1,5 +1,5 @@
 
-import { MethodsAJAX } from './methodsAJAX.js';
+
 
 class ServPosts {
 	constructor (url) {
@@ -16,8 +16,6 @@ class ServPosts {
 		this.send.addEventListener('click', this.sendOnePost.bind(self));
 	/*
 		почему если указать обработчик соб. в html, то getPosts is not defined?
-		функция определена не в глобальной области видимости ?
-		Поскольку элемент  создается после загрузки страницы, поэтому событие click не может быть привязано к нему.?
 		*/
 		this.getPos.addEventListener('click', this.getPosts.bind(self));
 	}

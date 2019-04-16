@@ -1,7 +1,7 @@
-import { MethodsAJAX_ES6 } from './methodsAJAX_ES6';
-import { ServPosts } from './task2';
+import { MethodsAJAX_ES6 as Methods} from './methodsAJAX_ES6.js';
+import { ServPosts } from './task2.js';
 
-let servPosts = new ServPosts();
+let servPosts = new ServPosts(Methods);
 class Task1 {
 	constructor () {               														// параметром или нет MethodsAJAX_ES6??
 		this.options = {
@@ -10,15 +10,17 @@ class Task1 {
 			opts: '?lang=ru&units=si&exclude=currently, hourly, flags, minutely',
 		};
 
+		this.instance = new Methods();                   // параметром или нет MethodsAJAX_ES6??
 		this.init();
 
 	}
 
 	init () {
-		this.instance = new MethodsAJAX_ES6();                   // параметром или нет MethodsAJAX_ES6??
 
+		const self = this;
 		this.getWeather = document.getElementById('getWeather');
-		this.getWeather.addEventListener('click', this.loadData);
+
+		this.getWeather.addEventListener('click', self.loadData.bind(self) );   // this не терять(использовать bind)
 
 	}
 
@@ -27,8 +29,6 @@ class Task1 {
 	}
 
 	loadData () {    //  параметр === MouseEvent {isTrusted: true, screenX: 327, screenY: 115, clientX: 327, clientY: 12, …}
-
-		console.log(this.instance);
 
 		this.instance.getDataFetch(`${this.options.proxy}${this.options.url}${this.options.opts}`)
 			.then(data => this.rendData(data), this.funOnreject)

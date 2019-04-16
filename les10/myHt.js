@@ -5,7 +5,7 @@ const instance = new MethodsAJAX();
 const getWeather = document.getElementById('getWeather');
 getWeather.addEventListener('click', loadData);
 
-// async function loadData () {
+
  function loadData () {    //  параметр === MouseEvent {isTrusted: true, screenX: 327, screenY: 115, clientX: 327, clientY: 12, …}
 	const options = {
 		proxy: 'https://cors-anywhere.herokuapp.com/',
@@ -24,6 +24,7 @@ getWeather.addEventListener('click', loadData);
 	/**
 	 * old way of solving
 	 */
+	 // async function loadData () {
 	/* const xhr = new XMLHttpRequest();
 	xhr.open('GET', `${options.proxy}${options.url}${options.opts}`);
 	xhr.responseType = 'text';

@@ -1,14 +1,15 @@
 
-import { MethodsAJAX_ES6 } from './methodsAJAX_ES6';
+// import { MethodsAJAX_ES6 } from './methodsAJAX_ES6.js';
 
 export class ServPosts {
-	constructor (url) {
-		this.instance = new MethodsAJAX_ES6();
+	constructor (Methods, url) {
+		this.instance = new Methods();
 		this.url = url || `http://localhost:3006/posts`;
 
 		this.send = document.getElementById('send');
-		this.getPos = document.getElementById('getPos');
+		this.getPos = document.getElementById('getPosts');
 		this.init();
+
 	}
 
 	init () {
@@ -19,6 +20,7 @@ export class ServPosts {
 			функция определена не в глобальной области видимости ?
 			Поскольку элемент  создается после загрузки страницы, поэтому событие click не может быть привязано к нему.?
 			*/
+
 		this.getPos.addEventListener('click', this.getPosts.bind(self));
 	}
 
