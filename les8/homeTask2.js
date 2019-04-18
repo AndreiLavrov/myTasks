@@ -65,7 +65,7 @@ function Timer2 (startNum) {
 const time = new Timer2(10);
 time.start(console.log);
 
-// task 2
+// task timer-by-class
 const message = document.getElementById('message');
 const inputUser = document.getElementById('inputUser');
 const send = document.getElementById('send');

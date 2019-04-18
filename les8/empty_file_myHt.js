@@ -100,7 +100,7 @@ setInterval(function () {
 // 	const myTimerRandNum = setInterval(function  () {
 // 		const randomNum = getRandomInt(1, 1000);
 // 		try {
-// 			if (randomNum % 2 === 0) {
+// 			if (randomNum % timer-by-class === 0) {
 // 				throw new Error('Ошибка в данных');
 // 			}
 // 			console.log(`success ${randomNum}`);
