@@ -13,67 +13,108 @@
 
 <body>
 
+	<header>
+		<nav>
+			<div class="topnav" id="myTopnav">
+				<a >HOME</a>
+				<a >PROJECTS</a>
+				<a >BLOG</a>
+				<a >CONTACT</a>
+				<a >ABOUT</a>
+				<a >SERVICES</a>
+				<a >LOCATION</a>
+				<a id="menu" href="#" class="icon">&#9776;</a>
+			</div>
+		</nav>
+	</header>
+
+
 	<div class="main-content">
 
-		<div class="all-news page">
+			<div class="all-news page">
 
-			<div class="search-line">
-				<span>Find news:</span>
-				<input type="text" class="search" name="search">
+				<div class="search-line">
+					<span>Find news:</span>
+					<input type="text" class="search" name="search">
+				</div>
+
+				<ul class="news-list">
+					<script id="news-template" type="x-handlebars-template">​
+						{{#each this}}
+							<div data-index="{{id}}">
+							<li data-index="{{id}}">
+								<a href="#" class="news-photo"><img src="{{image.small}}" height="130" alt="{{name}}"/></a>
+								<!--<h2><a href="#"> {{name}} </a></h2>-->
+								<ul class="news-description">
+									<li>{{description}}</li>
+
+								</ul>
+								<!--<div class="highlight"></div>-->
+							</li>
+							<button class="read-more" data-index="{{id}}">read more</button>
+							</div>
+						{{/each}}
+					</script> 
+				</ul>
+
 			</div>
 
-			<ul class="news-list">
-				<script id="news-template" type="x-handlebars-template">​
-					{{#each this}}
-                        <div data-index="{{id}}">
-						<li data-index="{{id}}">
-							<a href="#" class="news-photo"><img src="{{image.small}}" height="130" alt="{{name}}"/></a>
-							<!--<h2><a href="#"> {{name}} </a></h2>-->
-							<ul class="news-description">
-								<li>{{description}}</li>
-
-							</ul>
-							<!--<div class="highlight"></div>-->
-						</li>
-				        <button class="read-more" data-index="{{id}}">read more</button>
-                        </div>
-					{{/each}}
-				</script> 
-			</ul>
-
-		</div>
-
-		<div class="news page">
-			<div class="overlay"></div>
-			<div class="news-container">
-				<img src=""/>
-				<p ></p>
-				<span class="close">×</span>
-			</div>
-		</div>
-
-		<div class="single-news page">
-
-			<div class="overlay"></div>
-
-			<div class="preview-large">
-				<!--<h3>Single product view</h3>-->
-				<img src=""/>
-				<p></p>
-
-				<span class="close">×</span>
+			<div class="news page">
+				<div class="overlay"></div>
+				<div class="news-container">
+					<img src=""/>
+					<p ></p>
+					<span class="close">×</span>
+				</div>
 			</div>
 
-		</div>
+			<div class="single-news page">
 
-		<div class="error page">
-			<h3>Sorry, something went wrong :(</h3>
-		</div>
+				<div class="overlay"></div>
+
+				<div class="preview-large">
+					<!--<h3>Single product view</h3>-->
+					<img src=""/>
+					<p></p>
+
+					<span class="close">×</span>
+				</div>
+
+			</div>
+
+			<div class="error page">
+				<h3>Sorry, something went wrong :(</h3>
+			</div>
 
 
 
 	</div>
+
+
+	<footer>
+		<nav>
+			<a href="index.html">HOME</a>
+			<a href="projects.html">PROJECTS</a>
+			<a href="blog.html">BLOG</a>
+			<a href="contact.html">CONTACT</a>
+			<a href="about.html">ABOUT</a>
+			<a href="services.html">SERVICES</a>
+			<a href="location.html">LOCATION</a>
+		</nav>
+
+		<!--<div class="social">-->
+			<!--<a href="#"><img src="img/em.png"></a>-->
+			<!--<a href="#"><img src="img/face.png"></a>-->
+			<!--<a href="#"><img src="img/goo.png"></a>-->
+			<!--<a href="#"><img src="img/inst.png"></a>-->
+			<!--<a href="#"><img src="img/pint.png"></a>-->
+		<!--</div>-->
+		<p class="autor">Andrei Lavrov 2019</p>
+	</footer>
+
+
 	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
 	<script src="dist/bundle.js"></script>
 </body>
+
 </html>

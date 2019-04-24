@@ -1,5 +1,6 @@
 
 export class Timer{
+
 	constructor (elem, current = 10, step = 1, done) {
 		this.elem = elem;
 		this.current = current;
@@ -59,6 +60,7 @@ export class Timer{
 	}
 
 	stop () {
+
 		clearInterval(this.timerId);
 		this.status = false;
 	};

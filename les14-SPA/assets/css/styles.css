@@ -30,17 +30,18 @@ header {
 	box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);
 }
 
-header a {
+header a, footer a {
 	color: #ffffff;
 	text-decoration: none;
+	margin: 5px;
 }
 
-header h2.tzine{
+/*header h2.tzine{
 	float: right;
 	opacity:0.9;
-}
+}*/
 
-header h2.tzine:hover{
+/*header h2.tzine:hover{
 	opacity:1;
 }
 
@@ -51,7 +52,7 @@ header h2.tzine a{
 	padding: 12px 18px;
 	border-radius: 3px;
 	background-color: #5895DB;
-}
+}*/
 
 
 @media (max-width: 500px){
@@ -67,6 +68,34 @@ header h2.tzine a{
 
 }
 
+
+
+/*-----------------
+	The Footer
+------------------*/
+
+footer {
+	/*position: fixed;*/
+
+	/*left:0;
+	right:0;*/
+
+	height: 40px;
+	z-index: 100;
+
+	background-color: #282b2c;
+	padding: 40px;
+	color: #fff;
+	box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+footer p {
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 12px;
+}
+
 /*-----------------
 	Main Content
 ------------------*/
@@ -75,15 +104,15 @@ header h2.tzine a{
 .main-content{
 	box-sizing: border-box;
 	text-align: center;
-	margin: 30px auto 60px;
+	margin: 100px auto 60px;
 	padding: 0 40px;
 }
 
-.main-content h3{
+/*.main-content h3{
 	font-size: 28px;
 	color:  #5a96b9;
 	padding-bottom: 20px;
-}
+}*/
 
 @media (max-width: 600px){
 
@@ -100,17 +129,27 @@ header h2.tzine a{
 --------------------*/
 
 /*	Search Form	*/
+
+.search-line {
+	display: block;
+	text-align: left;
+}
+
 .search{
 	display: block;
+	position: absolute;
+	vertical-align: center;
+
 	box-sizing: border-box;
-	padding: 5px 30px 30px;
-	width: 60%;
+	padding: 10px;
+	width: 45%;
+
 	background-color: #FFF;
 	border: 1px solid #DBE3E7;
 	border-radius: 5px;
 	box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
-	position: absolute;
-	text-align: center;
+
+
 	color: #2B2E31;
 	opacity: 0;
 }
@@ -129,10 +168,9 @@ header h2.tzine a{
 
 .news-list{
     display: block;
-
-	padding-top: 100px;
+	margin: 80px auto;
 	list-style:none;
-	max-width: 1500px;
+	max-width: 1400px;
 	text-align: center;
 	opacity: 0;
 	font-size: 0;
@@ -148,8 +186,8 @@ header h2.tzine a{
 }
 
 .news-list > div{
-	height: 400px;
-	width: 300px;
+	height: 505px;
+	width: 520px;
 	box-sizing:border-box;
 	display: inline-block;
 	cursor: pointer;
@@ -164,8 +202,8 @@ header h2.tzine a{
 	border-radius: 3px;
 	box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
 
-	margin: 0 12px 14px 0;
-	padding: 25px;
+	margin: 15px 5px;
+	padding: 5px;
 
 }
 
@@ -181,10 +219,16 @@ header h2.tzine a{
 	text-align: center;
 	/*box-shadow : 0 0 20px 8px #f3f3f3 inset;*/
 
-	width: 225px;
-	margin-bottom: 25px;
-	padding-left: 0px;
+	/*width: 510px;*/
+	/*height: 318px;*/
+	/*margin-bottom: 25px;*/
+	/*padding: 0;*/
 	box-sizing: border-box;
+}
+
+.news-list .news-photo img{
+	width: 510px;
+	height: 318px;
 }
 
 /* The product name */
@@ -207,7 +251,7 @@ header h2.tzine a{
 /* Product description */
 
 .news-list .news-description{
-	margin-top: 20px;
+	margin: 20px;
 
 	color: #5d5d5d;
 	font-size: 14px;
@@ -215,8 +259,8 @@ header h2.tzine a{
 	white-space: normal;
 
 	height: 100px;
-	width: 260px;
-	margin-bottom: 20px;
+	width: 460px;
+
 
 	list-style: none;
 }
@@ -227,13 +271,15 @@ header h2.tzine a{
 	margin-right: 5px;
 }
 
-.news-list .news-description li:first-child{
+/*.news-list .news-description li:first-child{
 	display: block;
 }
 
 .news-list .news-description li span{
 	font-weight: bold;
-}
+}*/
+
+
 
 /* Price and order button */
 
@@ -252,16 +298,16 @@ header h2.tzine a{
 	height: 32px;
 }
 
-.news-list .news-price{
-	float: right;
+/*.news-list .news-price{*/
+	/*float: right;*/
 
-	color:  #4e4e4e;
-	font-weight: bold;
-	font-size: 20px;
+	/*color:  #4e4e4e;*/
+	/*font-weight: bold;*/
+	/*font-size: 20px;*/
 
-	padding-top: 6px;
-	margin: 0;
-}
+	/*padding-top: 6px;*/
+	/*margin: 0;*/
+/*}*/
 
 /*.products-list .highlight{*/
 	/*position: absolute;*/

@@ -19,7 +19,7 @@
 		 .then((res)=> res.json())
 		 .then((data)=> {
 			 this.allNews = data;
-			 this.generateAllNewsHTML(this.allNews);
+			 this.generateAllNewsHTML(this.allNews);                                          // i am stop watching here
 			 this.initRoutes();
 			 window.dispatchEvent(new HashChangeEvent('hashchange'));  // start application, init chang hash
 		 })
@@ -150,7 +150,7 @@
 		 const theTemplate = Handlebars.compile(theTemplateScript);
 		 list.innerHTML = theTemplate(data);
 
-		 list.querySelectorAll('li').forEach((li) => {
+		 list.querySelectorAll('li').forEach((li) => {       // do non remember i need to delete div in html!
 			 li.addEventListener('click', (event) => {
 				 event.preventDefault();
 				 window.location.hash = `singleNews/${li.dataset.index}`;
