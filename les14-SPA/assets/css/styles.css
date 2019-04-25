@@ -41,10 +41,10 @@ header a, footer a {
 	opacity:0.9;
 }*/
 
-/*header h2.tzine:hover{
-	opacity:1;
+header a:hover{
+     cursor: pointer;
 }
-
+/*
 header h2.tzine a{
 	font-size: 13px;
 	text-transform: uppercase;
@@ -102,6 +102,9 @@ footer p {
 
 
 .main-content{
+    /*???*/
+    width: 100%;
+
 	box-sizing: border-box;
 	text-align: center;
 	margin: 100px auto 60px;
@@ -142,16 +145,15 @@ footer p {
 
 	box-sizing: border-box;
 	padding: 10px;
-	width: 45%;
+	width: 400px;
 
 	background-color: #FFF;
 	border: 1px solid #DBE3E7;
 	border-radius: 5px;
 	box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
 
-
 	color: #2B2E31;
-	opacity: 0;
+	/*opacity: 0;*/
 }
 
 .search-line span {
@@ -160,32 +162,36 @@ footer p {
 }
 
 
-/*	Products List	*/
+/*	News List	*/
 
-.all-news h3{
+/*.all-news h3{
 	opacity: 0;
-}
+}*/
 
-.news-list{
+.all-news{
     display: block;
 	margin: 80px auto;
 	list-style:none;
 	max-width: 1400px;
 	text-align: center;
 	opacity: 0;
+
+    /*?*/
 	font-size: 0;
 }
 
-.search,
-.all-news.visible .news-list,
-.all-news.visible .filters,
+/*.search.visible,*/
+.all-news.visible,
 .all-news.visible h3{
 	opacity: 1;
 	transition: 1s;
 	pointer-events: auto;
 }
 
-.news-list > div{
+.news-list {
+    margin-top: 50px;
+}
+.news-list > li{
 	height: 505px;
 	width: 520px;
 	box-sizing:border-box;
@@ -207,7 +213,9 @@ footer p {
 
 }
 
-.news-list > div.hidden{
+
+
+.news-list > li.hidden{
 	opacity: 0.2;
 	pointer-events: none;
 }
@@ -230,23 +238,6 @@ footer p {
 	width: 510px;
 	height: 318px;
 }
-
-/* The product name */
-
-/*.products-list h2{*/
-	/*display: block;*/
-	/*font-size: 18px;*/
-	/*white-space: nowrap;*/
-	/*overflow: hidden;*/
-	/*text-overflow:ellipsis;*/
-	/*max-width: 200px;*/
-	/*margin:0;*/
-/*}*/
-
-/*.products-list h2 a{*/
-	/*text-decoration: none;*/
-	/*color: #2B2E31;*/
-/*}*/
 
 /* Product description */
 
@@ -271,14 +262,6 @@ footer p {
 	margin-right: 5px;
 }
 
-/*.news-list .news-description li:first-child{
-	display: block;
-}
-
-.news-list .news-description li span{
-	font-weight: bold;
-}*/
-
 
 
 /* Price and order button */
@@ -298,31 +281,31 @@ footer p {
 	height: 32px;
 }
 
-/*.news-list .news-price{*/
-	/*float: right;*/
-
-	/*color:  #4e4e4e;*/
-	/*font-weight: bold;*/
-	/*font-size: 20px;*/
-
-	/*padding-top: 6px;*/
-	/*margin: 0;*/
-/*}*/
-
-/*.products-list .highlight{*/
-	/*position: absolute;*/
-	/*top:0;*/
-	/*left:0;*/
-	/*width:100%;*/
-	/*height:100%;*/
-	/*background-color: rgba(0,0,0,0.1);*/
-	/*opacity: 0;*/
-	/*transition: 0.4s;*/
-/*}*/
-
 .news-list > li:hover .highlight{
 	opacity: 1;
 }
+
+/*---------------------
+news in HOVER
+---------------------- */
+
+/*.news-list > li:hover {*/
+    /*!*transition-property: background-color;*!*/
+    /*transition: all;*/
+    /*transition-duration: 1s;*/
+
+    /*height: 605px;*/
+    /*width: 620px;*/
+/*}*/
+
+/*.news-list .news-photo img:hover{*/
+    /*transition: all;*/
+    /*transition-duration: 1s;*/
+
+    /*width: 610px;*/
+    /*height: 418px;*/
+/*}*/
+
 
 /* Making the list responsive */
 
@@ -504,4 +487,16 @@ footer p {
 }
 
 
+/*------------------
+  ABOUT
+------------------ */
 
+.about-container{
+    opacity: 0;
+    transition: 0.6s;
+}
+
+.about-container.visible{
+    z-index: 500;
+    opacity: 1;
+}

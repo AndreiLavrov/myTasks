@@ -34,19 +34,7 @@ class TimerAct {
 		this.message.innerText = `your pulse is ${+this.inputUser.value * 4} beats`;
 	}
 
-	funStage1 (){
 
-			this.stage = 1;
-			this.myTimer.stop();
-			this.funCallBack();
-			return this.myTimer.start();
-	}
-
-	funStage2 () {
-
-			this.stage = 2;
-			this.ShowStopTim();
-	}
 
 	clickStart () {
 
@@ -61,37 +49,13 @@ class TimerAct {
 
 				this.stage = 0;
 
-				// ( ()=> {
-						this.message.textContent = `Измерение начнется через`;
-						this.myTimer.start()
-				// })()                                                               // или в функцию обернуть для `.then` ??
-
-				.then(() => {
-						return this.funStage1();
-				})
-
-				.then(() => {
-						return this.funStage2();
-				})
-
-				.catch((e) => console.log(e.message))
+				this.actionTimer();
 
 		}	else  if ((this.myTimer.status === true) && (this.myTimer.isPause === true)){
 
 				if(this.stage === 0){
 
-						this.message.textContent = `Измерение начнется через`;
-						this.myTimer.start()
-
-						.then(() => {
-								return this.funStage1();
-						})
-
-						.then(() => {
-								return this.funStage2();
-						})
-
-						.catch((e) => console.log(e.message))
+						this.actionTimer();
 
 				} else if(this.stage === 1){
 
@@ -113,6 +77,36 @@ class TimerAct {
 
 	}
 
+	actionTimer () {
+			// ( ()=> {
+			this.message.textContent = `Измерение начнется через`;
+			this.myTimer.start()
+			// })()                                                               // или в функцию обернуть для `.then` ??
+
+					.then(() => {
+							return this.funStage1();
+					})
+
+					.then(() => {
+							return this.funStage2();
+					})
+
+					.catch((e) => console.log(e.message))
+	}
+
+		funStage1 (){
+
+				this.stage = 1;
+				this.myTimer.stop();
+				this.funCallBack();
+				return this.myTimer.start();
+		}
+
+		funStage2 () {
+
+				this.stage = 2;
+				this.ShowStopTim();
+		}
 
 	funCallBack () {
 			this.message.textContent = `Измеряйте пульс...`;
