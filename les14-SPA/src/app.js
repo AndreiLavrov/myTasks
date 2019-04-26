@@ -6,9 +6,9 @@
  		this.about = [];
 	 this.allNews = [];
 	 this.router = new Router();
-	 this.searchService = new SearchService();
-	 this.searchService.subscribe(this.onFilterChange);
-	 this.initSingleNewsPage();
+		 this.searchService = new SearchService();
+		 this.searchService.subscribe(this.onFilterChange);
+		 this.initSingleNewsPage();
 	 this.initNewsPage();
 	 this.initHeaderButtons();
 
@@ -22,7 +22,6 @@
 		 .then((res)=> res.json())
 		 .then((data)=> {
 			 this.allNews = data;
-			 this.generateAllNewsHTML(this.allNews);
 			 this.initRoutes();
 			 window.dispatchEvent(new HashChangeEvent('hashchange'));  // start application, init chang hash
 		 })
@@ -51,13 +50,22 @@
 
 // фильтруем
 	 renderNewsPage(data) {
-	 const page = document.querySelector('.all-news');
-	 const pageList = document.querySelector('.news-list');
-	 const allNews = document.querySelectorAll('.all-news .news-list > li');
+	 			const page = document.querySelector('.all-news');
+	 			const pageList = document.querySelector('.news-list');
+	 			let allNews = document.querySelectorAll('.all-news .news-list > li');
+			 console.log(allNews);
 
-	 [...allNews].forEach((news) => {
-		 news.classList.add('hidden');
-	 });
+					  if(!allNews.length > 0){     // interesting behavior without 'if' -- delete aii incorrect news-elements ?! //
+							 this.generateAllNewsHTML(data);
+					  }
+
+					 allNews = document.querySelectorAll('.all-news .news-list > li');
+			 console.log(allNews);
+
+
+			 [...allNews].forEach((news) => {
+					 news.classList.add('hidden');
+	 			});
 
 	 /*[...allNews].forEach((news) => {
 			 data.forEach((item) => {
@@ -72,7 +80,7 @@
 
 
 			 [...allNews].forEach((news) => {
-			 																										// почему работает? ведь если если подходящий "news" был
+			 																										// занятно..) почему работает? ведь если если подходящий "news" был
 			 //		перебран после не подходящего, то должен остаться на своем месте (за ним, не вверху) ?? :)
 
 							 for (let i = 0; i < data.length; i++) {
@@ -86,7 +94,9 @@
 							 pageList.appendChild(news);
 			 });
 
-		 page.classList.add('visible');
+		// page.classList.add('visible');
+			 page.classList.remove('hider');
+			 pageList.classList.remove('hider');
 
  }
 
@@ -107,7 +117,7 @@
 		 const self = this;
 		 this.singleNewsPage = document.querySelector('.single-news');
 		 this.singleNewsPage.addEventListener('click', (event) => {
-			 if (self.singleNewsPage.classList.contains('visible')) {
+			 if (!self.singleNewsPage.classList.contains('hider')) {                       // ?  hider
 				 const clicked = event.target;
 
 				 if (clicked.classList.contains('close') || clicked.classList.contains('overlay')) {
@@ -130,15 +140,15 @@
 			 });
 		 }
 
-		 page.classList.add('visible');
+		 page.classList.remove('hider');
 	 }
 
 	 initNewsPage() {
 		 const self = this;
 		 this.NewsPage = document.querySelector('.news');
 		 this.NewsPage.addEventListener('click', (event) => {
-			 if (self.NewsPage.classList.contains('visible')) {
-				 const clicked = event.target;
+			 if (!self.NewsPage.classList.contains('hider')) {
+					 const clicked = event.target;
 
 				 if (clicked.classList.contains('close') || clicked.classList.contains('overlay')) {
 					 location.hash = self.searchService.getCurrentState();
@@ -160,47 +170,57 @@
 			 });
 		 }
 
-		 page.classList.add('visible');
+		 page.classList.remove('hider');
 	 }
 
- // add html(ul) in page
+
 	 generateAllNewsHTML(data) {
-		 const list = document.querySelector('.all-news .news-list');
-		 const theTemplateScript = document.getElementById('news-template').innerHTML;
 
-		 //compile
-		 const theTemplate = Handlebars.compile(theTemplateScript);
-		 list.innerHTML = theTemplate(data);
+				 const list = document.querySelector('.all-news .news-list');
+				 const theTemplateScript = document.getElementById('news-template').innerHTML;
 
-		 list.querySelectorAll('.liClass').forEach((li) => {
+				 //compile
+				 const theTemplate = Handlebars.compile(theTemplateScript);
+				 list.innerHTML = theTemplate(data);
 
-		 		let button = li.querySelector('button');
+				 list.querySelectorAll('.liClass').forEach((li) => {
 
-		 		li.addEventListener('click', (event) => {
+						let button = li.querySelector('button');
 
-						 event.preventDefault();
+						li.addEventListener('click', (event) => {
 
-						 if (event.target !== button) {
+								 event.preventDefault();
 
-								window.location.hash = `singleNews/${li.dataset.index}`;
+								 if (event.target !== button) {
 
-						 } else if (event.target === button) {
+										window.location.hash = `singleNews/${li.dataset.index}`;
 
-								 window.location.hash = `news/${button.dataset.index}`;
-						 }
-			 });
-	 	});
+								 } else if (event.target === button) {
+
+										 window.location.hash = `news/${button.dataset.index}`;
+								 }
+					 });
+				});
  }
 
  renderErrorPage() {
  		const page = document.querySelector('.error');
- 		page.classList.add('visible');
+ 		page.classList.remove('hider');
  }
 
  initHeaderButtons() {
 		 const navigation = document.querySelector('.navigation');
 		 //const pagesNavigation = document.querySelectorAll('a');
+		 const home = document.querySelector('.home');
+		 const usedThin = document.querySelector('.usedThin');
+		 const blog = document.querySelector('.blog');
+		 const contacts = document.querySelector('.contacts');
 		 const about = document.querySelector('.about');
+		 const service = document.querySelector('.service');
+		 const location = document.querySelector('.location');
+		 const weather = document.querySelector('.weather');
+		 const play = document.querySelector('.play');
+
 
 
 		 navigation.addEventListener('click', (event) => {
@@ -211,13 +231,15 @@
 
 								 window.location.hash = `about`;
 
+						 } else if(event.target === home) {
+								 window.location.hash = `#`;
 						 }
 				 });
 		 };
 
 
  renderAboutPage() {
- 		const allNews = document.querySelector('.all-news');
+ 		const newsList = document.querySelector('.news-list');
 		 const page = document.querySelector('.about-container');
 		 const aboutText1 = document.querySelector('.aboutText1');
 
@@ -227,25 +249,13 @@
 				 .then((res)=> res.json())
 				 .then((about)=> {
 						 this.about = about;
-						 this.text1 = this.about[0].text1;
+						 this.text1 = this.about[0].text1;                           // is correct this way getting data by array ?
 						 aboutText1.innerHTML = this.text1;
 				 })
-		 allNews.innerHTML = '';
-		 page.classList.add('visible');
+		 // newsList.innerHTML = '';
+		 page.classList.remove('hider');
  }
-		 initAboutPage() {
-				 const self = this;
-				 this.NewsPage = document.querySelector('.news');
-				 this.NewsPage.addEventListener('click', (event) => {
-						 if (self.NewsPage.classList.contains('visible')) {
-								 const clicked = event.target;
 
-								 if (clicked.classList.contains('close') || clicked.classList.contains('overlay')) {
-										 location.hash = self.searchService.getCurrentState();
-								 }
-						 }
-				 });
-		 }
 
 }
 

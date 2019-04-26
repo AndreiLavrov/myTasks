@@ -70,6 +70,8 @@ header h2.tzine a{
 
 
 
+
+
 /*-----------------
 	The Footer
 ------------------*/
@@ -134,12 +136,12 @@ footer p {
 /*	Search Form	*/
 
 .search-line {
-	display: block;
+	/*display: block;*/
 	text-align: left;
 }
 
 .search{
-	display: block;
+	/*display: block;*/
 	position: absolute;
 	vertical-align: center;
 
@@ -169,24 +171,26 @@ footer p {
 }*/
 
 .all-news{
-    display: block;
+    /*display: block;*/
 	margin: 80px auto;
 	list-style:none;
 	max-width: 1400px;
 	text-align: center;
-	opacity: 0;
+	/*opacity: 0;*/
 
     /*?*/
 	font-size: 0;
+    transition: 1s;
+    pointer-events: auto;
 }
 
 /*.search.visible,*/
-.all-news.visible,
-.all-news.visible h3{
-	opacity: 1;
-	transition: 1s;
-	pointer-events: auto;
-}
+/*.all-news.visible,*/
+/*.all-news.visible h3{*/
+	/*opacity: 1;*/
+	/*transition: 1s;*/
+	/*pointer-events: auto;*/
+/*}*/
 
 .news-list {
     margin-top: 50px;
@@ -223,7 +227,7 @@ footer p {
 /* The product image */
 
 .news-list .news-photo{
-	display: block;
+	/*display: block;*/
 	text-align: center;
 	/*box-shadow : 0 0 20px 8px #f3f3f3 inset;*/
 
@@ -258,7 +262,7 @@ footer p {
 
 .news-list .news-description li{
 /*//inline-*/
-	display: block;
+	/*display: block;*/
 	margin-right: 5px;
 }
 
@@ -330,7 +334,7 @@ news in HOVER
 }
 
 .overlay{
-	height: 20px;
+    height: 100%;
 	width: 100%;
 	position: fixed;
 	top: 0;
@@ -340,9 +344,9 @@ news in HOVER
 	z-index: 100;
 }
 
-.single-news.visible .overlay{
-	height: 100%;
-}
+/*.single-news.visible .overlay{*/
+	/*height: 100%;*/
+/*}*/
 
 .preview-large{
 	box-sizing: border-box;
@@ -359,11 +363,11 @@ news in HOVER
 	background-color:  #ffffff;
 
 	z-index: 102;
-	opacity: 0;
+	/*!*opacity: 0;*!                    // */
 	transition: 0.4s;
 
 }
-
+/*                                                          решить с анимацией для не visible*/
 .single-news.visible .preview-large{
 	opacity: 1;
 	transition: 1.4s;
@@ -405,7 +409,7 @@ news in HOVER
  }
 
 .overlay{
-	height: 20px;
+    height: 100%;
 	width: 100%;
 	position: fixed;
 	top: 0;
@@ -415,9 +419,9 @@ news in HOVER
 	z-index: 100;
 }
 
-.news.visible .overlay{
-	height: 100%;
-}
+/*.news.visible .overlay{*/
+	/*height: 100%;*/
+/*}*/
 
 .news-container{
 	box-sizing: border-box;
@@ -435,7 +439,7 @@ news in HOVER
 	background-color:  #ffffff;
 
 	z-index: 102;
-	opacity: 0;
+	/*opacity: 0;                           ///*/
 	transition: 0.4s;
 
 }
@@ -469,7 +473,7 @@ news in HOVER
 ----------------------------*/
 
 .error{
-	opacity: 0;
+	/*opacity: 0;                                      //*/
 	transition: 0.6s;
 	pointer-events: none;
 	position: absolute;
@@ -478,9 +482,9 @@ news in HOVER
 	width: 100%;
 }
 
-.error.visible{
-	opacity: 1;
-}
+/*.error.visible{*/
+	/*opacity: 1;*/
+/*}*/
 
 .error h3{
 	font-size: 40px;
@@ -492,11 +496,21 @@ news in HOVER
 ------------------ */
 
 .about-container{
-    opacity: 0;
+    /*opacity: 0;                               //*/
     transition: 0.6s;
+    color: #000000;
 }
 
 .about-container.visible{
     z-index: 500;
     opacity: 1;
+}
+
+
+/*----------------
+hide
+----------------*/
+
+.hider{
+	display: none;
 }

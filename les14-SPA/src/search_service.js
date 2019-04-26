@@ -1,38 +1,41 @@
 import { Observable } from "./observable";
 
 export class SearchService {
-	constructor () {
-		this._observable = new Observable();
+		constructor () {
+				this._observable = new Observable();
 
-		this.filters = {};
-		// this.filters = '';
+				this.filters = '';
+				// this.filters = '';
 
-		this.setInitialState();
-		this.search = document.querySelector('.search');
-    this.init();
-	}
+				this.setInitialState();
+				this.search = document.querySelector('.search');
+				this.init();
+		}
 
-	init() {
-      let self = this;
-      this.search.addEventListener('input', this.onSearchClick.bind(self));
-	}
+		init() {
 
-	subscribe(fn) {
+      	this.search.addEventListener('input', this.onSearchClick.bind(this));
+		}
+
+		subscribe(fn) {
          this._observable.subscribe(fn);
     }
 
-	onSearchClick(event) {
-      this.filters = event.target.value;
-      this._observable.next(this.createQueryHash(this.filters));
+		onSearchClick(event) {
+				console.log(event.target.value);
+
+				this.filters = event.target.value;
+				console.log(this.filters);
+				this._observable.next(this.createQueryHash(this.filters));
     }
 
-	createQueryHash(filters) {
-		if (Object.keys(filters).length > 0) {
-			return `#filter/${JSON.stringify(filters)}`;
-		}
+		createQueryHash(filters) {
+				if (filters.length > 0) {
+						return `#filter/${JSON.stringify(filters)}`;
+				}
 
-		return '#';
-	}
+				return '#';
+		}
 
     setInitialState() {
         if (location.hash.includes('#filters/')) {
@@ -49,15 +52,14 @@ export class SearchService {
         return this.createQueryHash(this.filters);
     }
 
-    renderFilters(products, filter) {
+    renderFilters(news, filter) {
 				this.search.value = `${filter}`;
 
-
         let result = [];
-        products.forEach((product) => {
-            if(product.description.toLowerCase().includes(String(filter))
-							|| product.description.includes(String(filter)) ) {
-                result.push(product);
+				news.forEach((item) => {
+            if(item.description.includes(String(filter))
+							|| item.description.toLowerCase().includes(String(filter)) ) {
+                result.push(item);
             }
         });
 

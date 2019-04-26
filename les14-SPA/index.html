@@ -40,23 +40,18 @@
 					<input type="text" class="search" name="search">
 				</div>
 
-				<ul class="news-list">
+				<ul class="news-list" >
 					<script id="news-template" type="x-handlebars-template">​
-						{{#each this}}
-							<!--<div data-index="{{id}}">-->
-							<li class="liClass" data-index="{{id}}">
-								<a href="#" class="news-photo"><img src="{{image.small}}" height="130" alt="{{name}}"/></a>
-								<!--<h2><a href="#"> {{name}} </a></h2>-->
-								<ul class="news-description">
-									<li>{{description}}</li>
+					{{#each this}}
+					<li class="liClass" data-index="{{id}}">
+						<a href="#" class="news-photo"><img src="{{image.small}}" height="130" alt="{{name}}"/></a>
+						<ul class="news-description">
+							<li>{{description}}</li>
+						</ul>
+						<button class="read-more" data-index="{{id}}">read more</button>
+					</li>
+					{{/each}}`;
 
-								</ul>
-								<!--<div class="highlight"></div>-->
-								<button class="read-more" data-index="{{id}}">read more</button>
-
-							</li>
-							<!--</div>-->
-						{{/each}}
 					</script> 
 				</ul>
 
@@ -91,16 +86,14 @@
 				<h3>Sorry, something went wrong :(</h3>
 			</div>
 
-		<!--////-->
-		<div class="about page">
-			<!--<div class="overlay"></div>-->
-			<div class="about-container">
-				<!--<img src=""/>-->
-				<p class="aboutText1"></p>
 
-				<span class="close">×</span>
-			</div>
+		<div class="about-container page">
+
+			<p class="aboutText1"></p>
+
+			<span class="close">×</span>
 		</div>
+
 
 	</div>
 

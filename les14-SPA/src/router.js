@@ -31,7 +31,8 @@ export class Router {
 	render(url){
 		let temp = url.split('/')[0];
 		[...this.mainContentPages].forEach((page)=> {
-			page.classList.remove('visible')
+				//page.classList.remove('visible');
+				page.classList.add('hider');
 		});
 
 		this.routes[temp] ? this.routes[temp]() : this.routes['404']();
