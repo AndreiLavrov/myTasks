@@ -1,19 +1,25 @@
- import { Router } from './router';
- import { SearchService } from "./search_service";
+ import { Router } from './router.js';
+ import { SearchService } from "./search_service.js";
+ import { Control } from './control.js';
 
  class App {
- constructor (){
- 		this.about = [];
-	 this.allNews = [];
-	 this.router = new Router();
-		 this.searchService = new SearchService();
-		 this.searchService.subscribe(this.onFilterChange);
-		 this.initSingleNewsPage();
-	 this.initNewsPage();
-	 this.initHeaderButtons();
+ 		constructor (){
+ 				// this.about = [];       // нужно ли объявлять переменную заранее, или можно только в методе(renderAboutPage) ??
+ 				// this.text1 = '';
 
-	 this.init();
- }
+	 			this.allNews = [];
+	 			this.router = new Router();
+		 		this.searchService = new SearchService();
+
+				 this.searchService.subscribe(this.onFilterChange);
+				 this.initSingleNewsPage();
+				 this.initNewsPage();
+
+				 this.control = new Control();
+				 this.control.initHeaderButtons();
+
+				 this.init();
+ 		}
 
  init(){
 	 fetch('http://localhost:3006/news', { headers: {
@@ -22,6 +28,7 @@
 		 .then((res)=> res.json())
 		 .then((data)=> {
 			 this.allNews = data;
+				 console.log(`data .then ${data}`);
 			 this.initRoutes();
 			 window.dispatchEvent(new HashChangeEvent('hashchange'));  // start application, init chang hash
 		 })
@@ -44,7 +51,7 @@
 	}
 
 	renderHomePage() {
-
+			this.clearSearchInp();
 		this.renderNewsPage(this.allNews);
 	}
 
@@ -56,11 +63,13 @@
 			 console.log(allNews);
 
 					  if(!allNews.length > 0){     // interesting behavior without 'if' -- delete aii incorrect news-elements ?! //
-							 this.generateAllNewsHTML(data);
+
+					  		this.generateAllNewsHTML(this.allNews);
+								allNews = document.querySelectorAll('.all-news .news-list > li');
+								console.log(allNews);
 					  }
 
-					 allNews = document.querySelectorAll('.all-news .news-list > li');
-			 console.log(allNews);
+
 
 
 			 [...allNews].forEach((news) => {
@@ -96,7 +105,7 @@
 
 		// page.classList.add('visible');
 			 page.classList.remove('hider');
-			 pageList.classList.remove('hider');
+			 //pageList.classList.remove('hider');
 
  }
 
@@ -175,8 +184,8 @@
 
 
 	 generateAllNewsHTML(data) {
-
-				 const list = document.querySelector('.all-news .news-list');
+			 console.log(`data ${data}`);
+			 const list = document.querySelector('.all-news .news-list');
 				 const theTemplateScript = document.getElementById('news-template').innerHTML;
 
 				 //compile
@@ -207,35 +216,35 @@
  		const page = document.querySelector('.error');
  		page.classList.remove('hider');
  }
-
- initHeaderButtons() {
-		 const navigation = document.querySelector('.navigation');
-		 //const pagesNavigation = document.querySelectorAll('a');
-		 const home = document.querySelector('.home');
-		 const usedThin = document.querySelector('.usedThin');
-		 const blog = document.querySelector('.blog');
-		 const contacts = document.querySelector('.contacts');
-		 const about = document.querySelector('.about');
-		 const service = document.querySelector('.service');
-		 const location = document.querySelector('.location');
-		 const weather = document.querySelector('.weather');
-		 const play = document.querySelector('.play');
-
-
-
-		 navigation.addEventListener('click', (event) => {
-
-						 event.preventDefault();
-
-						 if (event.target === about) {
-
-								 window.location.hash = `about`;
-
-						 } else if(event.target === home) {
-								 window.location.hash = `#`;
-						 }
-				 });
-		 };
+ //
+ // initHeaderButtons() {
+	// 	 const navigation = document.querySelector('.navigation');
+	// 	 //const pagesNavigation = document.querySelectorAll('a');
+	// 	 const home = document.querySelector('.home');
+	// 	 const usedThin = document.querySelector('.usedThin');
+	// 	 const blog = document.querySelector('.blog');
+	// 	 const contacts = document.querySelector('.contacts');
+	// 	 const about = document.querySelector('.about');
+	// 	 const service = document.querySelector('.service');
+	// 	 const location = document.querySelector('.location');
+	// 	 const weather = document.querySelector('.weather');
+	// 	 const play = document.querySelector('.play');
+ //
+ //
+ //
+	// 	 navigation.addEventListener('click', (event) => {
+ //
+	// 					 event.preventDefault();
+ //
+	// 					 if (event.target === about) {
+ //
+	// 							 window.location.hash = `about`;
+ //
+	// 					 } else if(event.target === home) {
+	// 							 window.location.hash = `#`;
+	// 					 }
+	// 			 });
+	// 	 };
 
 
  renderAboutPage() {
@@ -254,6 +263,10 @@
 				 })
 		 // newsList.innerHTML = '';
 		 page.classList.remove('hider');
+ }
+
+ clearSearchInp() {
+		 document.querySelector('.search').value = '';
  }
 
 

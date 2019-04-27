@@ -32,7 +32,10 @@ export class Router {
 		let temp = url.split('/')[0];
 		[...this.mainContentPages].forEach((page)=> {
 				//page.classList.remove('visible');
-				page.classList.add('hider');
+				if(!page.classList.contains('hider')){
+						console.log(`page.classList.contains`);
+						page.classList.add('hider');
+				}
 		});
 
 		this.routes[temp] ? this.routes[temp]() : this.routes['404']();
