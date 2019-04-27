@@ -1,4 +1,5 @@
 export class Control {
+
 		constructor (){
 				this.navigation = document.querySelector('.navigation');
 				//const pagesNavigation = document.querySelectorAll('a');
@@ -13,6 +14,7 @@ export class Control {
 				this.play = document.querySelector('.play');
 
 		}
+
 
 		initHeaderButtons() {
 
