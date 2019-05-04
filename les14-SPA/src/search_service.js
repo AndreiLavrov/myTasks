@@ -5,7 +5,6 @@ export class SearchService {
 				this._observable = new Observable();
 
 				this.filters = '';
-				// this.filters = '';
 
 				this.setInitialState();
 				this.search = document.querySelector('.search');
@@ -31,15 +30,15 @@ export class SearchService {
 
 		createQueryHash(filters) {
 				if (filters.length > 0) {
-						return `#filter/${JSON.stringify(filters)}`;
+						return `filter/${JSON.stringify(filters)}`;
 				}
 
-				return '#';
+				return '';
 		}
 
     setInitialState() {
-        if (location.hash.includes('#filters/')) {
-            let filter = location.hash.split('#filter/')[1].trim();
+        if (window.location.pathname.includes('filters/')) {
+            let filter = window.location.pathname.split('filter/')[1].trim();
             try {
                 this.filters = JSON.parse(decodeURI(filter));
             } catch(err) {
