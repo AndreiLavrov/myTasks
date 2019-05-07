@@ -18,15 +18,16 @@
 			<div class="navigation" id="myTopnav">
 				<a class="home">ГЛАВНАЯ</a>
 				<a class="products">PRODUCTS</a>
-				<a class="usedThin">БАРАХОЛКА</a>
-				<a class="blog">BLOG</a>
-				<a class="contacts">CONTACT</a>
+				<a class="cart">CART</a>
+				<a class="usedThin"></a>
+				<a class="blog"></a>
+				<a class="contacts"></a>
 				<a class="about">О НАС</a>
-				<a class="service">SERVICES</a>
-				<a class="location">LOCATION</a>
+				<a class="service"></a>
+				<a class="location"></a>
 				<a class="weather">ПОГОДА</a>
 				<a class="play">ИГРАТЬ</a>
-				<a class="enter">ВОЙТИ</a>
+				<a class="login">ВОЙТИ</a>
 				<a id="menu" href="#" class="icon">&#9776;</a>
 			</div>
 			<div class="authorisation"></div>
@@ -112,6 +113,7 @@
 							<li><span>Camera: </span>{{specs.camera}} Mpx</li>
 						</ul>
 						<button>Buy Now!</button>
+						<button class="add-to-cart" id="{{id}}">Add to cart!</button>
 						<p class="product-price">{{price}}$</p>
 						<div class="highlight"></div>
 					</li>
@@ -121,7 +123,10 @@
 
 		</div>
 
+		<div class="cart-page page"></div>
 
+
+        <div class="login-wrap page"></div>
 
 	</div>
 

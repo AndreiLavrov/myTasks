@@ -7,6 +7,7 @@ class App {
 				this.allNews = [];
 				this.aboutData = [];
 				this.products = [];
+				this.cart = {};
 
 				this.router = new RouterHistory();  //
 				this.searchService = new SearchService();   //
@@ -44,6 +45,8 @@ class App {
 				this.router.addRoute('404', this.renderErrorPage.bind(this));
 				this.router.addRoute('about', this.renderAboutPage.bind(this));
 				this.router.addRoute('products', this.renderProductsPage.bind(this));
+				this.router.addRoute('cart', this.renderCartPage.bind(this));
+				this.router.addRoute('login', this.renderLoginPage.bind(this));
 		}
 
 		onFilterChange (data) {
@@ -229,23 +232,25 @@ class App {
 				const page = document.querySelector('.about-container');
 				const aboutText1 = document.querySelector('.aboutText1');
 
-				fetch('http://localhost:3006/about', {
-						headers: {
-								'Content-Type': 'application/json'
-						}
-				})
-						.then((res) => res.json())
-						.then((about) => {
-								this.aboutData = about;
-								aboutText1.innerHTML = this.aboutData[0].text1;
-								console.log(`success`);
-								// this.about = about;
-								// this.text1 = this.about[0].text1;                           // is correct this way getting data by array ?
-								// aboutText1.innerHTML = this.text1;
-						});
+				if (!this.aboutData.length) {
+						fetch('http://localhost:3006/about', {
+								headers: {
+										'Content-Type': 'application/json'
+								}
+						})
+								.then((res) => res.json())
+								.then((about) => {
+										this.aboutData = about;
+										aboutText1.innerHTML = this.aboutData[0].text1;
 
-				// newsList.innerHTML = '';
-				page.classList.remove('hider');
+										page.classList.remove('hider');
+								});
+				} else {
+						console.log(this.aboutData);
+						aboutText1.innerHTML = this.aboutData[0].text1;
+						page.classList.remove('hider');
+				}
+
 		}
 
 
@@ -275,8 +280,10 @@ class App {
 						.then((products) => {
 
 								this.products = products;
-								console.log(this.products);
+								// console.log(this.products);
+								this.checkCart();                                                       // front
 								this.showProducts(this.products);
+								//this.showMiniCart();
 								page.classList.remove('hider');
 								console.log(page);
 						});
@@ -289,10 +296,251 @@ class App {
 
 				//compile
 				const theTemplate = Handlebars.compile(theTemplateScript);
-				 this.codeListSavedProducts = theTemplate(data);
+				this.codeListSavedProducts = theTemplate(data);
 				list.innerHTML = this.codeListSavedProducts;
 
+				//this.cart = {};
+
+				let butsAdd = document.querySelectorAll('.add-to-cart');    // проюлеммы с обработчиком события
+				console.log(butsAdd);
+				butsAdd.forEach((but) => {
+						but.addEventListener('click', () => this.addToCart(but));                        // this ?
+				})
 		}
+
+		addToCart(but) {
+
+				// console.log(this);
+				// console.log(but);
+				// console.log(	but.getAttribute('id'));
+
+				//добавляем товар в корзину
+				const article = but.getAttribute('id');
+				console.log(article);
+
+				if (this.cart[article] !== undefined) {
+						this.cart[article]++;
+				}
+				else {
+						this.cart[article] = 1;
+				}
+				localStorage.setItem('cart', JSON.stringify(this.cart) );
+				console.log(this.cart);
+				//showMiniCart();                                                              // ???
+		}
+
+		checkCart() {
+				//проверяю наличие корзины в localStorage;
+				if ( localStorage.getItem('cart') != null) {
+						this.cart = JSON.parse (localStorage.getItem('cart'));
+				}
+		};
+
+		showMiniCart() {
+				//показываю содержимое корзины
+				// const out = '';
+				// for (var w in cart){
+				// 		out += w + ' --- '+cart[w]+'<br>';
+				// }
+				// out+='<br><a href="cart.html">Корзина</a>';
+				// $('#mini-cart').html(out);
+		};
+
+
+		renderCartPage() {
+				this.checkCart();
+				// console.log(`this.cart ${this.cart}`);
+				// console.log(`this.products ${this.products}`);                                                  // равны [] !!!!!!
+				this.showCart(this.products)
+		}
+
+		showCart(arrProduct ) { 																					// arrProducts = null
+				let arrProducts = arrProduct || null;
+				const cartPage = document.querySelector('.cart-page');
+				cartPage.innerHTML = '';
+
+				if (Object.keys(this.cart).length === 0) {                        // Object equality check (this.cart === {}) {
+						let viewCart = document.createElement('div');
+						viewCart.innerHTML = `Cart is empty!`;
+						cartPage.appendChild(viewCart);
+
+				} else if(Object.keys(arrProducts).length !== 0){
+						this.drawCart(arrProducts, cartPage, this.cart);
+
+				}else if(Object.keys(arrProducts).length === 0) {
+						fetch('http://localhost:3006/products', {
+								headers: {
+										'Content-Type': 'application/json'
+								}
+						})
+								.then((res) => res.json())
+								.then((products) => {
+
+										this.products = products;
+										this.drawCart(this.products, cartPage, this.cart);
+										// cartPage.classList.remove('hider');
+								})
+
+				}
+
+				cartPage.classList.remove('hider');
+		}
+
+		drawCart(arrProducts, cartPage, cart) {
+
+				for (let key in cart) {
+						let product = {};
+						arrProducts.forEach((item) => {
+
+								if (String(item.id) === String(key)) { //
+										Object.assign(product, item);
+								}
+
+						});
+						let viewCart = document.createElement('div');
+						viewCart.innerHTML = `<button class="delete" data-art="${key}" >x</button>
+						<img src="${product.image.small}"><br>
+						<span class="productName">${product.name}</span>
+						<button class="minus" data-art="${key}">-</button>
+						<span class="productCount">${cart[key]}</span>
+						<button class="plus" data-art="${key}">+</button>
+						<span class="sumProductPrice">${cart[key] * product.price}</span>
+						<br>`;
+
+						cartPage.appendChild(viewCart);
+				}
+
+				let arrButPlus = document.querySelectorAll('.plus');
+				arrButPlus.forEach((item) => {
+
+						item.addEventListener('click', (event) =>{
+
+								this.plusProduct(item);
+						});
+				});
+
+				let arrButMinus = document.querySelectorAll('.minus');
+				arrButMinus.forEach((item) => {
+
+						item.addEventListener('click', (event) =>{
+
+								this.minusProduct(item);
+						});
+				});
+
+
+
+				let arrButDel = document.querySelectorAll('.delete');
+				arrButDel.forEach((item) => {
+
+						item.addEventListener('click', (event) => {
+
+								this.delProduct(item);
+								});
+				});
+
+		}
+
+		plusProduct(item) {
+				let numProduct = item.getAttribute('data-art');
+				this.cart[numProduct]++;
+				this.saveCartToLS();
+				this.renderCartPage();                                 // или лучше перерисовать только счетчик...
+		}
+
+		minusProduct(item) {
+				let numProduct = item.getAttribute('data-art');
+				if (this.cart[numProduct] > 1) {
+						this.cart[numProduct]--;
+				} else {
+						delete this.cart[numProduct];
+				}
+
+				this.saveCartToLS();
+				this.renderCartPage();
+		}
+
+		delProduct(item) {
+				let numProduct = item.getAttribute('data-art');
+
+				delete this.cart[numProduct];
+
+				this.saveCartToLS();
+				this.renderCartPage();
+		}
+
+		saveCartToLS() {
+				localStorage.setItem('cart', JSON.stringify(this.cart));
+		}
+
+
+
+		renderLoginPage() {
+				this.drawLoginPage();
+				this.showLoginPage();
+		}
+
+		drawLoginPage() {
+				let loginPage = document.querySelector('.login-wrap');
+				loginPage.innerHTML = `	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+				<div class="group">
+					<label for="user" class="label">Username</label>
+					<input id="user" type="text" class="input">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="pass" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<input id="check" type="checkbox" class="check" checked>
+					<label for="check"><span class="icon"></span> Keep me Signed in</label>
+				</div>
+				<div class="group">
+					<input type="submit" class="button" value="Sign In">
+				</div>
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<a href="#forgot">Forgot Password?</a>
+				</div>
+			</div>
+			<div class="sign-up-htm">
+				<div class="group">
+					<label for="user" class="label">Username</label>
+					<input id="user" type="text" class="input">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="pass" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Repeat Password</label>
+					<input id="pass" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Email Address</label>
+					<input id="pass" type="text" class="input">
+				</div>
+				<div class="group">
+					<input type="submit" class="button" value="Sign Up">
+				</div>
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<label for="tab-1">Already Member?</a>
+				</div>
+			</div>
+		</div>
+	</div>`;
+		}
+
+		showLoginPage() {
+				let loginPage = document.querySelector('.login-wrap');
+				loginPage.classList.remove('hider');
+		}
+
 }
 
 const model = new App();
