@@ -1,9 +1,13 @@
-import { RouterHistory } from './router-history';
 
 export class Controller {
 
-		constructor (router){
+		constructor (router, prodModel, productsView, cartModel, cartView){                              // or not param. ?
+
 				this.router = router;
+				this.prodModel = prodModel;
+				this.productsView = productsView;
+				this.cartModel = cartModel;
+				this.cartView = cartView;
 
 				this.navigation = document.querySelector('.navigation');
 
@@ -19,6 +23,17 @@ export class Controller {
 				this.weather = document.querySelector('.weather');
 				this.play = document.querySelector('.play');
 				this.login = document.querySelector('.login');
+
+
+				// this.productsView.on('addProdToCat', (id) => {                    // ,без this.??
+				// 		console.log(3.1);
+				// 		this.addToCart(id)
+				// } );                    //     bind ?
+		}
+
+		addToCart(id) {
+				console.log(3);
+				this.cartModel.addProductToCart(id);
 		}
 
 
