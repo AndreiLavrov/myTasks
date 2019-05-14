@@ -1,4 +1,4 @@
-import { EventEmitter } from './evente-emitter.js';
+import { EventEmitter } from './evente-emitter20.js';
 
 export class ViewTable extends EventEmitter {
 		constructor(model, elementsPage) {

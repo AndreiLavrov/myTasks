@@ -55,7 +55,7 @@ class Game {
 						this.rightPressed = true;
 				} else if (e.keyCode === 37) {
 						this.leftPressed = true;
-				} else if (e.keyCode === 80) {
+				} else if (e.keyCode === 80 || e.keyCode === 32) {
 						this.isPause = !this.isPause;
 						(this.isPause === false) ? this.draw() : null;
 				}
