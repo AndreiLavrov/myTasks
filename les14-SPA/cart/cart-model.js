@@ -22,7 +22,7 @@ export class CartModel extends EventEmitter{
 		getProductsInCart(allProducts) {
 				this.checkCart();
 
-				if (allProducts && allProducts.length) {
+				if (allProducts && allProducts.length) {      // change ?
 						this.allProducts = allProducts;
 				}
 

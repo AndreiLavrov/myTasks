@@ -21,10 +21,7 @@ export class SearchService {
     }
 
 		onSearchClick(event) {
-				console.log(event.target.value);
-
 				this.filters = event.target.value;
-				console.log(this.filters);
 				this._observable.next(this.createQueryHash(this.filters));
     }
 
@@ -37,9 +34,11 @@ export class SearchService {
 		}
 
     setInitialState() {
-        if (window.location.pathname.includes('filters/')) {
-            let filter = window.location.pathname.split('filter/')[1].trim();
-            try {
+        if (location.hash.includes('#filters/')) {
+            // let filter = window.location.pathname.split('filter/')[1].trim();
+						let filter = location.hash.split('#filter/')[1].trim();
+
+						try {
                 this.filters = JSON.parse(decodeURI(filter));
             } catch(err) {
                 this.filters = {};

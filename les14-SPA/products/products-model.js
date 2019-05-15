@@ -25,9 +25,9 @@ export class ProductsModel extends EventEmitter{
 										// console.log(5);
 										this.allProducts = products;
 
-										this.emit('addAllProducts', products);            // may be it is not necessary
+										// this.emit('addAllProducts', products);            // may be it is not necessary
 
-										this.emit('showProductsPage', products);
+										this.emit('showProductsPage', this.allProducts);
 										// this.productsView.showProductsPage(this.allProducts);
 
 								})

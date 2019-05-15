@@ -9,9 +9,11 @@ export class RouterHistory {
 				this.mainContentPages = document.querySelectorAll('.main-content .page');
 
 
-				window.addEventListener('popstate', ()=> {
+				// window.addEventListener('popstate', ()=> {
+				window.addEventListener('hashchange', ()=> {
 
-						this.render(decodeURI(window.location.pathname));
+						// this.render(decodeURI(window.location.pathname));
+						this.render(decodeURI(window.location.hash));
 				})
 		}
 
@@ -22,18 +24,16 @@ export class RouterHistory {
 
 		render(url){
 				console.log(url);
-				let temp = url.slice(1, url.length - 1).split('/')[0];                           // -1
+				// let temp = url.slice(1, url.length - 1).split('/')[0];
+				let temp = url.split('/')[0];
 
 
 				[...this.mainContentPages].forEach((page)=> {
-						//page.classList.remove('visible');
 						if(!page.classList.contains('hider')){
-								// console.log(`page.classList.contains`);       //
 								page.classList.add('hider');
 						}
 				});
 				this.routes[temp] ? this.routes[temp]() : this.routes['404']();
-				// console.log('this');
 
 		}
 

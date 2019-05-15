@@ -34,4 +34,6 @@ window.addEventListener('load', () => {
 
    const controller = new AppController(searchService, routerHistory, productsModel, productsView,
        cartModel, cartView, loginModel, loginView, aboutModel, aboutView, newsModel, newsView);
+
+    newsModel.getNews();
 });
