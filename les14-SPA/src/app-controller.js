@@ -22,26 +22,23 @@ export class AppController {
 
 				//this.cart = {};
 				this.router = routerHistory;  //
+
 				this.searchService = searchService;   //
-				this.searchService.subscribe(this.onFilterChange.bind(this));
+				this.searchService.subscribe(this.onFilterChange.bind(this));           /////////////////////////////
 
 				// this.initSingleNewsPage();
 				// this.initNewsPage();
 
 
-				this.navigation = document.querySelector('.navigation');
+				this.navigation = document.querySelector('.navbar');
 
 				this.home = document.querySelector('.home');
 				this.products = document.querySelector('.products');
 				this.cart = document.querySelector('.cart');
-				this.usedThin = document.querySelector('.usedThin');
-				this.blog = document.querySelector('.blog');
-				this.contacts = document.querySelector('.contacts');
 				this.about = document.querySelector('.about');
-				this.service = document.querySelector('.service');
-				this.location = document.querySelector('.location');
-				this.weather = document.querySelector('.weather');
-				this.play = document.querySelector('.play');
+				// this.location = document.querySelector('.location');
+				// this.weather = document.querySelector('.weather');
+				// this.play = document.querySelector('.play');
 				this.login = document.querySelector('.login');
 
 
@@ -59,56 +56,15 @@ export class AppController {
 				cartView.on('minusProductFromCart', (id) => this.minusProductFromCart(id));
 				newsModel.on('getNews', (news) => this.showNewsPage(news));
 
+				loginView.on('checkIsTakenEmail', (userObg) => this.checkIsTakenEmail(userObg));
+				loginView.on('getUserFormSignUp', (userObg) => this.signUp(userObg));
+				loginModel.on('getStatRegistr', (userStatusObj) => this.showUserStatus(userStatusObj));
+				loginView.on('getUserFormSignIn', (userObj) => this.signIn(userObj));
+				loginModel.on('showUserStatusLogin', (userObj) => this.showUserStatusLogin(userObj));
+
 
 		}
 
-
-		// addAllProducts(allProducts) {
-		// 		this.allProducts = allProducts;              //  this.allProducts here
-		// }
-
-		showNewsPage(news) {
-				this.newsView.generateAllNewsHTML(news);
-		}
-
-		renderHomePage () {
-				this.newsView.clearSearchInp();
-				this.newsView.renderNewsPage(this.newsModel.allNews);
-		}
-
-
-
-		showProductsPage(allProducts) {
-				this.cartModel.checkCart();                    // ?????????????
-				this.productsView.showProductsPage(allProducts, this.cartModel.cartObgLS);
-		}
-
-		renderProductsPage () {
-				this.prodModel.getProducts();
-		}
-
-		addProdToCat(id) {
-				this.cartModel.addProductToCat(id);
-		}
-
-		renderCartPage() {
-				this.cartModel.getProductsInCart(this.prodModel.allProducts);
-
-		}
-
-		showProdInCart(all) {
-				this.cartView.showCartPage(all, this.cartModel.cartObgLS);
-		}
-
-		delProductFromCart(id) {
-				this.cartModel.delProduct(id);
-				this.cartModel.getProductsInCart();
-		}
-
-		minusProductFromCart(id) {
-				this.cartModel.minusProduct(id);
-				this.cartModel.getProductsInCart();
-		}
 
 
 		initHeaderButtons() {
@@ -122,26 +78,26 @@ export class AppController {
 										// window.location.pathname = '';
 										window.location.hash = '';
 										break;
-								case this.about:
-										window.history.pushState(null, null, '/#about');
-										break;
 								case this.products:
-										window.history.pushState(null, null, '/#products');
+										// window.history.pushState(null, null, '/products');
+										window.location.hash = '#products';
 										break;
 								case this.cart:
-										window.history.pushState(null, null, '/#cart');
+										window.location.hash = '#cart';
+										break;
+								case this.about:
+										window.location.hash = '#about';
 										break;
 								case this.login:
-										window.history.pushState(null, null, '/#login');
+										window.location.hash = '#login';
 										break;
 								default:
 										break;
 						}
+
 						// this.router.render(decodeURI(window.location.pathname) + '/');
 						// this.router.render(decodeURI(window.location.pathname) );
 						this.router.render(decodeURI(window.location.hash) );
-
-
 				});
 		};
 
@@ -155,10 +111,6 @@ export class AppController {
 				window.dispatchEvent(new HashChangeEvent('hashchange'));
 
 		}
-
-
-
-
 
 
 
@@ -183,9 +135,101 @@ export class AppController {
 
 
 
-		renderFilterResults () {
-				this.newsView.renderFilterResults (this.newsModel.allNews);
+		showUserStatusLogin(userObg) {
+				this.loginView.showUserStatusLogin(userObg);
 		}
+
+		signIn(userObg) {
+				this.loginModel.signIn(userObg);
+		}
+
+
+
+		checkIsTakenEmail(userObg) {
+				this.loginModel.checkIsTakenEmail(userObg);
+		}
+
+
+		showUserStatus(userStatusObj) {
+				this.loginView.showUserStatus(userStatusObj);
+		}
+
+		// addAllProducts(allProducts) {
+		// 		this.allProducts = allProducts;              //  this.allProducts here
+		// }
+		signUp(userObg) {
+				this.loginModel.signUp(userObg);
+		}
+
+
+
+		renderHomePage () {
+				this.newsView.showNewsPage();
+		}
+
+		showNewsPage(news) {
+				this.newsView.generateAllNewsHTML(news);
+		}
+
+
+		renderFilterResults () {
+
+				if (!this.newsModel.allNews) {
+
+						const page = document.querySelector('.all-news');
+						page.classList.remove('hider');
+
+						this.newsView.renderFilterResults (this.searchService, this.newsModel.allNews);
+
+				} else {
+
+						this.newsView.renderFilterResults (this.searchService, this.newsModel.allNews);
+				}
+
+		}
+
+
+
+
+		renderProductsPage () {
+				this.prodModel.getProducts();
+		}
+
+		showProductsPage(allProducts) {
+				this.cartModel.checkCart();                    // ?????????????
+				this.productsView.showProductsPage(allProducts, this.cartModel.cartObgLS);
+		}
+
+
+
+		renderCartPage() {
+				this.cartModel.getProductsInCart(this.prodModel.allProducts);
+
+		}
+
+		addProdToCat(id) {
+				this.cartModel.addProductToCat(id);
+		}
+
+
+		showProdInCart(all) {
+				this.cartView.showCartPage(all, this.cartModel.cartObgLS);
+		}
+
+		delProductFromCart(id) {
+				this.cartModel.delProduct(id);
+				this.cartModel.getProductsInCart();
+		}
+
+		minusProductFromCart(id) {
+				this.cartModel.minusProduct(id);
+				this.cartModel.getProductsInCart();
+		}
+
+
+
+
+
 
 
 
@@ -234,10 +278,12 @@ export class AppController {
 		}
 
 
+
 		renderErrorPage () {
 				const page = document.querySelector('.error');
 				page.classList.remove('hider');
 		}
+
 
 
 		renderAboutPage () {
@@ -245,8 +291,9 @@ export class AppController {
 		}
 
 
+
 		renderLoginPage() {
-				this.loginView.drawLoginPage();
+				this.loginView.showLoginPage();
 		}
 
 

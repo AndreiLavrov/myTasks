@@ -5,7 +5,7 @@ export class NewsView extends EventEmitter{
 		constructor() {
 
 				super();
-				this.searchService = new SearchService();
+				// this.searchService = new SearchService();
 		}
 
 
@@ -32,10 +32,19 @@ export class NewsView extends EventEmitter{
 		}
 
 
+		showNewsPage() {
+				this.clearSearchInp ();
+
+				const page = document.querySelector('.all-news');
+				page.classList.remove('hider');
+		}
+
 
 		clearSearchInp () {
 				document.querySelector('.search').value = '';
 		}
+
+
 
 // фильтруем
 		renderNewsPage (data) {
@@ -43,13 +52,6 @@ export class NewsView extends EventEmitter{
 				const pageList = document.querySelector('.news-list');
 				let allNews = document.querySelectorAll('.all-news .news-list > li');
 				console.log(allNews);
-
-				/*if (!allNews.length > 0) {
-
-						this.generateAllNewsHTML(this.allNews);
-						allNews = document.querySelectorAll('.all-news .news-list > li');
-						console.log(allNews);
-				}*/
 
 				[...allNews].forEach((news) => {
 						news.classList.add('hidden');
@@ -73,7 +75,7 @@ export class NewsView extends EventEmitter{
 
 		}
 
-		renderFilterResults (allNews) {
+		renderFilterResults (searchService, allNews) {
 				// let filter = window.location.pathname.split('filter/')[1].trim();      // window
 				let filter = location.hash.split('#filter/')[1].trim();
 
@@ -85,7 +87,7 @@ export class NewsView extends EventEmitter{
 						return false;
 				}
 
-				const results = this.searchService.renderFilters(allNews, filter);        // major filtration
+				const results = searchService.renderFilters(allNews, filter);        // major filtration
 				this.renderNewsPage(results);
 		}
 

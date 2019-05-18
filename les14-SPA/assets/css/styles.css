@@ -15,58 +15,58 @@ h1, h3{
 	The Header
 ------------------*/
 
-header {
-	position: fixed;
-	top: 0;
-	left:0;
-	right:0;
+/*header {*/
+	/*position: fixed;*/
+	/*top: 0;*/
+	/*left:0;*/
+	/*right:0;*/
 
-	height: 40px;
-	z-index: 100;
+	/*height: 40px;*/
+	/*z-index: 100;*/
 
-	background-color: #282b2c;
-	padding: 20px 40px;
-	color: #fff;
-	box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);
-}
+	/*background-color: #282b2c;*/
+	/*padding: 20px 40px;*/
+	/*color: #fff;*/
+	/*box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);*/
+/*}*/
 
-header a, footer a {
-	color: #ffffff;
-	text-decoration: none;
-	margin: 5px;
-}
+/*header a, footer a {*/
+	/*color: #ffffff;*/
+	/*text-decoration: none;*/
+	/*margin: 5px;*/
+/*}*/
 
 /*header h2.tzine{
 	float: right;
 	opacity:0.9;
 }*/
 
-header a:hover{
-     cursor: pointer;
-}
-/*
-header h2.tzine a{
-	font-size: 13px;
-	text-transform: uppercase;
-	display: inline-block;
-	padding: 12px 18px;
-	border-radius: 3px;
-	background-color: #5895DB;
-}*/
+/*header a:hover{*/
+     /*cursor: pointer;*/
+/*}*/
+/*!**/
+/*header h2.tzine a{*/
+	/*font-size: 13px;*/
+	/*text-transform: uppercase;*/
+	/*display: inline-block;*/
+	/*padding: 12px 18px;*/
+	/*border-radius: 3px;*/
+	/*background-color: #5895DB;*/
+/*}*!*/
 
 
-@media (max-width: 500px){
+/*@media (max-width: 500px){*/
 
-	header {
-		padding: 20px 15px;
-	}
+	/*header {*/
+		/*padding: 20px 15px;*/
+	/*}*/
 
-	header h1{
-		font-size: 24px;
-		margin: 0;
-	}
+	/*header h1{*/
+		/*font-size: 24px;*/
+		/*margin: 0;*/
+	/*}*/
 
-}
+/*}*/
 
 
 
@@ -106,7 +106,7 @@ footer p {
 .main-content{
 	display: block;                     //
 	position: relative;               //
-    height: 70%;                       //
+    /*height: 70%;                       //*/
     width: 100%;
 
 	box-sizing: border-box;
@@ -180,8 +180,7 @@ footer p {
 	text-align: center;
 	/*opacity: 0;*/
 
-    /*?*/
-	font-size: 0;
+
     transition: 1s;
     pointer-events: auto;
 }
@@ -474,7 +473,7 @@ news in HOVER
 	Error Page
 ----------------------------*/
 
-.error{
+.error.page{
 	/*opacity: 0;                                      //*/
 	transition: 0.6s;
 	pointer-events: none;
@@ -778,7 +777,6 @@ button.addProdToCart{
     max-width:525px;
     min-height:670px;
     position:relative;
-    /*background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;*/
     background:url(../images/bg.jpg) no-repeat center;
     box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
@@ -842,6 +840,7 @@ button.addProdToCart{
     width:100%;
     color:#fff;
     display:block;
+
 }
 .login-form .group .input,
 .login-form .group .button{
@@ -922,3 +921,11 @@ button.addProdToCart{
 .foot-lnk{
     text-align:center;
 }
+
+
+
+.errValidForm{
+    color: #dc3545;
+}
+
+

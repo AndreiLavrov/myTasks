@@ -20,23 +20,40 @@
 <body>
 
 	<header>
-		<nav>
-			<div class="navigation" id="myTopnav">
-				<a class="home">ГЛАВНАЯ</a>
-				<a class="products">PRODUCTS</a>
-				<a class="cart">CART</a>
-				<a class="usedThin"></a>
-				<a class="blog"></a>
-				<a class="contacts"></a>
-				<a class="about">О НАС</a>
-				<a class="service"></a>
-				<a class="location"></a>
-				<a class="weather">ПОГОДА</a>
-				<a class="play">ИГРАТЬ</a>
-				<a class="login">ВОЙТИ</a>
-				<a id="menu" href="#" class="icon">&#9776;</a>
-			</div>
-			<div class="authorisation"></div>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <!--<a href="#" class="navbar-brand">-->
+                <!--<img src="" width="30" height="30" alt="logo" >-->
+            <!--</a>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportContent"
+                    aria-controls="navbarSupportContent" aria-expanded="false" aria-label="Toglle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link home">ГЛАВНАЯ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link products">PRODUCTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link cart">CART</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link about">О НАС</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link weather">ПОГОДА</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link play">ИГРАТЬ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link login">ВОЙТИ</a>
+                    </li>
+                </ul>
+
 		</nav>
 	</header>
 
@@ -140,30 +157,20 @@
 	</div>
 
 
-	<footer>
-		<nav>
-            <div class="navigation">
-                <a class="home">ГЛАВНАЯ</a>
-                <a class="usedThin">БАРАХОЛКА</a>
-                <a class="blog">BLOG</a>
-                <a class="contacts">CONTACT</a>
-                <a class="about">ABOUT</a>
-                <a class="service">SERVICES</a>
-                <a class="location">LOCATION</a>
-                <a class="weather">weather</a>
-            </div>
-		</nav>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 
-		<p class="author">Andrei Lavrov 2019</p>
-	</footer>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+
+
 	<script src="dist/bundle.js"></script>
+
+
 </body>
 
 </html>

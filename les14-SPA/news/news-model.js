@@ -4,7 +4,6 @@ export class NewsModel extends EventEmitter{
 		constructor() {
 
 				super();
-
 		}
 
 		getNews() {

@@ -1,6 +1,3 @@
-
-
-
 class ServPosts {
 	constructor (url) {
 		this.instance = new MethodsAJAX();
