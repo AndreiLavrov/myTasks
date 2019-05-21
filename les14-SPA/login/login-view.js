@@ -1,27 +1,26 @@
+import { EventEmitter } from '../src/evente-emitter';
 
- import { EventEmitter } from '../src/evente-emitter';
-
- export class LoginView extends EventEmitter{
-		constructor() {
+export class LoginView extends EventEmitter {
+		constructor () {
 
 				super();
 		}
 
+		showLoginPage () {
 
-		 showLoginPage() {
-				 let loginPage = document.querySelector('.login-wrap');
+				let loginPage = document.querySelector('.login-wrap');
 
-				 if (loginPage.innerHTML === '') {
-						 this.drawLoginPage();
-				 }
+				if (loginPage.innerHTML === '') {
+						this.drawLoginPage();
+				}
 
-				 loginPage.classList.remove('hider');
-		 }
+				loginPage.classList.remove('hider');
+		}
 
+		drawLoginPage () {
 
-		 drawLoginPage() {
-				 let loginPage = document.querySelector('.login-wrap');
-				 loginPage.innerHTML = `	<div class="login-html">
+				let loginPage = document.querySelector('.login-wrap');
+				loginPage.innerHTML = `	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
 		<div class="login-form">
@@ -80,137 +79,140 @@
 		</div>
 	</div>`;
 
-				 const userEmail = document.querySelector('.sign-up-htm .email');
-				 userEmail.addEventListener('blur', () => this.checkIsTakenEmail());
-
-				 const submBut = document.querySelector('.butSignUp');
-				 submBut.addEventListener('click', (e) => {
-						 e.preventDefault();                     // чтобы не менять url........................./////////!!!
-						 this.getUserFormSignUp()
-				 });
-
-				 const butLog = document.querySelector('.sign-in-htm .butLog');
-				 butLog.addEventListener('click', (e) => {
-				 		e.preventDefault();                     // чтобы не менять url........................./////////!!!
-				 		this.getUserFormSignIn(e);
-				 });
-
-				 $('#sign-in-htm')
-						 .validate({
-								 rules: {
-										 userNameLog: { required: true },
-										 emailLog: {
-												 required: true,
-												 email: true
-										 },
-										 passLog: { required: true, minlength: 6, maxlength: 20}
-								 },
-								 messages: {
-										 userNameLog: "Please specify your name",
-										 emailLog: {
-												 required: "Please specify your name email",
-												 email: "Your email address must be in the format of name@domain.com"
-										 }
-
-								 },
-								 errorClass: "errValidForm"
-
-						 });
 
 
-				 $('#sign-up-htm')
-						 .validate({
-								 rules: {
-										 userName: { required: true },
-										 email: {
-												 required: true,
-												 email: true
-										 },
-										 pass: { required: true, minlength: 6, maxlength: 20 },
-										 pass2: { required: true, minlength: 6, maxlength: 20, equalTo: "#pass" }
-								 },
-								 messages: {
-										 userName: "Please specify your name",
-										 email: {
-												 required: "We need your email address to contact you",
-												 email: "Your email address must be in the format of name@domain.com"
-										 }
-								 },
-								 errorClass: "errValidForm"
-						 });
-		 }
+				document.querySelector('#spinerMain').classList.add('hider');
+				loginPage.classList.remove('hider');
+
+
+				const userEmail = document.querySelector('.sign-up-htm .email');
+				userEmail.addEventListener('blur', () => this.checkIsTakenEmail());
+
+				const submBut = document.querySelector('.butSignUp');
+				submBut.addEventListener('click', (e) => {
+						e.preventDefault();                     // чтобы не менялся url........................./////////!!!
+						this.getUserFormSignUp();
+				});
+
+				const butLog = document.querySelector('.sign-in-htm .butLog');
+				butLog.addEventListener('click', (e) => {
+						e.preventDefault();                     // чтобы не менялся url........................./////////!!!
+						this.getUserFormSignIn(e);
+				});
+
+				$('#sign-in-htm')
+						.validate({
+								rules: {
+										userNameLog: { required: true },
+										emailLog: {
+												required: true,
+												email: true
+										},
+										passLog: { required: true, minlength: 6, maxlength: 20 }
+								},
+								messages: {
+										userNameLog: 'Please specify your name',
+										emailLog: {
+												required: 'Please specify your name email',
+												email: 'Your email address must be in the format of name@domain.com'
+										}
+
+								},
+								errorClass: 'errValidForm'
+
+						});
+
+				$('#sign-up-htm')
+						.validate({
+								rules: {
+										userName: { required: true },
+										email: {
+												required: true,
+												email: true
+										},
+										pass: { required: true, minlength: 6, maxlength: 20 },
+										pass2: {
+												required: true,
+												minlength: 6,
+												maxlength: 20,
+												equalTo: '#pass'
+										}
+								},
+								messages: {
+										userName: 'Please specify your name',
+										email: {
+												required: 'We need your email address to contact you',
+												email: 'Your email address must be in the format of name@domain.com'
+										}
+								},
+								errorClass: 'errValidForm'
+						});
+
+		}
+
 // compare:(pass)!==(pass2)
-		 // success: "validClass"
-		 // onsubmit: true
-		 // submitHandler: alert('submitHandler')
+		// success: "validClass"
+		// onsubmit: true
+		// submitHandler: alert('submitHandler')
 
+		getUserFormSignIn () {
+				const userName = document.querySelector('.sign-in-htm .userNameLog').value;
+				const pass = document.querySelector('.sign-in-htm .passLog').value;
+				const email = document.querySelector('.sign-in-htm .emailLog').value;
 
+				let userObg = {
+						userName,
+						pass,
+						email,
+				};
 
-		 getUserFormSignIn() {
-				 const userName = document.querySelector('.sign-in-htm .userNameLog').value;
-				 const pass = document.querySelector('.sign-in-htm .passLog').value;
-				 const email = document.querySelector('.sign-in-htm .emailLog').value;
+				this.emit('getUserFormSignIn', userObg);
+		}
 
-
-				 let userObg = {
-						 userName,
-						 pass,
-						 email,
-				 };
-
-				 this.emit('getUserFormSignIn', userObg);
-		 }
-
-
-		 showUserStatusLogin(userStatusObj) {
+		showUserStatusLogin (userStatusObj) {
 				alert(`Ok. You logged under the email address ${userStatusObj.email}`);
-		 }
+		}
 
+		checkIsTakenEmail () {
 
+				const userObg = this.createUserObg();
 
-		 checkIsTakenEmail() {
+				let showHelpMes = document.querySelector('.showHelpMes');
+				showHelpMes.innerHTML = '';
 
-				 const userObg = this.createUserObg();
+				this.emit('checkIsTakenEmail', userObg);
+		}
 
-				 let showHelpMes = document.querySelector('.showHelpMes');
-				 showHelpMes.innerHTML = '';
+		createUserObg () {
 
-				 this.emit('checkIsTakenEmail', userObg);
-		 }
+				const userName = document.querySelector('.sign-up-htm .userName').value;
+				const pass = document.querySelector('.sign-up-htm .pass').value;
+				const pass2 = document.querySelector('.sign-up-htm .pass2').value;
+				const email = document.querySelector('.sign-up-htm .email').value;
 
+				let userObg = {
+						userName,
+						pass,
+						pass2,
+						email,
+				};
 
-		 createUserObg() {
+				return userObg;
+		}
 
-				 const userName = document.querySelector('.sign-up-htm .userName').value;
-				 const pass = document.querySelector('.sign-up-htm .pass').value;
-				 const pass2 = document.querySelector('.sign-up-htm .pass2').value;
-				 const email = document.querySelector('.sign-up-htm .email').value;
+		getUserFormSignUp () {
 
-				 let userObg = {
-						 userName,
-						 pass,
-						 pass2,
-						 email,
-				 }
+				// jQuery.contains(document.querySelector('.sign-up-htm'), document.querySelector('.error'));
+				const elemError = document.querySelector('.sign-up-htm .input.errValidForm');
 
-				 return userObg;
-		 }
+				if (!elemError) {
+						const userObg = this.createUserObg();
 
+						this.emit('getUserFormSignUp', userObg);
+				}
+		}
 
-		 getUserFormSignUp() {
-
-				 // jQuery.contains(document.querySelector('.sign-up-htm'), document.querySelector('.error'));
-				 const elemError = document.querySelector('.sign-up-htm .input.errValidForm');
-
-				 if (!elemError){
-						 const userObg = this.createUserObg();
-
-						 this.emit('getUserFormSignUp', userObg);
-				 }
-		 }
-
-
-		 showUserStatus(userStatusObj) {
+		showUserStatus (userStatusObj) {
 
 				let showHelpMes = document.querySelector('.showHelpMes');
 
@@ -221,8 +223,6 @@
 
 						alert(`Ok. You registered under the email ${userStatusObj.email}`);
 				}
-		 };
+		};
 
-
-
- }
+}

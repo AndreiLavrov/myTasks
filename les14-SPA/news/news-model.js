@@ -1,36 +1,80 @@
 import { EventEmitter } from '../src/evente-emitter.js';
 
-export class NewsModel extends EventEmitter{
-		constructor() {
+export class NewsModel extends EventEmitter {
+		constructor () {
 
 				super();
 		}
 
-		getNews() {
+
+		getNews () {
+
 				if (this.allNews && this.allNews.length > 0) {
 						this.emit('getNews', this.allNews);
 
-
 				} else {
 
-						fetch('http://localhost:3006/news', {
-								headers: {
-										'Content-Type': 'application/json'
-								}
-						})
-								.then((res) => res.json())
-								.then((allNews) => {
+						this.getNewsByFetch()
+								.then(() => {
 
-										this.allNews = allNews;
-
-										this.emit('getNews', allNews);
-
+										this.emit('getNews', this.allNews);
 								})
+								.catch(err => alert(err));
 				}
-
 		}
 
 
 
+		getNewsByFetch() {
 
+				return fetch('http://localhost:3006/news', {
+						headers: {
+								'Content-Type': 'application/json'
+						}
+				})
+						.then((res) => res.json())
+						.then((allNews) => {
+
+								this.allNews = allNews;
+						})
+		}
+
+
+
+		filterNews (filterStr) {
+
+				if (this.allNews) {
+
+						this.filterNewsIn(filterStr);
+
+				} else {
+						this.getNewsByFetch()
+								.then(() => {
+										this.filterNewsIn(filterStr);
+								})
+								.catch(err => alert(err));
+				}
+		}
+
+
+		filterNewsIn(filterStr) {
+
+				let result = [];
+				this.allNews.forEach((item) => {
+						if (item.description.includes(String(filterStr))
+								|| item.description.toLowerCase()
+										.includes(String(filterStr))) {
+								result.push(item);
+						}
+				});
+
+				this.emit('filterNews', result);
+		}
+
+
+
+		addIdSelectedNews(idSelectedOneNews) {
+
+				this.idSelectedOneNews = idSelectedOneNews;
+		}
 }

@@ -4,63 +4,52 @@ export class CartModel extends EventEmitter{
 		constructor () {
 
 				super();
+
 				this.cartObgLS = {};
 				this.allProducts = [];
 		}
 
 
 		checkCart() {
-				//проверяю наличие корзины в localStorage;
+
 				if ( localStorage.getItem('cart') != null) {
 						this.cartObgLS = JSON.parse (localStorage.getItem('cart'));
-						console.log(this.cartObgLS);
-				}
-		};
-
-		             // может что сделать с рендорингом каждый раз без сохранения(проверка изтенялось ли содержимое карзины)
-
-		getProductsInCart(allProducts) {
-				this.checkCart();
-
-				if (allProducts && allProducts.length) {      // change ?
-						this.allProducts = allProducts;
-				}
-
-				if (this.allProducts.length) {
-						this.emit('showProdInCart', this.allProducts);
-
-				} else {
-						this.getProdInCartAsinc();
 				}
 		}
 
-		getProdInCartAsinc() {
-				fetch('http://localhost:3006/products', {
-						headers: {
-								'Content-Type': 'application/json'
-						}
-				})
-						.then((res) => res.json())
-						.then((products) => {
+		             // может что сделать с рендорингом каждый раз без сохранения(проверка изменялось ли содержимое карзины)
 
-								this.allProducts = products;
-
-								this.emit('showProdInCart', this.allProducts);
-						})
-		}
-
-		// getOnlyProdInCart(allProducts, cart) {                   // не обязательна, можно передавать и массив ВСЕХ продуктов
-		// 		// drawCart(myCart, cartPage, cart) {
-		// 				for (let key in cart) {
-		// 						let product = {};
-		// 						allProducts.forEach((item) => {
-		// 								if (String(item.id) === String(key)) {                          //
-		// 										Object.assign(product, item);
-		// 								}
-		// 						});
-		// 						this.prodInCart.push(product);                                   //
-		// 				}
+		// getProductsInCart(allProducts) {
+		// 		this.checkCart();
+		//
+		// 		if (allProducts && allProducts.length) {      // change ?
+		// 				this.allProducts = allProducts;
+		// 		}
+		//
+		// 		if (this.allProducts.length) {
+		// 				this.emit('showProdInCart', this.allProducts);
+		//
+		// 		} else {
+		// 				this.getProdInCartAsinc();
+		// 		}
 		// }
+		//
+		// getProdInCartAsinc() {
+		// 		fetch('http://localhost:3006/products', {
+		// 				headers: {
+		// 						'Content-Type': 'application/json'
+		// 				}
+		// 		})
+		// 				.then((res) => res.json())
+		// 				.then((products) => {
+		//
+		// 						this.allProducts = products;
+		//
+		// 						this.emit('showProdInCart', this.allProducts);
+		// 				})
+		// }
+
+
 
 		addProductToCat(id) {
 

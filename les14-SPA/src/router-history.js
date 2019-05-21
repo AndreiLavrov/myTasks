@@ -1,9 +1,9 @@
 export class RouterHistory {
 		constructor (){
 				this.routes = {
-						'404': ()=> {
-								console.log('Not found');
-						}
+						// '404': ()=> {
+						// 		console.log('Not found');
+						// }
 				};
 
 				this.mainContentPages = document.querySelectorAll('.main-content .page');
@@ -12,6 +12,7 @@ export class RouterHistory {
 				// window.addEventListener('popstate', ()=> {
 				window.addEventListener('hashchange', ()=> {
 
+						document.querySelector('#spinerMain').classList.remove('hider');    // changed ...
 						// this.render(decodeURI(window.location.pathname));
 						this.render(decodeURI(window.location.hash));
 				})
@@ -23,7 +24,7 @@ export class RouterHistory {
 		}
 
 		render(url){
-				console.log(url);
+				// console.log(url);
 				// let temp = url.slice(1, url.length - 1).split('/')[0];
 				let temp = url.split('/')[0];
 

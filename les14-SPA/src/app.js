@@ -1,4 +1,3 @@
-import  { SearchService } from './search_service.js';
 import { RouterHistory } from './router-history.js';
 import { ProductsView } from '../products/products-view.js';
 import { ProductsModel } from '../products/products-model.js';
@@ -15,7 +14,6 @@ import { NewsView } from '../news/news-view.js';
 
 
 window.addEventListener('load', () => {
-    const searchService = new SearchService();
     const routerHistory = new RouterHistory();
     const productsModel = new ProductsModel();
     const productsView = new ProductsView();
@@ -32,8 +30,8 @@ window.addEventListener('load', () => {
 
 
 
-   const controller = new AppController(searchService, routerHistory, productsModel, productsView,
+   const controller = new AppController( routerHistory, productsModel, productsView,
        cartModel, cartView, loginModel, loginView, aboutModel, aboutView, newsModel, newsView);
 
-    newsModel.getNews();
+    // newsModel.getNews();
 });

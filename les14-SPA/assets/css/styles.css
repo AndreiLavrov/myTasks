@@ -405,7 +405,7 @@ news in HOVER
 /*---------------------------
 	news Page
 ----------------------------*/
-.news{
+.oneNews{
 	 z-index: 100;
  }
 
@@ -513,7 +513,7 @@ hide
 ----------------*/
 
 .hider{
-	display: none;
+	display: none !important;
 }
 
 
@@ -735,11 +735,8 @@ hide
 button add prod to cart
 ------------- */
 
-button.addProdToCart{
-	/*color: #b80c09;*/
+button.viwButAddProdToCart{
 	background-color: #dc3545;
-	/*transition: color;*/
-	/*transition-delay: inherit;*/
 }
 
 
@@ -747,17 +744,16 @@ button.addProdToCart{
 /*----------------
   cart
 ----------------*/
-
-.cart-page div{
-    width: 400px;
-    height: 300px;
-
+.cart-page .prod{
+    max-width: 200px;
+    border: 1px solid #00cc33;
+    margin: 22px;
 }
-.cart-page img{
-    /*width: 200px;*/
-    height: 150px;
-    margin: 50px;
-}
+
+/*.cart-page .prod img{*/
+    /*max-width: 70%;*/
+
+/*}*/
 
 
 

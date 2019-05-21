@@ -20,7 +20,7 @@
 <body>
 
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <!--<a href="#" class="navbar-brand">-->
                 <!--<img src="" width="30" height="30" alt="logo" >-->
             <!--</a>-->
@@ -32,7 +32,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a href="#" class="nav-link home">ГЛАВНАЯ</a>
+                        <a href="#" class="nav-link home">HOME</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link products">PRODUCTS</a>
@@ -41,16 +41,16 @@
                         <a href="#" class="nav-link cart">CART</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link about">О НАС</a>
+                        <a href="#" class="nav-link about">ABOUT</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link weather">ПОГОДА</a>
+                        <a href="#" class="nav-link weather">WEATHER</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link play">ИГРАТЬ</a>
+                        <a href="#" class="nav-link play">PLAY</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link login">ВОЙТИ</a>
+                        <a href="#" class="nav-link login">LOGIN</a>
                     </li>
                 </ul>
 
@@ -60,7 +60,10 @@
 
 	<div class="main-content">
 
-        <div class="all-news page">
+		<!--//  спинер-->
+		<div class="spinner-border text-dark" id="spinerMain"></div>
+
+        <div class="all-news page  hider">
 
 				<div class="search-line">
 					<span>Найти новость:</span>
@@ -71,7 +74,8 @@
 					<script id="news-template" type="x-handlebars-template">​
 					{{#each this}}
 					<li class="liClass" data-index="{{id}}">
-						<a href="#" class="news-photo"><img src="{{image.small}}" height="130" alt="{{name}}"/></a>
+						<!--<img class="img-fluid"-->
+						<a href="#" class="news-photo "><img src="{{image.small}}" height="130" alt="{{name}}"/></a>
 						<ul class="news-description">
 							<li>{{description}}</li>
 						</ul>
@@ -85,51 +89,74 @@
 			</div>
 
 
-        <div class="news page">
-				<!--<div class="overlay"></div>-->
-				<!--<div class="news-container">-->
-					<img src=""/>
+        <div class="oneNews page container hider">
+					<div >
+						<img alt="image news" class="img-fluid" src=""/> </div>
 					<p ></p>
+        </div>
+
+
+		<!--<div class="single-news page">-->
+
+				<!--<div class="overlay"></div>-->
+
+				<!--<div class="preview-large">-->
+					<!--&lt;!&ndash;<h3>Single product view</h3>&ndash;&gt;-->
+					<!--<img src=""/>-->
+					<!--<p></p>-->
+
 					<!--<span class="close">×</span>-->
 				<!--</div>-->
-			</div>
+
+        <!--</div>-->
 
 
-		<div class="single-news page">
-
-				<div class="overlay"></div>
-
-				<div class="preview-large">
-					<!--<h3>Single product view</h3>-->
-					<img src=""/>
-					<p></p>
-
-					<span class="close">×</span>
-				</div>
-
-			</div>
-
-
-		<div class="error page">
+		<div class="error page hider" >
 				<h3>Sorry, something went wrong :(</h3>
-			</div>
+        </div>
 
 
-		<div class="about-container page">
-
+		<div class="about-container page hider">
 			<p class="aboutText1"></p>
-
-
 		</div>
 
 
-		<div class="all-products page">
+		<div class="all-products page hider" >
+            <div class="container">
 
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Modal Heading</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                Modal body..
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 				<ul class="products-list">
 					<script id="products-template" type="x-handlebars-template">​
 					{{#each this}}
-					<li data-index="{{id}}">
-						<a href="#" class="product-photo"><img src="{{image.small}}" height="130" alt="{{name}}"/></a>
+					<li  data-index="{{id}}">
+						<div class="product-photo" data-toggle="modal" data-target="#myModal">
+                            <img src="{{image.small}}" height="130" alt="{{name}}"/>
+                        </div>
 						<h2><a href="#"> {{name}} </a></h2>
 						<ul class="product-description">
 							<li><span>Manufacturer: </span>{{specs.manufacturer}}</li>
@@ -137,7 +164,7 @@
 							<li><span>OS: </span>{{specs.os}}</li>
 							<li><span>Camera: </span>{{specs.camera}} Mpx</li>
 						</ul>
-						<button>Buy Now!</button>
+						<button data-toggle="modal" data-target="#modalIsOutOfStock">Buy Now!</button>
 						<button class="add-to-cart" id="{{id}}">Add to cart!</button>
 						<p class="product-price">{{price}}$</p>
 						<div class="highlight"></div>
@@ -146,24 +173,70 @@
 					</script>
 				</ul>
 
+
+                <!-- The Modal -->
+                <div class="modal fade" id="modalIsOutOfStock">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">sorry...</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                This item is currently out of stock.
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+			<!-- Right-aligned -->
+			<ul class="pagination justify-content-end">
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+			</ul>
 		</div>
 
 
-		<div class="cart-page page"></div>
+		<div class="cart-page page  container row hider" ></div>
 
 
-        <div class="login-wrap page"></div>
+        <div class="login-wrap page hider"></div>
 
 	</div>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
-    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>-->
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
 

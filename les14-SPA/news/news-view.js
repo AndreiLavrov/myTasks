@@ -1,12 +1,16 @@
 import { EventEmitter } from '../src/evente-emitter';
-import { SearchService } from '../src/search_service';
 
 export class NewsView extends EventEmitter{
 		constructor() {
 
 				super();
-				// this.searchService = new SearchService();
+
+				this.search = document.querySelector('.search');
+				this.search.addEventListener('input', this.onSearchClick.bind(this));
+
+				// window.onload = ()=> document.querySelector('#spinerMain').classList.add('hider');
 		}
+
 
 
 		generateAllNewsHTML (data) {
@@ -24,90 +28,141 @@ export class NewsView extends EventEmitter{
 
 								event.preventDefault();
 
-								window.location.hash = `news/${li.dataset.index}`;
-
+								window.location.hash = `oneNews/${li.dataset.index}`;
 								// this.router.render(decodeURI(window.location.pathname));
 						});
 				});
 		}
 
 
+
 		showNewsPage() {
+
 				this.clearSearchInp ();
 
+				let allNews = document.querySelectorAll('.all-news .news-list > li');
+				[...allNews].forEach((news) => {
+						news.classList.remove('hidden');
+				});
+
 				const page = document.querySelector('.all-news');
+				document.querySelector('#spinerMain').classList.add('hider');
 				page.classList.remove('hider');
 		}
 
 
 		clearSearchInp () {
+
 				document.querySelector('.search').value = '';
 		}
 
 
 
-// фильтруем
-		renderNewsPage (data) {
+
+		onSearchClick(event) {
+				this.filters = event.target.value;
+				location.hash = this.createQueryHash(this.filters);
+		}
+
+
+		createQueryHash(filters) {
+				if (filters.length > 0) {
+						return `filter/${JSON.stringify(filters)}`;
+				}
+
+				return '';
+		}
+
+
+
+		getCurrentFilterState() {
+
+				if (location.hash.includes('#filter/')) {
+						// let filter = window.location.pathname.split('filter/')[1].trim();
+						let filter = location.hash.split('#filter/')[1].trim();
+						filter = JSON.parse(decodeURI(filter));
+
+						document.querySelector('.search').value = filter;
+
+						return filter;
+				}
+
+		}
+
+
+
+		/**
+		 * sorting items on page
+		 * @param arrFilterNews -- array of matching items
+		 */
+		showFilterNews(arrFilterNews) {
+
 				const page = document.querySelector('.all-news');
 				const pageList = document.querySelector('.news-list');
 				let allNews = document.querySelectorAll('.all-news .news-list > li');
-				console.log(allNews);
 
 				[...allNews].forEach((news) => {
 						news.classList.add('hidden');
 				});
 
 
-				[...allNews].forEach((news) => {
+				// [...allNews].forEach((news) => {
+				all: for (let n = 0; n < allNews.length; n++) {
 
-						for (let i = 0; i < data.length; i++) {
+								for (let i = 0; i < arrFilterNews.length; i++) {
 
-								if (Number(news.dataset.index) === Number(data[i].id)) {
-										news.classList.remove('hidden');
-										return;
+										if (Number(allNews[n].dataset.index) === Number(arrFilterNews[i].id)) {
+												allNews[n].classList.remove('hidden');
+												break all;
+										}
 								}
-						}
 
-						pageList.appendChild(news);
-				});
+								pageList.appendChild(allNews[n]);
+				}
 
 				page.classList.remove('hider');
 
 		}
 
-		renderFilterResults (searchService, allNews) {
-				// let filter = window.location.pathname.split('filter/')[1].trim();      // window
-				let filter = location.hash.split('#filter/')[1].trim();
 
-				try {
-						filter = JSON.parse(decodeURI(filter));
-				} catch (e) {
-						// window.location.href = '';
-						window.location.hash = '#';
-						return false;
+
+
+
+
+		getCurrentOneNewsState() {
+
+				if (location.hash.includes('#oneNews/')) {
+						// let filter = window.location.pathname.split('filter/')[1].trim();
+						let news = location.hash.split('#oneNews/')[1].trim();
+						news = JSON.parse(decodeURI(news));
+
+						return news;
 				}
 
-				const results = searchService.renderFilters(allNews, filter);        // major filtration
-				this.renderNewsPage(results);
 		}
 
 
-		renderSingleNewsPage (allNews) {
-				const page = document.querySelector('.news');
-				const index = location.hash.split('#news/')[1].trim();
-				// const index = window.location.pathname.split('news/')[1].trim();
+// сделать вызов из контроллера и рисовать html из js !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		showOneNewsPage (allNews, idSelectedOneNews) {
+
+				const page = document.querySelector('.oneNews');
 
 				if (allNews && allNews.length) {
-						allNews.forEach((item) => {
-								if (Number(item.id) === Number(index)) {
+						for (let i = 0; i < allNews.length; i++) {
+								if (Number(allNews[i].id) === Number(idSelectedOneNews)) {
 
 										page.querySelector('img')
-												.setAttribute('src', '/' + item.image.large);
-										page.querySelector('p').innerText = item.content;
+												.setAttribute('src', '/' + allNews[i].image.large);
+										page.querySelector('p').innerText = allNews[i].content;
+
+										page.querySelector('img').onload = ()=> page.classList.remove('hider');
+
+										break;
 								}
-						});
+						}
 				}
 
-				page.classList.remove('hider');
 		}
+
+
 }

@@ -1,8 +1,6 @@
 export class AppController {
-		constructor (searchService, routerHistory, productsModel, productsView, cartModel,
+		constructor (routerHistory, productsModel, productsView, cartModel,
 								 cartView, loginModel, loginView, aboutModel, aboutView, newsModel, newsView) {
-
-				this.allNews = [];
 
 				this.newsModel = newsModel;
 				this.newsView = newsView;
@@ -15,19 +13,11 @@ export class AppController {
 
 				this.prodModel = productsModel;
 				this.productsView = productsView;
-				//this.products = this.prodModel.allPproducts;  // нужен общий массив this.products а не отдельн prodModel и cartModel
 
 				this.cartModel = cartModel;
 				this.cartView = cartView;
 
-				//this.cart = {};
 				this.router = routerHistory;  //
-
-				this.searchService = searchService;   //
-				this.searchService.subscribe(this.onFilterChange.bind(this));           /////////////////////////////
-
-				// this.initSingleNewsPage();
-				// this.initNewsPage();
 
 
 				this.navigation = document.querySelector('.navbar');
@@ -44,17 +34,19 @@ export class AppController {
 
 				this.init();
 
-
 				this.initHeaderButtons();
 
-				// productsModel.on('addAllProducts', (all) => this.addAllProducts(all));
+
+				newsModel.on('getNews', (news) => this.generateAllNewsHTML(news));
+				newsModel.on('filterNews', (news) => this.showFilterNews(news));
+
 				productsModel.on('showProductsPage', (all) => this.showProductsPage(all));
 				productsView.on('addProdToCat', (id) => this.addProdToCat(id));
-				cartModel.on('showProdInCart', (all) => this.showProdInCart(all));
+
+				// cartModel.on('showProdInCart', (all) => this.showProdInCart(all));
 				cartView.on('addProdToCat', (id) => this.addProdToCat(id));
 				cartView.on('delProductFromCart', (id) => this.delProductFromCart(id));
 				cartView.on('minusProductFromCart', (id) => this.minusProductFromCart(id));
-				newsModel.on('getNews', (news) => this.showNewsPage(news));
 
 				loginView.on('checkIsTakenEmail', (userObg) => this.checkIsTakenEmail(userObg));
 				loginView.on('getUserFormSignUp', (userObg) => this.signUp(userObg));
@@ -107,31 +99,130 @@ export class AppController {
 
 				this.initRoutes();
 
-				// this.router.render(decodeURI(window.location.pathname));
-				window.dispatchEvent(new HashChangeEvent('hashchange'));
+				this.newsModel.getNews();
+
+				// // this.router.render(decodeURI(window.location.pathname));
+				// window.dispatchEvent(new HashChangeEvent('hashchange'));              // ?
 
 		}
 
 
 
-		initRoutes () {      // add  rout in list
+		initRoutes () {
 				this.router.addRoute('', this.renderHomePage.bind(this));
 				this.router.addRoute('#filter', this.renderFilterResults.bind(this));
-				//this.router.addRoute('#singleNews', this.renderSingleNewsPage.bind(this));
-				this.router.addRoute('#news', this.renderSingleNewsPage.bind(this));
-				this.router.addRoute('404', this.renderErrorPage.bind(this));
-				this.router.addRoute('#about', this.renderAboutPage.bind(this));
+				this.router.addRoute('#oneNews', this.renderOneNewsPage.bind(this));
 				this.router.addRoute('#products', this.renderProductsPage.bind(this));
-				// this.router.addRoute('products', this.prodClass.renderProductsPage.bind(this)); 270 где теряем, если так вызываем метод класса?
 				this.router.addRoute('#cart', this.renderCartPage.bind(this));
+				this.router.addRoute('#about', this.renderAboutPage.bind(this));
 				this.router.addRoute('#login', this.renderLoginPage.bind(this));
+				this.router.addRoute('404', this.renderErrorPage.bind(this));
+
 		}
 
-		onFilterChange (data) {
-				// window.history.pushState(null, 'Filter page', '/' + data);
+
+
+		generateAllNewsHTML(news) {
+
+				this.newsView.generateAllNewsHTML(news);
+
 				// this.router.render(decodeURI(window.location.pathname));
-				location.hash = data;
+				window.dispatchEvent(new HashChangeEvent('hashchange'));             // ?
+
 		}
+
+
+		renderHomePage () {
+
+				this.newsView.showNewsPage();
+		}
+
+
+
+
+		renderFilterResults () {
+
+				const filter = this.newsView.getCurrentFilterState();
+				this.newsModel.filterNews(filter);
+		}
+
+
+		showFilterNews(arrFilterNews) {
+
+				this.newsView.showFilterNews(arrFilterNews);
+		}
+
+
+
+		renderOneNewsPage () {
+
+				const idSelectedOneNews = this.newsView.getCurrentOneNewsState();
+				this.newsModel.addIdSelectedNews(idSelectedOneNews);
+				this.newsView.showOneNewsPage (this.newsModel.allNews, idSelectedOneNews);
+		}
+
+
+
+
+		renderProductsPage () {
+
+				this.prodModel.getProducts();
+		}
+
+
+		showProductsPage(allProducts) {
+
+				this.cartModel.checkCart();
+				this.productsView.showProductsPage(allProducts, this.cartModel.cartObgLS);
+		}
+
+
+
+
+		renderCartPage() {                                                                 // ?
+
+				this.cartModel.checkCart();
+
+				if (this.prodModel.allProducts.length > 0) {
+						this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cartObgLS);
+
+				} else {
+
+						this.prodModel.getProdPromise()
+								.then((products) => {
+
+										this.cartView.showCartPage(products, this.cartModel.cartObgLS);
+								})
+				}
+
+				// this.cartModel.getProductsInCart(this.prodModel.allProducts);
+		}
+
+
+		// showProdInCart(all) {
+		// 		this.cartView.showCartPage(all, this.cartModel.cartObgLS);
+		// }
+
+
+		addProdToCat(id) {
+				this.cartModel.addProductToCat(id);
+		}
+
+
+		delProductFromCart(id) {
+				this.cartModel.delProduct(id);
+				// this.cartModel.getProductsInCart();
+				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cartObgLS);
+
+		}
+
+
+		minusProductFromCart(id) {
+				this.cartModel.minusProduct(id);
+				// this.cartModel.getProductsInCart();
+				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cartObgLS);
+		}
+
 
 
 
@@ -154,128 +245,19 @@ export class AppController {
 				this.loginView.showUserStatus(userStatusObj);
 		}
 
-		// addAllProducts(allProducts) {
-		// 		this.allProducts = allProducts;              //  this.allProducts here
-		// }
+
 		signUp(userObg) {
 				this.loginModel.signUp(userObg);
 		}
 
 
 
-		renderHomePage () {
-				this.newsView.showNewsPage();
-		}
-
-		showNewsPage(news) {
-				this.newsView.generateAllNewsHTML(news);
-		}
-
-
-		renderFilterResults () {
-
-				if (!this.newsModel.allNews) {
-
-						const page = document.querySelector('.all-news');
-						page.classList.remove('hider');
-
-						this.newsView.renderFilterResults (this.searchService, this.newsModel.allNews);
-
-				} else {
-
-						this.newsView.renderFilterResults (this.searchService, this.newsModel.allNews);
-				}
-
-		}
-
-
-
-
-		renderProductsPage () {
-				this.prodModel.getProducts();
-		}
-
-		showProductsPage(allProducts) {
-				this.cartModel.checkCart();                    // ?????????????
-				this.productsView.showProductsPage(allProducts, this.cartModel.cartObgLS);
-		}
-
-
-
-		renderCartPage() {
-				this.cartModel.getProductsInCart(this.prodModel.allProducts);
-
-		}
-
-		addProdToCat(id) {
-				this.cartModel.addProductToCat(id);
-		}
-
-
-		showProdInCart(all) {
-				this.cartView.showCartPage(all, this.cartModel.cartObgLS);
-		}
-
-		delProductFromCart(id) {
-				this.cartModel.delProduct(id);
-				this.cartModel.getProductsInCart();
-		}
-
-		minusProductFromCart(id) {
-				this.cartModel.minusProduct(id);
-				this.cartModel.getProductsInCart();
-		}
 
 
 
 
 
 
-
-
-
-// для продукта
-		// initSingleNewsPage () {
-		// 		const self = this;
-		// 		this.singleNewsPage = document.querySelector('.single-news');
-		// 		this.singleNewsPage.addEventListener('click', (event) => {
-		// 				if (!self.singleNewsPage.classList.contains('hider')) {                       // ?  hider
-		// 						const clicked = event.target;
-		//
-		// 						if (clicked.classList.contains('close') || clicked.classList.contains('overlay')) {
-		// 								// window.history.pushState(null, null, '/' + self.searchService.getCurrentState());
-		// 								// this.router.render(decodeURI(window.location.pathname));
-		// 								location.hash = self.searchService.getCurrentState();
-		// 						}
-		// 				}
-		// 		});
-		// }
-		//// для продукта
-
-		// renderSingleNewsPage () {
-		// 		const page = document.querySelector('.single-news');
-		// 		const container = document.querySelector('.preview-large');
-		// 		// const index = window.location.pathname.split('singleNews/')[1].trim();   // window
-		// 		const index = location.hash.split('#singleNews/')[1].trim();
-		//
-		// 		if (this.allNews.length) {
-		// 				this.allNews.forEach((item) => {
-		// 						if (Number(item.id) === Number(index)) {
-		// 								container.querySelector('img')
-		// 										.setAttribute('src', '/' + item.image.small);
-		// 								container.querySelector('p').innerText = item.description;
-		// 						}
-		// 				});
-		// 		}
-		//
-		// 		page.classList.remove('hider');
-		// }
-
-
-
-		renderSingleNewsPage () {
-				this.newsView.renderSingleNewsPage (this.newsModel.allNews);
-		}
 
 
 
@@ -295,7 +277,6 @@ export class AppController {
 		renderLoginPage() {
 				this.loginView.showLoginPage();
 		}
-
 
 
 }

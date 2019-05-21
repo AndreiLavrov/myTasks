@@ -92,6 +92,8 @@ export class LoginModel extends EventEmitter{
 				this.emit('showUserStatusLogin', userObj);
 		}
 
+
+
 }
 
 
