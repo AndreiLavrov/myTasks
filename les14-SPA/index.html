@@ -1,249 +1,252 @@
-
 <!DOCTYPE html>
 <html>
 
 <head lang="en">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Single Page App Without A Framework</title>
 
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
-	<link href="assets/css/styles.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
 
-	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <!--<a href="#" class="navbar-brand">-->
-                <!--<img src="" width="30" height="30" alt="logo" >-->
-            <!--</a>-->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportContent"
-                    aria-controls="navbarSupportContent" aria-expanded="false" aria-label="Toglle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <!--<a href="#" class="navbar-brand">-->
+        <!--<img src="" width="30" height="30" alt="logo" >-->
+        <!--</a>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportContent"
+                aria-controls="navbarSupportContent" aria-expanded="false" aria-label="Toglle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-			<div class="collapse navbar-collapse" id="navbarSupportContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a href="#" class="nav-link home">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link products">PRODUCTS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link cart">CART</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link about">ABOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link weather">WEATHER</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link play">PLAY</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link login">LOGIN</a>
-                    </li>
-                </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a href="#" class="nav-link home">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link products">PRODUCTS</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link cart">CART</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link about">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link weather">WEATHER</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link play">PLAY</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link login">LOGIN</a>
+                </li>
+            </ul>
 
-		</nav>
-	</header>
-
-
-	<div class="main-content">
-
-		<!--//  спинер-->
-		<div class="spinner-border text-dark" id="spinerMain"></div>
+    </nav>
+</header>
 
 
+<div class="main-content">
 
-        <div class="all-news page  hider">
-
-				<div class="search-line">
-					<span>Найти новость:</span>
-					<input type="text" class="search" name="search">
-				</div>
-
-				<ul class="news-list" >
-					<script id="news-template" type="x-handlebars-template">​
-					{{#each this}}
-					<li class="liClass" data-index="{{id}}">
-						<!--<img class="img-fluid"-->
-						<a href="#" class="news-photo "><img src="{{image.small}}" height="130" alt="{{name}}"/></a>
-						<ul class="news-description">
-							<li>{{description}}</li>
-						</ul>
-						<button class="read-more" data-index="{{id}}">read more</button>
-					</li>
-					{{/each}}`;
-
-					</script> 
-				</ul>
-
-			</div>
+    <!--//  спинер-->
+    <div class="spinner-border text-dark" id="spinerMain"></div>
 
 
-        <div class="oneNews page container hider">
-					<div >
-						<img alt="image news" class="img-fluid" src=""/> </div>
-					<p ></p>
-        </div>
+    <div class="all-news page container hider">
 
-
-		<!--<div class="single-news page">-->
-
-				<!--<div class="overlay"></div>-->
-
-				<!--<div class="preview-large">-->
-					<!--&lt;!&ndash;<h3>Single product view</h3>&ndash;&gt;-->
-					<!--<img src=""/>-->
-					<!--<p></p>-->
-
-					<!--<span class="close">×</span>-->
-				<!--</div>-->
-
-        <!--</div>-->
-
-
-		<div class="error page hider" >
-				<h3>Sorry, something went wrong :(</h3>
-        </div>
-
-
-		<div class="about-container page hider">
-			<div class="aboutText1"></div>
-		</div>
-
-
-		<div class="all-products page hider" >
-            <div class="container">
-
-                <!-- The Modal -->
-                <div class="modal fade" id="myModal">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Modal Heading</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                Modal body..
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
+        <div class="row">
+            <div class="col-sm-6 search-line">
+                <span>Найти новость:</span>
+                <input type="text" class="search" name="search">
             </div>
-				<ul class="products-list">
-					<script id="products-template" type="x-handlebars-template">​
-					{{#each this}}
-					<li  data-index="{{id}}">
-						<div class="product-photo" data-toggle="modal" data-target="#myModal">
-                            <img src="{{image.small}}" height="130" alt="{{name}}"/>
-                        </div>
-						<h2><a href="#"> {{name}} </a></h2>
-						<ul class="product-description">
-							<li><span>Manufacturer: </span>{{specs.manufacturer}}</li>
-							<li><span>Storage: </span>{{specs.storage}} GB</li>
-							<li><span>OS: </span>{{specs.os}}</li>
-							<li><span>Camera: </span>{{specs.camera}} Mpx</li>
-						</ul>
-						<button data-toggle="modal" data-target="#modalIsOutOfStock">Buy Now!</button>
-						<button class="add-to-cart" id="{{id}}">Add to cart!</button>
-						<p class="product-price">{{price}}$</p>
-						<div class="highlight"></div>
-					</li>
-					{{/each}}
-					</script>
-				</ul>
+        </div>
+
+        <div>
+            <ul class="row justify-content-end news-list">
+                <script id="news-template" type="x-handlebars-template">​
+                {{#each this}}
+                <li class="col-sm-6 col-md-4 liClass" data-index="{{id}}">
+                    <!--<img class="img-fluid"-->
+                    <a href="#" class="news-photo "><img class="img-fluid" src="{{image.small}}" height="130"
+                                                         alt="{{name}}"/></a>
+                    <ul class="news-description">
+                        <li>{{description}}</li>
+                    </ul>
+                    <button class="read-more" data-index="{{id}}">read more</button>
+                </li>
+                {{/each}}`;
+
+                </script>
+            </ul>
+        </div>
+    </div>
 
 
-                <!-- The Modal -->
-                <div class="modal fade" id="modalIsOutOfStock">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
+    <div class="oneNews page container hider">
+        <div>
+            <img alt="image news" class="img-fluid" src=""/></div>
+        <p></p>
+    </div>
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">sorry...</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
 
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                This item is currently out of stock.
-                            </div>
+    <!--<div class="single-news page">-->
 
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
+    <!--<div class="overlay"></div>-->
 
-                        </div>
+    <!--<div class="preview-large">-->
+    <!--&lt;!&ndash;<h3>Single product view</h3>&ndash;&gt;-->
+    <!--<img src=""/>-->
+    <!--<p></p>-->
+
+    <!--<span class="close">×</span>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+
+    <div class="all-products page container hider">
+
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Modal body..
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
                 </div>
+            </div>
+        </div>
 
 
-
-			<!-- Right-aligned -->
-			<ul class="pagination justify-content-end">
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-			</ul>
-		</div>
-
-
-		<div class="cart-page page  container row hider" ></div>
-
-
-        <div class="login-wrap page hider"></div>
-
-	</div>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
-
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>-->
-
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
-    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
-
-	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+        <div>
+            <ul class="row products-list">
+                <script id="products-template" type="x-handlebars-template">​
+                {{#each this}}
+                <li class="col-sm-12" data-index="{{id}}">
+                    <div class="product-photo" data-toggle="modal" data-target="#myModal">
+                        <img class="img-fluid" src="{{image.small}}" height="130" alt="{{name}}"/>
+                    </div>
+                    <h2><a href="#"> {{name}} </a></h2>
+                    <ul class="product-description">
+                        <li><span>Manufacturer: </span>{{specs.manufacturer}}</li>
+                        <li><span>Storage: </span>{{specs.storage}} GB</li>
+                        <li><span>OS: </span>{{specs.os}}</li>
+                        <li><span>Camera: </span>{{specs.camera}} Mpx</li>
+                    </ul>
+                    <button data-toggle="modal" data-target="#modalIsOutOfStock">Buy Now!</button>
+                    <button class="add-to-cart" id="{{id}}">Add to cart!</button>
+                    <p class="product-price">{{price}}$</p>
+                    <div class="highlight"></div>
+                </li>
+                {{/each}}
+                </script>
+            </ul>
+        </div>
 
 
-	<script src="dist/bundle.js"></script>
+        <!-- The Modal -->
+        <div class="modal fade" id="modalIsOutOfStock">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">sorry...</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        This item is currently out of stock.
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Right-aligned -->
+        <ul class="pagination justify-content-end">
+            <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+        </ul>
+    </div>
+
+
+    <div class="cart-page page  container row hider"></div>
+
+
+    <div class="about-container page hider">
+        <div class="aboutText1"></div>
+    </div>
+
+
+    <div class="login-wrap page hider"></div>
+
+
+    <div class="error page hider">
+        <h3>Sorry, something went wrong :(</h3>
+    </div>
+</div>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>-->
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+
+
+<script src="dist/bundle.js"></script>
 
 
 </body>

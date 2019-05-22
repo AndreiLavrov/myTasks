@@ -115,20 +115,6 @@ footer p {
 	padding: 0 40px;
 }
 
-/*.main-content h3{
-	font-size: 28px;
-	color:  #5a96b9;
-	padding-bottom: 20px;
-}*/
-
-@media (max-width: 600px){
-
-	.main-content{
-		margin: 45px auto;
-		padding: 0 25px;
-	}
-
-}
 
 
 /*-------------------
@@ -149,7 +135,7 @@ footer p {
 
 	box-sizing: border-box;
 	padding: 10px;
-	width: 400px;
+	/*width: 400px;*/
 
 	background-color: #FFF;
 	border: 1px solid #DBE3E7;
@@ -176,7 +162,7 @@ footer p {
     /*display: block;*/
 	margin: 80px auto;
 	list-style:none;
-	max-width: 1400px;
+	/*max-width: 1400px;*/
 	text-align: center;
 	/*opacity: 0;*/
 
@@ -185,20 +171,13 @@ footer p {
     pointer-events: auto;
 }
 
-/*.search.visible,*/
-/*.all-news.visible,*/
-/*.all-news.visible h3{*/
-	/*opacity: 1;*/
-	/*transition: 1s;*/
-	/*pointer-events: auto;*/
-/*}*/
 
 .news-list {
     margin-top: 50px;
 }
 .news-list > li{
-	height: 505px;
-	width: 520px;
+	/*height: 505px;*/
+	/*width: 520px;*/
 	box-sizing:border-box;
 	display: inline-block;
 	cursor: pointer;
@@ -228,20 +207,13 @@ footer p {
 /* The product image */
 
 .news-list .news-photo{
-	/*display: block;*/
 	text-align: center;
-	/*box-shadow : 0 0 20px 8px #f3f3f3 inset;*/
-
-	/*width: 510px;*/
-	/*height: 318px;*/
-	/*margin-bottom: 25px;*/
-	/*padding: 0;*/
 	box-sizing: border-box;
 }
 
 .news-list .news-photo img{
-	width: 510px;
-	height: 318px;
+	/*width: 510px;*/
+	/*height: 318px;*/
 }
 
 /* Product description */
@@ -254,8 +226,8 @@ footer p {
 	line-height: 1.45;
 	white-space: normal;
 
-	height: 100px;
-	width: 460px;
+	/*height: 100px;*/
+	/*width: 460px;*/
 
 
 	list-style: none;
@@ -290,40 +262,6 @@ footer p {
 	opacity: 1;
 }
 
-/*---------------------
-news in HOVER
----------------------- */
-
-/*.news-list > li:hover {*/
-    /*!*transition-property: background-color;*!*/
-    /*transition: all;*/
-    /*transition-duration: 1s;*/
-
-    /*height: 605px;*/
-    /*width: 620px;*/
-/*}*/
-
-/*.news-list .news-photo img:hover{*/
-    /*transition: all;*/
-    /*transition-duration: 1s;*/
-
-    /*width: 610px;*/
-    /*height: 418px;*/
-/*}*/
-
-
-/* Making the list responsive */
-
-@media (max-width: 800px){
-
-	.news-list .news-photo{
-		width: 225px;
-	}
-
-	.news-list .news-description{
-		max-width: 225px;
-	}
-}
 
 
 /*---------------------------
@@ -355,29 +293,24 @@ news in HOVER
 	height: 500px;
 	position: fixed;
 	left: 15%;
-	/*margin-left: -375px;*/
 	top: 5%;
-	/*margin-top: -275px;*/
 	pointer-events: none;
 
 	border-radius: 6px;
 	background-color:  #ffffff;
 
 	z-index: 102;
-	/*!*opacity: 0;*!                    // */
 	transition: 0.4s;
 
 }
-/*                                                          решить с анимацией для не visible*/
+
+
 .single-news.visible .preview-large{
 	opacity: 1;
 	transition: 1.4s;
 	pointer-events: auto;
 }
 
-/*.preview-large h3{*/
-	/*margin-top: 20px;*/
-/*}*/
 
 .preview-large img{
 	width: 100%;
@@ -440,7 +373,6 @@ news in HOVER
 	background-color:  #ffffff;
 
 	z-index: 102;
-	/*opacity: 0;                           ///*/
 	transition: 0.4s;
 
 }
@@ -483,9 +415,6 @@ news in HOVER
 	width: 100%;
 }
 
-/*.error.visible{*/
-	/*opacity: 1;*/
-/*}*/
 
 .error h3{
 	font-size: 40px;
@@ -497,7 +426,6 @@ news in HOVER
 ------------------ */
 
 .about-container{
-    /*opacity: 0;                               //*/
     transition: 0.6s;
     color: #000000;
 }
@@ -612,10 +540,6 @@ hide
 	padding: 25px;
 }
 
-/*.products-list > li.hidden{*/
-	/*opacity: 0.2;*/
-	/*pointer-events: none;*/
-/*}*/
 
 /* The product image */
 
@@ -624,7 +548,7 @@ hide
 	text-align: center;
 	box-shadow : 0 0 20px 8px #f3f3f3 inset;
 
-	width: 275px;
+	/*width: 275px;*/
 	margin-bottom: 25px;
 	padding: 20px 0;
 	box-sizing: border-box;
@@ -703,33 +627,7 @@ hide
 	margin: 0;
 }
 
-/*.products-list .highlight{*/
-	/*position: absolute;*/
-	/*top:0;*/
-	/*left:0;*/
-	/*width:100%;*/
-	/*height:100%;*/
-	/*background-color: rgba(0,0,0,0.1);*/
-	/*opacity: 0;*/
-	/*transition: 0.4s;*/
-/*}*/
 
-/*.products-list > li:hover .highlight{*/
-	/*opacity: 1;*/
-/*}*/
-
-/* Making the list responsive */
-
-@media (max-width: 800px){
-
-	.products-list .product-photo{
-		width: 225px;
-	}
-
-	.products-list .product-description{
-		max-width: 225px;
-	}
-}
 
 /*-------------
 button add prod to cart
@@ -744,16 +642,13 @@ button.viwButAddProdToCart{
 /*----------------
   cart
 ----------------*/
+
 .cart-page .prod{
     max-width: 200px;
-    border: 1px solid #00cc33;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
     margin: 22px;
 }
-
-/*.cart-page .prod img{*/
-    /*max-width: 70%;*/
-
-/*}*/
 
 
 
@@ -780,7 +675,7 @@ button.viwButAddProdToCart{
     width:100%;
     height:100%;
     position:absolute;
-    padding:90px 70px 50px 70px;
+    padding:90px 8vw 50px 8vw;
     background:rgba(40,57,101,.9);
 }
 .login-html .sign-in-htm,
@@ -841,7 +736,7 @@ button.viwButAddProdToCart{
 .login-form .group .input,
 .login-form .group .button{
     border:none;
-    padding:15px 20px;
+    padding:15px 10px;
     border-radius:5px;
     background:rgba(255,255,255,.1);
 }
