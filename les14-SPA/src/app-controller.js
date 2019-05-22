@@ -48,6 +48,8 @@ export class AppController {
 				cartView.on('delProductFromCart', (id) => this.delProductFromCart(id));
 				cartView.on('minusProductFromCart', (id) => this.minusProductFromCart(id));
 
+				aboutModel.on('getAboutData', (aboutData) => this.showAboutPage(aboutData));
+
 				loginView.on('checkIsTakenEmail', (userObg) => this.checkIsTakenEmail(userObg));
 				loginView.on('getUserFormSignUp', (userObg) => this.signUp(userObg));
 				loginModel.on('getStatRegistr', (userStatusObj) => this.showUserStatus(userStatusObj));
@@ -226,6 +228,20 @@ export class AppController {
 
 
 
+		renderAboutPage () {
+
+				this.aboutModel.getAboutData();
+				// this.aboutView.showAboutPage();
+		}
+
+
+		showAboutPage(aboutData) {
+				this.aboutView.showAboutPage(aboutData);
+		}
+
+
+
+
 		showUserStatusLogin(userObg) {
 				this.loginView.showUserStatusLogin(userObg);
 		}
@@ -266,11 +282,6 @@ export class AppController {
 				page.classList.remove('hider');
 		}
 
-
-
-		renderAboutPage () {
-				this.aboutView.showAboutPage();
-		}
 
 
 

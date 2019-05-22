@@ -5,35 +5,28 @@ export class AboutView extends EventEmitter{
 		constructor() {
 
 				super();
-				this.aboutData = [];
+				// this.aboutData = [];
 		}
 
 
-		showAboutPage() {
+		showAboutPage(aboutData) {
 
-				const newsList = document.querySelector('.news-list');
 				const page = document.querySelector('.about-container');
 				const aboutText1 = document.querySelector('.aboutText1');
 
-				if (!this.aboutData.length > 0) {
-						fetch('http://localhost:3006/about', {
-								headers: {
-										'Content-Type': 'application/json'
-								}
-						})
-								.then((res) => res.json())
-								.then((about) => {
-										this.aboutData = about;
-										aboutText1.innerHTML = this.aboutData[0].text1;
+				console.log(aboutData);
+				aboutText1.innerHTML = aboutData[0].text1;
+				console.log(aboutText1);
 
-										page.classList.remove('hider');
-								});
+				if (aboutText1.innerHTML === '') {
 
-				} else {
+						aboutText1.innerHTML = aboutData[0].text1;
 
-						aboutText1.innerHTML = this.aboutData[0].text1;
-						page.classList.remove('hider');
 				}
 
+				document.querySelector('#spinerMain').classList.add('hider');
+				page.classList.remove('hider');
 		}
+
+
 }

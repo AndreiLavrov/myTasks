@@ -120,6 +120,7 @@ export class NewsView extends EventEmitter{
 								pageList.appendChild(allNews[n]);
 				}
 
+				document.querySelector('#spinerMain').classList.add('hider');
 				page.classList.remove('hider');
 
 		}
