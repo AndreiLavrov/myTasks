@@ -9,8 +9,6 @@ export class EventEmitter {
     }
 
     emit(event, arg) {
-        // console.log(this._events);
-        // console.log(this);
         (this._events[event] || []).forEach(listener => listener(arg));
     }
 }

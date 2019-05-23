@@ -1,4 +1,4 @@
-import { EventEmitter } from '../src/evente-emitter';
+import { EventEmitter } from '../evente-emitter';
 
 export class ProductsModel extends EventEmitter{
 		constructor() {

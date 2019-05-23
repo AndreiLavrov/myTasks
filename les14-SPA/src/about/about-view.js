@@ -1,5 +1,5 @@
 
-import { EventEmitter } from '../src/evente-emitter';
+import { EventEmitter } from '../evente-emitter';
 
 export class AboutView extends EventEmitter{
 		constructor() {
@@ -24,7 +24,7 @@ export class AboutView extends EventEmitter{
 
 				}
 
-				document.querySelector('#spinerMain').classList.add('hider');
+				document.querySelector('#spinnerMain').classList.add('hider');
 				page.classList.remove('hider');
 		}
 

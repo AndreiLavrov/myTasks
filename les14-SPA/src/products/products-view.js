@@ -1,23 +1,28 @@
-import { EventEmitter } from '../src/evente-emitter';
+import { EventEmitter } from '../evente-emitter';
 
 export class ProductsView extends EventEmitter {
 		constructor () {
-
 				super();
 		}
 
 		showProductsPage (allProducts, cartObgLS) {
-
 				const list = document.querySelector('.products-list');
 				const page = document.querySelector('.all-products');
 
 				if (!this.savedProductsHtml) {
 						this.buildProductsPage(allProducts, list);
+
+						// const imgProduct = document.querySelector('.product-photo img');
+						// imgProduct.onload = () => {
+						// 		document.querySelector('#spinnerMain').classList.add('hider');
+						// 		page.classList.remove('hider');
+						// }
 				}
 
 				this.showButAddedProduct(cartObgLS);                                // correcting bug
 
-				document.querySelector('#spinerMain')
+
+				document.querySelector('#spinnerMain')
 						.classList
 						.add('hider');
 				page.classList.remove('hider');

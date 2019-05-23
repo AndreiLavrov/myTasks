@@ -1,5 +1,5 @@
-import { EventEmitter } from '../src/evente-emitter';
-import { MethodsAJAX } from '../src/methodsAJAX';
+import { EventEmitter } from '../evente-emitter';
+import { MethodsAJAX } from '../methodsAJAX';
 
 export class AboutModel extends EventEmitter{
 		constructor() {

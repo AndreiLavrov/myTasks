@@ -32,36 +32,37 @@
         <div class="collapse navbar-collapse" id="navbarSupportContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a href="#" class="nav-link home">HOME</a>
+                    <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link home">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link products">PRODUCTS</a>
+                    <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link products">PRODUCTS</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link cart">CART</a>
+                    <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link cart">CART</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link about">ABOUT</a>
+                    <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link about">ABOUT</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link weather">WEATHER</a>
+                    <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link weather">WEATHER</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link play">PLAY</a>
+                    <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link play">PLAY</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link login">LOGIN</a>
+                    <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link login">LOGIN</a>
                 </li>
             </ul>
 
+            <!--<span class="nameLogUser">-->
     </nav>
 </header>
 
 
 <div class="main-content">
 
-    <!--//  спинер-->
-    <div class="spinner-border text-dark" id="spinerMain"></div>
+    <!--//  spinner-->
+    <div class="spinner-border text-dark" id="spinnerMain"></div>
 
 
     <div class="all-news page container hider">
@@ -84,10 +85,8 @@
                     <ul class="news-description">
                         <li>{{description}}</li>
                     </ul>
-                    <button class="read-more" data-index="{{id}}">read more</button>
                 </li>
                 {{/each}}`;
-
                 </script>
             </ul>
         </div>
@@ -149,7 +148,7 @@
             <ul class="row products-list">
                 <script id="products-template" type="x-handlebars-template">​
                 {{#each this}}
-                <li class="col-sm-12" data-index="{{id}}">
+                <li class="col-sm-6 col-md-4" data-index="{{id}}">
                     <div class="product-photo" data-toggle="modal" data-target="#myModal">
                         <img class="img-fluid" src="{{image.small}}" height="130" alt="{{name}}"/>
                     </div>
@@ -215,11 +214,74 @@
     </div>
 
 
-    <div class="login-wrap page hider"></div>
+    <div class="login-wrap page container hider">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+            <div class="login-form">
+                <form class="sign-in-htm" id="sign-in-htm">
+                    <div class="group">
+                        <label for="userNameLog" class="label">Username</label>
+                        <input id="userNameLog" type="text" class="input userNameLog" name="userNameLog" autofocus>
+                    </div>
+                    <div class="group">
+                        <label for="emailLog" class="label">Email Address</label>
+                        <input id="emailLog" type="text" class="input emailLog" name="emailLog">
+                    </div>
+                    <div class="group">
+                        <label for="passLog" class="label">Password</label>
+                        <input id="passLog" type="password" class="input passLog" data-type="password" name="passLog">
+                    </div>
+                    <div class="group">
+                        <input id="check" type="checkbox" class="check" checked>
+                        <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button butLog" value="Sign In">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a href="#forgot">Forgot Password?</a>
+                    </div>
+                </form>
+
+                <form class="sign-up-htm" id="sign-up-htm">
+                    <div class="group">
+                        <label for="userName" class="label">Username</label>
+                        <input id="userName" type="text" class="input userName" name="userName">
+                    </div>
+                    <div class="group">
+                        <label for="email" class="label">Email Address</label>
+                        <input id="email" type="text" class="input email" name="email">
+                    </div>
+                    <div class="showHelpMes errValidForm"></div>
+                    <div class="group">
+                        <label for="pass" class="label">Password</label>
+                        <input id="pass" type="password" class="input pass" data-type="password" name="pass">
+                    </div>
+                    <div class="group">
+                        <label for="pass2" class="label">Repeat Password</label>
+                        <input id="pass2" type="password" class="input pass2" data-type="password" name="pass2">
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button butSignUp" value="Sign Up ">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <label for="tab-1">Already Member?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+
+        </div>
+    </div>
 
 
     <div class="error page hider">
-        <h3>Sorry, something went wrong :(</h3>
+        <h3>Sorry, page not found...</h3>
     </div>
 </div>
 

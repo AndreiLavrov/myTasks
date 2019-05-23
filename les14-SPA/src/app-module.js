@@ -1,15 +1,21 @@
-export class AppController {
-		constructor (routerHistory, productsModel, productsView, cartModel,
-								 cartView, loginModel, loginView, aboutModel, aboutView, newsModel, newsView) {
+export class AppModule {
+		constructor (router,
+								 newsModel,
+								 newsView,
+								 productsModel,
+								 productsView,
+								 cartModel,
+								 cartView,
+								 aboutModel,
+								 aboutView,
+								 loginModel,
+								 loginView) {
+
+
+				this.router = router;
 
 				this.newsModel = newsModel;
 				this.newsView = newsView;
-
-				this.aboutModel = aboutModel;
-				this.aboutView = aboutView;
-
-				this.loginModel = loginModel;
-				this.loginView = loginView;
 
 				this.prodModel = productsModel;
 				this.productsView = productsView;
@@ -17,19 +23,11 @@ export class AppController {
 				this.cartModel = cartModel;
 				this.cartView = cartView;
 
-				this.router = routerHistory;  //
+				this.aboutModel = aboutModel;
+				this.aboutView = aboutView;
 
-
-				this.navigation = document.querySelector('.navbar');
-
-				this.home = document.querySelector('.home');
-				this.products = document.querySelector('.products');
-				this.cart = document.querySelector('.cart');
-				this.about = document.querySelector('.about');
-				// this.location = document.querySelector('.location');
-				// this.weather = document.querySelector('.weather');
-				// this.play = document.querySelector('.play');
-				this.login = document.querySelector('.login');
+				this.loginModel = loginModel;
+				this.loginView = loginView;
 
 
 				this.init();
@@ -37,6 +35,7 @@ export class AppController {
 				this.initHeaderButtons();
 
 
+				// this.addGlobalEventHandlers();
 				newsModel.on('getNews', (news) => this.generateAllNewsHTML(news));
 				newsModel.on('filterNews', (news) => this.showFilterNews(news));
 
@@ -51,11 +50,10 @@ export class AppController {
 				aboutModel.on('getAboutData', (aboutData) => this.showAboutPage(aboutData));
 
 				loginView.on('checkIsTakenEmail', (userObg) => this.checkIsTakenEmail(userObg));
+				loginModel.on('getStatRegistr', (userStatusObj) => this.showUserStatusRegistr(userStatusObj));
 				loginView.on('getUserFormSignUp', (userObg) => this.signUp(userObg));
-				loginModel.on('getStatRegistr', (userStatusObj) => this.showUserStatus(userStatusObj));
 				loginView.on('getUserFormSignIn', (userObj) => this.signIn(userObj));
 				loginModel.on('showUserStatusLogin', (userObj) => this.showUserStatusLogin(userObj));
-
 
 		}
 
@@ -63,17 +61,26 @@ export class AppController {
 
 		initHeaderButtons() {
 
+				this.navigation = document.querySelector('.navbar');
+				this.home = document.querySelector('.home');
+				this.products = document.querySelector('.products');
+				this.cart = document.querySelector('.cart');
+				this.about = document.querySelector('.about');
+				// this.location = document.querySelector('.location');
+				// this.weather = document.querySelector('.weather');
+				// this.play = document.querySelector('.play');
+				this.login = document.querySelector('.login');
+
+
 				this.navigation.addEventListener('click', (event) => {
 
 						event.preventDefault();
 
 						switch (event.target) {
 								case this.home:
-										// window.location.pathname = '';
 										window.location.hash = '';
 										break;
 								case this.products:
-										// window.history.pushState(null, null, '/products');
 										window.location.hash = '#products';
 										break;
 								case this.cart:
@@ -89,8 +96,6 @@ export class AppController {
 										break;
 						}
 
-						// this.router.render(decodeURI(window.location.pathname) + '/');
-						// this.router.render(decodeURI(window.location.pathname) );
 						this.router.render(decodeURI(window.location.hash) );
 				});
 		};
@@ -103,7 +108,9 @@ export class AppController {
 
 				this.newsModel.getNews();
 
-				// // this.router.render(decodeURI(window.location.pathname));
+				// здесь будет код  рисующий  имя  пользователя....
+
+
 				// window.dispatchEvent(new HashChangeEvent('hashchange'));              // ?
 
 		}
@@ -111,6 +118,7 @@ export class AppController {
 
 
 		initRoutes () {
+
 				this.router.addRoute('', this.renderHomePage.bind(this));
 				this.router.addRoute('#filter', this.renderFilterResults.bind(this));
 				this.router.addRoute('#oneNews', this.renderOneNewsPage.bind(this));
@@ -124,13 +132,36 @@ export class AppController {
 
 
 
+		// addGlobalEventHandlers() {
+		//
+		// 		newsModel.on('getNews', (news) => this.generateAllNewsHTML(news));
+		// 		newsModel.on('filterNews', (news) => this.showFilterNews(news));
+		//
+		// 		productsModel.on('showProductsPage', (all) => this.showProductsPage(all));
+		// 		productsView.on('addProdToCat', (id) => this.addProdToCat(id));
+		//
+		// 		// cartModel.on('showProdInCart', (all) => this.showProdInCart(all));
+		// 		cartView.on('addProdToCat', (id) => this.addProdToCat(id));
+		// 		cartView.on('delProductFromCart', (id) => this.delProductFromCart(id));
+		// 		cartView.on('minusProductFromCart', (id) => this.minusProductFromCart(id));
+		//
+		// 		aboutModel.on('getAboutData', (aboutData) => this.showAboutPage(aboutData));
+		//
+		// 		loginView.on('checkIsTakenEmail', (userObg) => this.checkIsTakenEmail(userObg));
+		// 		loginView.on('getUserFormSignUp', (userObg) => this.signUp(userObg));
+		// 		loginModel.on('getStatRegistr', (userStatusObj) => this.showUserStatus(userStatusObj));
+		// 		loginView.on('getUserFormSignIn', (userObj) => this.signIn(userObj));
+		// 		loginModel.on('showUserStatusLogin', (userObj) => this.showUserStatusLogin(userObj));
+		//
+		// }
+
+
+
 		generateAllNewsHTML(news) {
 
 				this.newsView.generateAllNewsHTML(news);
 
-				// this.router.render(decodeURI(window.location.pathname));
 				window.dispatchEvent(new HashChangeEvent('hashchange'));             // ?
-
 		}
 
 
@@ -207,11 +238,13 @@ export class AppController {
 
 
 		addProdToCat(id) {
+
 				this.cartModel.addProductToCat(id);
 		}
 
 
 		delProductFromCart(id) {
+
 				this.cartModel.delProduct(id);
 				// this.cartModel.getProductsInCart();
 				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cartObgLS);
@@ -220,6 +253,7 @@ export class AppController {
 
 
 		minusProductFromCart(id) {
+
 				this.cartModel.minusProduct(id);
 				// this.cartModel.getProductsInCart();
 				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cartObgLS);
@@ -241,6 +275,22 @@ export class AppController {
 
 
 
+		renderLoginPage() {
+				this.loginView.showLoginPage();
+		}
+
+		checkIsTakenEmail(userObg) {
+				this.loginModel.checkIsTakenEmail(userObg);
+		}
+
+		showUserStatusRegistr(userStatusObj) {
+				this.loginView.showUserStatusRegistr(userStatusObj);
+		}
+
+		signUp(userObg) {
+				this.loginModel.signUp(userObg);
+		}
+
 
 		showUserStatusLogin(userObg) {
 				this.loginView.showUserStatusLogin(userObg);
@@ -252,44 +302,10 @@ export class AppController {
 
 
 
-		checkIsTakenEmail(userObg) {
-				this.loginModel.checkIsTakenEmail(userObg);
-		}
-
-
-		showUserStatus(userStatusObj) {
-				this.loginView.showUserStatus(userStatusObj);
-		}
-
-
-		signUp(userObg) {
-				this.loginModel.signUp(userObg);
-		}
-
-
-
-
-
-
-
-
-
-
-
-
 		renderErrorPage () {
 				const page = document.querySelector('.error');
 				page.classList.remove('hider');
 		}
-
-
-
-
-		renderLoginPage() {
-				this.loginView.showLoginPage();
-		}
-
-
 }
 
 

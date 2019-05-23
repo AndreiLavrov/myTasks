@@ -1,4 +1,4 @@
-export class RouterHistory {
+export class Router {
 		constructor (){
 				this.routes = {
 						// '404': ()=> {
@@ -12,7 +12,7 @@ export class RouterHistory {
 				// window.addEventListener('popstate', ()=> {
 				window.addEventListener('hashchange', ()=> {
 
-						document.querySelector('#spinerMain').classList.remove('hider');    // changed ...
+						document.querySelector('#spinnerMain').classList.remove('hider');    // changed ...
 						// this.render(decodeURI(window.location.pathname));
 						this.render(decodeURI(window.location.hash));
 				})

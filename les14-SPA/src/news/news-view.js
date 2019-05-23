@@ -1,4 +1,4 @@
-import { EventEmitter } from '../src/evente-emitter';
+import { EventEmitter } from '../evente-emitter';
 
 export class NewsView extends EventEmitter{
 		constructor() {
@@ -8,7 +8,7 @@ export class NewsView extends EventEmitter{
 				this.search = document.querySelector('.search');
 				this.search.addEventListener('input', this.onSearchClick.bind(this));
 
-				// window.onload = ()=> document.querySelector('#spinerMain').classList.add('hider');
+				// window.onload = ()=> document.querySelector('#spinnerMain').classList.add('hider');
 		}
 
 
@@ -46,7 +46,7 @@ export class NewsView extends EventEmitter{
 				});
 
 				const page = document.querySelector('.all-news');
-				document.querySelector('#spinerMain').classList.add('hider');
+				document.querySelector('#spinnerMain').classList.add('hider');
 				page.classList.remove('hider');
 		}
 
@@ -120,7 +120,7 @@ export class NewsView extends EventEmitter{
 								pageList.appendChild(allNews[n]);
 				}
 
-				document.querySelector('#spinerMain').classList.add('hider');
+				document.querySelector('#spinnerMain').classList.add('hider');
 				page.classList.remove('hider');
 
 		}
@@ -156,7 +156,10 @@ export class NewsView extends EventEmitter{
 												.setAttribute('src', '/' + allNews[i].image.large);
 										page.querySelector('p').innerText = allNews[i].content;
 
-										page.querySelector('img').onload = ()=> page.classList.remove('hider');
+										page.querySelector('img').onload = ()=> {
+												document.querySelector('#spinnerMain').classList.add('hider');
+												page.classList.remove('hider');
+										}
 
 										break;
 								}

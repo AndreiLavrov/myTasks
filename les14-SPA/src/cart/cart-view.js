@@ -1,4 +1,4 @@
-import { EventEmitter } from '../src/evente-emitter';
+import { EventEmitter } from '../evente-emitter';
 
 export class CartView extends EventEmitter {
 		constructor () {
@@ -19,7 +19,7 @@ export class CartView extends EventEmitter {
 						viewCart.innerHTML = `Cart is empty!`;
 						cartPage.appendChild(viewCart);
 
-						document.querySelector('#spinerMain').classList.add('hider');
+						document.querySelector('#spinnerMain').classList.add('hider');
 						cartPage.classList.remove('hider');
 
 				} else {
@@ -27,7 +27,7 @@ export class CartView extends EventEmitter {
 						this.drawCart(allProducts, cartObgLS, cartPage);
 
 						document.querySelector('.cart-page img').onload = () => {
-								document.querySelector('#spinerMain').classList.add('hider');
+								document.querySelector('#spinnerMain').classList.add('hider');
 								cartPage.classList.remove('hider');
 						}
 				}

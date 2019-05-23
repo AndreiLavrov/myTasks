@@ -1,20 +1,20 @@
-import { RouterHistory } from './router-history.js';
-import { ProductsView } from '../products/products-view.js';
-import { ProductsModel } from '../products/products-model.js';
-import { CartModel } from '../cart/cart-model.js';
-import { CartView } from '../cart/cart-view.js';
-import { AppController } from './app-controller.js';
-import { LoginModel } from '../login/login-model.js';
-import { LoginView } from '../login/login-view.js';
-import { AboutModel } from '../about/about-model.js';
-import { AboutView } from '../about/about-view.js';
-import { NewsModel } from '../news/news-model.js';
-import { NewsView } from '../news/news-view.js';
+import { Router } from './router.js';
+import { ProductsView } from './products/products-view.js';
+import { ProductsModel } from './products/products-model.js';
+import { CartModel } from './cart/cart-model.js';
+import { CartView } from './cart/cart-view.js';
+import { AppModule } from './app-module.js';
+import { LoginModel } from './login/login-model.js';
+import { LoginView } from './login/login-view.js';
+import { AboutModel } from './about/about-model.js';
+import { AboutView } from './about/about-view.js';
+import { NewsModel } from './news/news-model.js';
+import { NewsView } from './news/news-view.js';
 
 
 
 window.addEventListener('load', () => {
-    const routerHistory = new RouterHistory();
+    const router = new Router();
     const productsModel = new ProductsModel();
     const productsView = new ProductsView();
     const cartModel = new CartModel();
@@ -30,8 +30,17 @@ window.addEventListener('load', () => {
 
 
 
-   const controller = new AppController( routerHistory, productsModel, productsView,
-       cartModel, cartView, loginModel, loginView, aboutModel, aboutView, newsModel, newsView);
+   const controller = new AppModule(
+       router,
+       newsModel,
+       newsView,
+       productsModel,
+       productsView,
+       cartModel,
+       cartView,
+       aboutModel,
+       aboutView,
+       loginModel,
+       loginView);
 
-    // newsModel.getNews();
 });

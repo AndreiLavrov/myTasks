@@ -1,4 +1,4 @@
-import { EventEmitter } from '../src/evente-emitter.js';
+import { EventEmitter } from '../evente-emitter.js';
 
 export class NewsModel extends EventEmitter {
 		constructor () {

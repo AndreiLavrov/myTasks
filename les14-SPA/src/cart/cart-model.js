@@ -1,4 +1,4 @@
-import { EventEmitter } from '../src/evente-emitter';
+import { EventEmitter } from '../evente-emitter';
 
 export class CartModel extends EventEmitter{
 		constructor () {
@@ -11,7 +11,6 @@ export class CartModel extends EventEmitter{
 
 
 		checkCart() {
-
 				if ( localStorage.getItem('cart') != null) {
 						this.cartObgLS = JSON.parse (localStorage.getItem('cart'));
 				}
