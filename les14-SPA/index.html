@@ -22,7 +22,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <!--<a href="#" class="navbar-brand">-->
-        <!--<img src="" width="30" height="30" alt="logo" >-->
+            <!--<img src="......svg" width="30" height="30" alt="logo" >-->
         <!--</a>-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportContent"
                 aria-controls="navbarSupportContent" aria-expanded="false" aria-label="Toglle navigation">
@@ -37,6 +37,7 @@
                 <li class="nav-item">
                     <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link products">PRODUCTS</a>
                 </li>
+                <!--disabled-->
                 <li class="nav-item">
                     <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link cart">CART</a>
                 </li>
@@ -49,12 +50,13 @@
                 <li class="nav-item">
                     <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link play">PLAY</a>
                 </li>
-                <li class="nav-item">
-                    <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link login">LOGIN</a>
-                </li>
+                <!--<li class="nav-item">-->
+                    <!--<a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link login">LOGIN</a>-->
+                <!--</li>-->
             </ul>
-
-            <!--<span class="nameLogUser">-->
+        </div>
+        <a href="#" class="navbar-brand"><span class="nameLogUser"></span></a>
+        <a  data-target="#navbarSupportContent" href="#" class="nav-link login">LOGIN</a>
     </nav>
 </header>
 
@@ -148,7 +150,7 @@
             <ul class="row products-list">
                 <script id="products-template" type="x-handlebars-template">​
                 {{#each this}}
-                <li class="col-sm-6 col-md-4" data-index="{{id}}">
+                <li class="col-sm-3 col-md-2" data-index="{{id}}">
                     <div class="product-photo" data-toggle="modal" data-target="#myModal">
                         <img class="img-fluid" src="{{image.small}}" height="130" alt="{{name}}"/>
                     </div>

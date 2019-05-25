@@ -6,14 +6,11 @@ export class CartView extends EventEmitter {
 				super();
 		}
 
-
-
-		showCartPage (allProducts, cartObgLS) {
-
+		showCartPage(allProducts, cartObgLS) {
 				const cartPage = document.querySelector('.cart-page');
 				cartPage.innerHTML = '';
 
-				if (Object.keys(cartObgLS).length === 0) {
+				if (Object.keys(cartObgLS).length === 0) {																							// cartObgLS == {}
 
 						let viewCart = document.createElement('div');
 						viewCart.innerHTML = `Cart is empty!`;
@@ -23,7 +20,7 @@ export class CartView extends EventEmitter {
 						cartPage.classList.remove('hider');
 
 				} else {
-
+						console.log(allProducts);
 						this.drawCart(allProducts, cartObgLS, cartPage);
 
 						document.querySelector('.cart-page img').onload = () => {
@@ -41,15 +38,17 @@ export class CartView extends EventEmitter {
 		drawCart (allProducts, cartObgLS, cartPage) {
 
 				for (let key in cartObgLS) {
-						let product = {};
 
-						allProducts.forEach((item) => {
+						let product;
+						for(let i = 0; i < allProducts.length; i++) {                                  // можно применить хитрый цикл за один проход...
 
-								if (String(item.id) === String(key)) { //
-										Object.assign(product, item);                 // копирование объекта, нужно ли ??
-								}
-
-						});
+										if (String(allProducts[i].id) === String(key)) { //
+												// Object.assign(product, item);                 // копирование объекта, нужно ли ??
+												product = allProducts[i];
+												break;
+										}
+						}
+						console.log(`product ${product}`);
 
 						let viewCart = document.createElement('div');        // сначала добав в докум ??
 						viewCart.innerHTML = `
@@ -119,6 +118,18 @@ export class CartView extends EventEmitter {
 						});
 				});
 
+		}
+
+
+		/**
+		 * draw in navbar userLogName
+		 * @param userLogName - (string) registered user name
+		 */
+		showUserAccountEmail(userLogName) {
+				if (userLogName) {
+						let name = document.querySelector('.nameLogUser')
+						name.innerHTML = userLogName;
+				}
 		}
 
 }

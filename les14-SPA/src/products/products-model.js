@@ -1,9 +1,11 @@
 import { EventEmitter } from '../evente-emitter';
+import { MethodsAJAX } from '../methodsAJAX';
 
 export class ProductsModel extends EventEmitter{
 		constructor() {
 
 				super();
+				this.methodsAJAX = new MethodsAJAX();
 				this.allProducts = [];
 		}
 
@@ -17,9 +19,7 @@ export class ProductsModel extends EventEmitter{
 				} else {
 
 				this.getProdPromise()
-						.then((products) => {
-
-								this.allProducts = products;
+						.then(() => {
 
 								this.emit('showProductsPage', this.allProducts);
 						})
@@ -28,13 +28,11 @@ export class ProductsModel extends EventEmitter{
 
 
 		getProdPromise() {
-				return fetch('http://localhost:3006/products', {
-						headers: {
-								'Content-Type': 'application/json'
-						}
-				})
-						.then((res) => res.json())
+				return this.methodsAJAX.getDataFetch('http://localhost:3006/products')
+						.then((products) => {
 
+								this.allProducts = products;
+						})
 		}
 
 }

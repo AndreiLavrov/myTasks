@@ -113,8 +113,6 @@ export class LoginView extends EventEmitter {
 		 */
 		getUserFormSignUp () {
 				// jQuery.contains(document.querySelector('.sign-up-htm'), document.querySelector('.error'));
-				const elemErrorSignUp = document.querySelector('.sign-up-htm .input.errValidForm');
-				const elemValidSignUp = document.querySelector('.sign-up-htm .input.valid');
 				const quantityAllInp = document.querySelectorAll('.sign-up-htm .input').length;
 				const quantityAllValidInp = document.querySelectorAll('.sign-up-htm .input.valid').length;
 
@@ -150,17 +148,10 @@ export class LoginView extends EventEmitter {
 		 *
 		 * @param userStatusObj -- obj-user with name or 'false'
 		 */
-		showUserStatusRegistr (userStatusObj) {
+		emailIsTaken (userStatusObj) {
 				let showHelpMes = document.querySelector('.showHelpMes');
 
-				if (userStatusObj.email === false) {
-						showHelpMes.innerHTML = 'Sorry... This email is taken!!!';
-
-				} else {
-						alert(`Ok. You registered under the email ${userStatusObj.email}`);               // change !!!
-
-						// window.location.hash = '#cart';
-				}
+				showHelpMes.innerHTML = 'Sorry... This email is taken!!!';
 		};
 
 
@@ -194,13 +185,15 @@ export class LoginView extends EventEmitter {
 		}
 
 
-		showUserStatusLogin (userStatusObj) {
+		// showUserStatusLogin (userStatusObj) {
+		//
+		// 		alert(`Ok. You logged under the email address ${userStatusObj.email}`);    //
+		// 		// рсуем в навбаре имя ..
+		//
+		// 		window.location.hash = '#cart';
+		// 		// this.drawUserLogName(userStatusObj.userName);
+		// }
 
-				alert(`Ok. You logged under the email address ${userStatusObj.email}`);    //
-				// рсуем в навбаре имя ..
-
-				window.location.hash = '#cart';
-		}
 
 
 }

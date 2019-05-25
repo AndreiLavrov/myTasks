@@ -42,7 +42,7 @@ export class AppModule {
 				productsModel.on('showProductsPage', (all) => this.showProductsPage(all));
 				productsView.on('addProdToCat', (id) => this.addProdToCat(id));
 
-				// cartModel.on('showProdInCart', (all) => this.showProdInCart(all));
+				// cartModel.on('creatAccountUserObg', (obj) => this.showAccount(obj));
 				cartView.on('addProdToCat', (id) => this.addProdToCat(id));
 				cartView.on('delProductFromCart', (id) => this.delProductFromCart(id));
 				cartView.on('minusProductFromCart', (id) => this.minusProductFromCart(id));
@@ -50,10 +50,11 @@ export class AppModule {
 				aboutModel.on('getAboutData', (aboutData) => this.showAboutPage(aboutData));
 
 				loginView.on('checkIsTakenEmail', (userObg) => this.checkIsTakenEmail(userObg));
-				loginModel.on('getStatRegistr', (userStatusObj) => this.showUserStatusRegistr(userStatusObj));
+				loginModel.on('emailIsTaken', (userStatusObj) => this.emailIsTaken(userStatusObj));
 				loginView.on('getUserFormSignUp', (userObg) => this.signUp(userObg));
 				loginView.on('getUserFormSignIn', (userObj) => this.signIn(userObj));
-				loginModel.on('showUserStatusLogin', (userObj) => this.showUserStatusLogin(userObj));
+				loginModel.on('userIsAuthorized', (userObj) => this.userIsAuthorized(userObj));
+				// loginModel.on('addSSUserLogEmail', (userObj) => this.showUserStatusLogin(userObj));
 
 		}
 
@@ -106,9 +107,11 @@ export class AppModule {
 
 				this.initRoutes();
 
-				this.newsModel.getNews();
+				this.newsModel.getNews();                                                 // нужно ли каждый раз получать новости....? при обнновлении..
 
 				// здесь будет код  рисующий  имя  пользователя....
+				// this.loginView.drawUserLogName(this.loginModel.userLogName);
+				this.showUserAccountEmail();
 
 
 				// window.dispatchEvent(new HashChangeEvent('hashchange'));              // ?
@@ -204,61 +207,49 @@ export class AppModule {
 
 
 		showProductsPage(allProducts) {
-
-				this.cartModel.checkCart();
-				this.productsView.showProductsPage(allProducts, this.cartModel.cartObgLS);
+				// this.cartModel.checkUserLogEmail();                                                // fix not need
+				this.productsView.showProductsPage(allProducts, this.cartModel.accountUserObg.cartObgLS);
 		}
 
 
 
 
-		renderCartPage() {                                                                 // ?
-
-				this.cartModel.checkCart();
+		renderCartPage() {                                                                 // ? проверить , возможно лишнее и так вызыв в констр
 
 				if (this.prodModel.allProducts.length > 0) {
-						this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cartObgLS);
+						this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.accountUserObg.cartObgLS);
 
 				} else {
 
 						this.prodModel.getProdPromise()
 								.then((products) => {
 
-										this.cartView.showCartPage(products, this.cartModel.cartObgLS);
+										this.cartView.showCartPage(products, this.cartModel.accountUserObg.cartObgLS);
 								})
+								.catch(e => alert(`.catch-showAccount ${e}`))                //
 				}
-
-				// this.cartModel.getProductsInCart(this.prodModel.allProducts);
 		}
 
 
-		// showProdInCart(all) {
-		// 		this.cartView.showCartPage(all, this.cartModel.cartObgLS);
-		// }
 
 
 		addProdToCat(id) {
-
 				this.cartModel.addProductToCat(id);
 		}
 
+		minusProductFromCart(id) {
+				this.cartModel.minusProduct(id);
+				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.accountUserObg.cartObgLS);
+		}
 
 		delProductFromCart(id) {
-
 				this.cartModel.delProduct(id);
-				// this.cartModel.getProductsInCart();
-				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cartObgLS);
-
+				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.accountUserObg.cartObgLS);
 		}
 
-
-		minusProductFromCart(id) {
-
-				this.cartModel.minusProduct(id);
-				// this.cartModel.getProductsInCart();
-				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cartObgLS);
+		showUserAccountEmail() {
+				this.cartView.showUserAccountEmail(this.cartModel.userLogEmail);
 		}
-
 
 
 
@@ -283,8 +274,8 @@ export class AppModule {
 				this.loginModel.checkIsTakenEmail(userObg);
 		}
 
-		showUserStatusRegistr(userStatusObj) {
-				this.loginView.showUserStatusRegistr(userStatusObj);
+		emailIsTaken(userStatusObj) {
+				this.loginView.emailIsTaken(userStatusObj);
 		}
 
 		signUp(userObg) {
@@ -292,13 +283,16 @@ export class AppModule {
 		}
 
 
-		showUserStatusLogin(userObg) {
-				this.loginView.showUserStatusLogin(userObg);
+		userIsAuthorized(userObg) {
+				this.cartView.showUserAccountEmail(userObg.email);
+				this.cartModel.addAccountUserObg(userObg);																				// || window.location.hash = '#cart';
+				window.location.hash = '#cart';
 		}
 
 		signIn(userObg) {
 				this.loginModel.signIn(userObg);
 		}
+
 
 
 

@@ -19,7 +19,7 @@ export class ProductsView extends EventEmitter {
 						// }
 				}
 
-				this.showButAddedProduct(cartObgLS);                                // correcting bug
+				// this.showButAddedProduct(cartObgLS);                                // correcting bug
 
 
 				document.querySelector('#spinnerMain')
@@ -53,6 +53,9 @@ export class ProductsView extends EventEmitter {
 		}
 
 		showButAddedProduct (cartObgLS) {                                                 // bug!!!
+				if (cartObgLS == {}) {
+						return;
+				}
 				console.log(cartObgLS);
 				let butsAdd = document.querySelectorAll('.add-to-cart');
 

@@ -6,20 +6,20 @@ export class LoginModel extends EventEmitter{
 				super();
 
 				this.methodsAJAX = new MethodsAJAX();
-				this.userLogName = false;
+				this.userLogEmail = false;
 				// localStorage.setItem('userLogName', JSON.stringify(this.userLogName) );
-				this.checkUserLogName();
+				// this.checkUserLogName();
 		}
 
 
-		/**
-		 * check is user registered
-		 */
-		checkUserLogName() {
-				if ( localStorage.getItem('userLogName') != null) {
-						this.userLogName = JSON.parse (localStorage.getItem('userLogName'));
-				}
-		}
+		// /**
+		//  * check is user registered
+		//  */
+		// checkUserLogName() {
+		// 		if ( localStorage.getItem('userLogName') != null) {
+		// 				this.userLogName = JSON.parse (localStorage.getItem('userLogName'));
+		// 		}
+		// }
 
 
 		/**
@@ -36,7 +36,7 @@ export class LoginModel extends EventEmitter{
 
 										if (allUserObj[i].email === userObj.email) {
 												userObj.email = false;
-												this.emit('getStatRegistr', userObj);
+												this.emit('emailIsTaken', userObj);
 												break;
 										}
 								}
@@ -66,16 +66,11 @@ export class LoginModel extends EventEmitter{
 		 * @param userObj -- this is user data from the form
 		 */
 		addNewUser(userObj) {
-				if (userObj.pass === '' || userObj.pass2 === '' || userObj.userName === '') {
-						return;
-				}
-
 				this.methodsAJAX.sendData('http://localhost:3006/login', userObj)
 						.then(() => {
 
-								this.userLogName = userObj.userName;
-								this.emit('getStatRegistr', userObj);
-								this.showUserLogName(userObj);
+								// this.emit('addedNewUser', userObj);
+								this.userIsAuthorized(userObj);
 
 								alert('addNewUser');
 
@@ -97,7 +92,7 @@ export class LoginModel extends EventEmitter{
 												&& allUserObj[i].pass === userObj.pass
 												&& allUserObj[i].email === userObj.email) {
 
-												this.showUserLogName(userObj);
+												this.userIsAuthorized(allUserObj[i]);
 												break;
 										}
 								}
@@ -110,11 +105,11 @@ export class LoginModel extends EventEmitter{
 		 * add the user to the Local Storage.
 		 * @param userObj
 		 */
-		showUserLogName(userObj) {
-				this.userLogName = userObj.userName;
-				localStorage.setItem('userLogName', JSON.stringify(this.userLogName) );
+		userIsAuthorized(userObj) {
+				this.userLogEmail = userObj.email;
+				localStorage.setItem('userLogEmail', JSON.stringify(userObj.email) );
 
-				this.emit('showUserStatusLogin', userObj);
+				this.emit('userIsAuthorized', userObj);
 		}
 
 

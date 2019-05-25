@@ -6,6 +6,25 @@
       "pass": "1111",
       "pass2": "1111",
       "email": "lavrovvandrei@gmail.com"
+    },
+    {
+      "userName": "q",
+      "pass": "111111",
+      "pass2": "111111",
+      "email": "q@q",
+      "id": 2
+    },
+    {
+      "userName": "w",
+      "pass": "111111",
+      "pass2": "111111",
+      "email": "w@w",
+      "id": 3,
+      "cartObgLS": {
+        "4": 1,
+        "6": 1,
+        "7": 3
+      }
     }
   ],
   "about": [
