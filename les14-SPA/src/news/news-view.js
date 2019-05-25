@@ -1,44 +1,31 @@
 import { EventEmitter } from '../evente-emitter';
 
-export class NewsView extends EventEmitter{
-		constructor() {
-
+export class NewsView extends EventEmitter {
+		constructor () {
 				super();
-
 				this.search = document.querySelector('.search');
 				this.search.addEventListener('input', this.onSearchClick.bind(this));
-
-				// window.onload = ()=> document.querySelector('#spinnerMain').classList.add('hider');
 		}
 
-
-
 		generateAllNewsHTML (data) {
-
 				const list = document.querySelector('.all-news .news-list');
 				const theTemplateScript = document.getElementById('news-template').innerHTML;
-
 
 				const theTemplate = Handlebars.compile(theTemplateScript);
 				list.innerHTML = theTemplate(data);
 
-				list.querySelectorAll('.liClass').forEach((li) => {
+				list.querySelectorAll('.liClass')
+						.forEach((li) => {
 
-						li.addEventListener('click', (event) => {
-
-								event.preventDefault();
-
-								window.location.hash = `oneNews/${li.dataset.index}`;
-								// this.router.render(decodeURI(window.location.pathname));
+								li.addEventListener('click', (event) => {
+										event.preventDefault();
+										window.location.hash = `oneNews/${li.dataset.index}`;
+								});
 						});
-				});
 		}
 
-
-
-		showNewsPage() {
-
-				this.clearSearchInp ();
+		showNewsPage () {
+				this.clearSearchInp();
 
 				let allNews = document.querySelectorAll('.all-news .news-list > li');
 				[...allNews].forEach((news) => {
@@ -46,26 +33,22 @@ export class NewsView extends EventEmitter{
 				});
 
 				const page = document.querySelector('.all-news');
-				document.querySelector('#spinnerMain').classList.add('hider');
+				document.querySelector('#spinnerMain')
+						.classList
+						.add('hider');
 				page.classList.remove('hider');
 		}
 
-
 		clearSearchInp () {
-
 				document.querySelector('.search').value = '';
 		}
 
-
-
-
-		onSearchClick(event) {
+		onSearchClick (event) {
 				this.filters = event.target.value;
 				location.hash = this.createQueryHash(this.filters);
 		}
 
-
-		createQueryHash(filters) {
+		createQueryHash (filters) {
 				if (filters.length > 0) {
 						return `filter/${JSON.stringify(filters)}`;
 				}
@@ -73,30 +56,22 @@ export class NewsView extends EventEmitter{
 				return '';
 		}
 
-
-
-		getCurrentFilterState() {
-
+		getCurrentFilterState () {
 				if (location.hash.includes('#filter/')) {
-						// let filter = window.location.pathname.split('filter/')[1].trim();
 						let filter = location.hash.split('#filter/')[1].trim();
 						filter = JSON.parse(decodeURI(filter));
 
 						document.querySelector('.search').value = filter;
-
 						return filter;
 				}
-
 		}
 
-
-
 		/**
-		 * sorting items on page
+		 * leave visible and first only selected items.
+		 * I Use break to avoid sorting out unnecessary options.
 		 * @param arrFilterNews -- array of matching items
 		 */
-		showFilterNews(arrFilterNews) {
-
+		showFilterNews (arrFilterNews) {
 				const page = document.querySelector('.all-news');
 				const pageList = document.querySelector('.news-list');
 				let allNews = document.querySelectorAll('.all-news .news-list > li');
@@ -105,32 +80,24 @@ export class NewsView extends EventEmitter{
 						news.classList.add('hidden');
 				});
 
+				[...arrFilterNews].forEach((filterNews) => {
 
-				// [...allNews].forEach((news) => {
-				all: for (let n = 0; n < allNews.length; n++) {
-
-								for (let i = 0; i < arrFilterNews.length; i++) {
-
-										if (Number(allNews[n].dataset.index) === Number(arrFilterNews[i].id)) {
-												allNews[n].classList.remove('hidden');
-												break all;
-										}
+						for (let i = 0; i < allNews.length; i++) {
+								if (Number(allNews[i].dataset.index) === Number(filterNews.id)) {
+										allNews[i].classList.remove('hidden');
+										pageList.insertBefore(allNews[i], pageList.firstChild);
+										break;
 								}
+						}
+				});
 
-								pageList.appendChild(allNews[n]);
-				}
-
-				document.querySelector('#spinnerMain').classList.add('hider');
+				document.querySelector('#spinnerMain')
+						.classList
+						.add('hider');
 				page.classList.remove('hider');
-
 		}
 
-
-
-
-
-
-		getCurrentOneNewsState() {
+		getCurrentOneNewsState () {
 
 				if (location.hash.includes('#oneNews/')) {
 						// let filter = window.location.pathname.split('filter/')[1].trim();
@@ -142,31 +109,31 @@ export class NewsView extends EventEmitter{
 
 		}
 
-
-// сделать вызов из контроллера и рисовать html из js !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		/**
+		 * I Use break to avoid sorting out unnecessary options.
+		 * @param allNews - all News
+		 * @param idSelectedOneNews - ID number of the selected news
+		 */
 		showOneNewsPage (allNews, idSelectedOneNews) {
-
 				const page = document.querySelector('.oneNews');
 
-				if (allNews && allNews.length) {
-						for (let i = 0; i < allNews.length; i++) {
-								if (Number(allNews[i].id) === Number(idSelectedOneNews)) {
+				for (let i = 0; i < allNews.length; i++) {
+						if (Number(allNews[i].id) === Number(idSelectedOneNews)) {
 
-										page.querySelector('img')
-												.setAttribute('src', '/' + allNews[i].image.large);
-										page.querySelector('p').innerText = allNews[i].content;
+								page.querySelector('img')
+										.setAttribute('src', '/' + allNews[i].image.large);
+								page.querySelector('p').innerText = allNews[i].content;
 
-										page.querySelector('img').onload = ()=> {
-												document.querySelector('#spinnerMain').classList.add('hider');
-												page.classList.remove('hider');
-										}
+								page.querySelector('img').onload = () => {
+										document.querySelector('#spinnerMain')
+												.classList
+												.add('hider');
+										page.classList.remove('hider');
+								};
 
-										break;
-								}
+								break;
 						}
 				}
-
 		}
-
 
 }

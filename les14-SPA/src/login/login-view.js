@@ -177,7 +177,7 @@ export class LoginView extends EventEmitter {
 				};
 
 				if (quantityAllInp === quantityAllValidInp) {
-						alert('!elemErrorSignIn && elemValidSignIn');
+						// alert('!elemErrorSignIn && elemValidSignIn');
 
 						this.emit('getUserFormSignIn', userObg);
 				}

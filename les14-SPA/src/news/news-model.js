@@ -1,19 +1,18 @@
 import { EventEmitter } from '../evente-emitter.js';
+import { MethodsAJAX } from '../methodsAJAX';
 
 export class NewsModel extends EventEmitter {
 		constructor () {
-
 				super();
+				this.methodsAJAX = new MethodsAJAX();
+				this.allNews = [];
 		}
 
-
 		getNews () {
-
-				if (this.allNews && this.allNews.length > 0) {
+				if (this.allNews.length > 0) {
 						this.emit('getNews', this.allNews);
 
 				} else {
-
 						this.getNewsByFetch()
 								.then(() => {
 
@@ -23,28 +22,17 @@ export class NewsModel extends EventEmitter {
 				}
 		}
 
-
-
-		getNewsByFetch() {
-
-				return fetch('http://localhost:3006/news', {
-						headers: {
-								'Content-Type': 'application/json'
-						}
-				})
-						.then((res) => res.json())
+		getNewsByFetch () {
+				return this.methodsAJAX.getDataFetch('http://localhost:3006/news')
 						.then((allNews) => {
 
 								this.allNews = allNews;
 						})
+						.catch(err => alert(err));
 		}
 
-
-
 		filterNews (filterStr) {
-
-				if (this.allNews) {
-
+				if (this.allNews.length > 0) {
 						this.filterNewsIn(filterStr);
 
 				} else {
@@ -56,9 +44,7 @@ export class NewsModel extends EventEmitter {
 				}
 		}
 
-
-		filterNewsIn(filterStr) {
-
+		filterNewsIn (filterStr) {
 				let result = [];
 				this.allNews.forEach((item) => {
 						if (item.description.includes(String(filterStr))
@@ -71,10 +57,7 @@ export class NewsModel extends EventEmitter {
 				this.emit('filterNews', result);
 		}
 
-
-
-		addIdSelectedNews(idSelectedOneNews) {
-
+		addIdSelectedNews (idSelectedOneNews) {
 				this.idSelectedOneNews = idSelectedOneNews;
 		}
 }

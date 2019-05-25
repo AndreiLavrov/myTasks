@@ -11,16 +11,7 @@ export class ProductsView extends EventEmitter {
 
 				if (!this.savedProductsHtml) {
 						this.buildProductsPage(allProducts, list);
-
-						// const imgProduct = document.querySelector('.product-photo img');
-						// imgProduct.onload = () => {
-						// 		document.querySelector('#spinnerMain').classList.add('hider');
-						// 		page.classList.remove('hider');
-						// }
 				}
-
-				// this.showButAddedProduct(cartObgLS);                                // correcting bug
-
 
 				document.querySelector('#spinnerMain')
 						.classList
@@ -29,58 +20,33 @@ export class ProductsView extends EventEmitter {
 		}
 
 		buildProductsPage (allProducts, list) {
-
 				const theTemplateScript = document.getElementById('products-template').innerHTML;
 				const theTemplate = Handlebars.compile(theTemplateScript);
+
 				this.savedProductsHtml = theTemplate(allProducts);
 				list.innerHTML = this.savedProductsHtml;
 
 				let buttonsAdd = document.querySelectorAll('.add-to-cart');
 				buttonsAdd.forEach((but) => {
 
-						but.addEventListener('click', (e) => {    // может передаем об.события а не экземпляр продукта??
+						but.addEventListener('click', (e) => {
 
 								let idElem = e.target.getAttribute('id');
 								this.emit('addProdToCat', idElem);
 
-								console.log(e.target);
-
-								e.target.innerText = 'Added to cart';
-								e.target.classList.add('viwButAddProdToCart');
-
+								this.showButtAddedProduct(e.target);
 						});
 				});
 		}
 
-		showButAddedProduct (cartObgLS) {                                                 // bug!!!
-				if (cartObgLS == {}) {
-						return;
-				}
-				console.log(cartObgLS);
-				let butsAdd = document.querySelectorAll('.add-to-cart');
-
-				console.log(butsAdd);                          // почему выводит элементы с уже добавленным классом ??
-				for (let key in cartObgLS) {
-						// console.log(key);
-
-						inner: for (let i = 0; i < butsAdd.length; i++) {
-
-								butsAdd[i].classList.remove('viwButAddProdToCart');
-								butsAdd[i].innerText = 'Add to cart';
-
-								let id = butsAdd[i].getAttribute('id');
-
-								if (String(id) === String(key)) { //  если за коментить, то елементы будут без viwButAddProdToCart уже сразу
-
-										console.log(butsAdd[i]);
-										butsAdd[i].classList.add('viwButAddProdToCart');              // is it correct ???
-										butsAdd[i].innerText = 'Added to cart';
-										console.log(butsAdd[i]);                                       //  What the f*** ??
-										break inner;
-								}
-						}
-				}
-				console.log(butsAdd);
+		showButtAddedProduct(target) {
+				target.innerText = 'Added to cart';
+				target.classList.add('viwButAddProdToCart');
+				setTimeout(() => {
+						target.innerText = 'Add to cart';
+						target.classList.remove('viwButAddProdToCart');
+				}, 3000);
 		}
+
 
 }

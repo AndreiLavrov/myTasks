@@ -5,8 +5,6 @@ export class CartModel extends EventEmitter{
 		constructor () {
 				super();
 				this.methodsAJAX = new MethodsAJAX();
-
-				this.allProducts = [];               // is need
 				// this.userLogEmail = false;
 
 				this.accountUserObg = {};
@@ -41,44 +39,8 @@ export class CartModel extends EventEmitter{
 						.catch(err => alert(err));
 		}
 
-
-
-		             // может что сделать с рендорингом каждый раз без сохранения(проверка изменялось ли содержимое карзины)
-
-		// getProductsInCart(allProducts) {
-		// 		this.checkCart();
-		//
-		// 		if (allProducts && allProducts.length) {      // change ?
-		// 				this.allProducts = allProducts;
-		// 		}
-		//
-		// 		if (this.allProducts.length) {
-		// 				this.emit('showProdInCart', this.allProducts);
-		//
-		// 		} else {
-		// 				this.getProdInCartAsinc();
-		// 		}
-		// }
-		//
-		// getProdInCartAsinc() {
-		// 		fetch('http://localhost:3006/products', {
-		// 				headers: {
-		// 						'Content-Type': 'application/json'
-		// 				}
-		// 		})
-		// 				.then((res) => res.json())
-		// 				.then((products) => {
-		//
-		// 						this.allProducts = products;
-		//
-		// 						this.emit('showProdInCart', this.allProducts);
-		// 				})
-		// }
-
-
-
 		addProductToCat(id) {
-				if (this.accountUserObg.cartObgLS[id] !== undefined) {       // if (this.accountUserObg.cartObgLS[id] !== undefined) {
+				if (this.accountUserObg.cartObgLS[id] !== undefined) {
 						this.accountUserObg.cartObgLS[id]++;
 
 				} else {
@@ -89,12 +51,11 @@ export class CartModel extends EventEmitter{
 				this.addChangesToServer();
 		}
 
-
 		minusProduct(id) {
 				if (this.accountUserObg.cartObgLS[id] > 1) {
-						this.accountUserObg.cartObgLS[id] -= 1 ;             // correcting this.accountUserObg.cartObgLS[id] -
+						this.accountUserObg.cartObgLS[id] -= 1 ;
 				} else {
-						delete this.accountUserObg.cartObgLS[id];                                                     // ??
+						delete this.accountUserObg.cartObgLS[id];
 				}
 
 				localStorage.setItem(this.accountUserObg.email, JSON.stringify(this.accountUserObg.cartObgLS) );
@@ -104,7 +65,6 @@ export class CartModel extends EventEmitter{
 
 		delProduct(id) {
 				if (this.accountUserObg.cartObgLS[id] !== undefined) {
-
 						delete this.accountUserObg.cartObgLS[id];
 
 				} else {

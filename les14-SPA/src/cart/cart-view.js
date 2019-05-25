@@ -2,7 +2,6 @@ import { EventEmitter } from '../evente-emitter';
 
 export class CartView extends EventEmitter {
 		constructor () {
-
 				super();
 		}
 
@@ -10,7 +9,7 @@ export class CartView extends EventEmitter {
 				const cartPage = document.querySelector('.cart-page');
 				cartPage.innerHTML = '';
 
-				if (Object.keys(cartObgLS).length === 0) {																							// cartObgLS == {}
+				if (Object.keys(cartObgLS).length === 0) {
 
 						let viewCart = document.createElement('div');
 						viewCart.innerHTML = `Cart is empty!`;
@@ -28,29 +27,25 @@ export class CartView extends EventEmitter {
 								cartPage.classList.remove('hider');
 						}
 				}
-
-
-
 		}
 
-
-
+		/**
+		 * I Use break to avoid sorting out unnecessary options.
+		 * @param allProducts
+		 * @param cartObgLS
+		 * @param cartPage
+		 */
 		drawCart (allProducts, cartObgLS, cartPage) {
-
 				for (let key in cartObgLS) {
-
 						let product;
-						for(let i = 0; i < allProducts.length; i++) {                                  // можно применить хитрый цикл за один проход...
-
-										if (String(allProducts[i].id) === String(key)) { //
-												// Object.assign(product, item);                 // копирование объекта, нужно ли ??
-												product = allProducts[i];
-												break;
-										}
+						for(let i = 0; i < allProducts.length; i++) {                           // можно применить хитрый цикл за один проход...
+								if (String(allProducts[i].id) === String(key)) { //
+										product = allProducts[i];
+										break;
+								}
 						}
-						console.log(`product ${product}`);
 
-						let viewCart = document.createElement('div');        // сначала добав в докум ??
+						let viewCart = document.createElement('div');                      // здесь перениесу в html и шаблонизатором..
 						viewCart.innerHTML = `
 						<div class="row">
 								<button type="button" class="col-1 btn btn-danger btn-sm delete" data-art="${key}" >x</button>
