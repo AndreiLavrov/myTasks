@@ -148,7 +148,7 @@ export class AppModule {
 
 
 		renderCartPage() {
-				if (this.prodModel.allProducts.length > 0) {
+				if (this.prodModel.allProducts.length) {
 						this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.accountUserObg.cartObgLS);
 
 				} else {

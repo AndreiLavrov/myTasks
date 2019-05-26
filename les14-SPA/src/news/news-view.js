@@ -76,6 +76,7 @@ export class NewsView extends EventEmitter {
 				const pageList = document.querySelector('.news-list');
 				let allNews = document.querySelectorAll('.all-news .news-list > li');
 
+
 				[...allNews].forEach((news) => {
 						news.classList.add('hidden');
 				});
@@ -119,10 +120,13 @@ export class NewsView extends EventEmitter {
 
 				for (let i = 0; i < allNews.length; i++) {
 						if (Number(allNews[i].id) === Number(idSelectedOneNews)) {
-
+								page.querySelector('.contentDescrip').innerText = allNews[i].description;
+								page.querySelector('.firstPartDiscr').innerText = allNews[i].content;
+								page.querySelector('.contentDate').innerText = allNews[i].date;
 								page.querySelector('img')
 										.setAttribute('src', '/' + allNews[i].image.large);
-								page.querySelector('p').innerText = allNews[i].content;
+								page.querySelector('.secondPartDiscr').innerText = allNews[i].content2;
+								page.querySelector('.authorPartDiscr').innerText = allNews[i].author;
 
 								page.querySelector('img').onload = () => {
 										document.querySelector('#spinnerMain')

@@ -15,88 +15,11 @@ h1, h3{
 	The Header
 ------------------*/
 
-/*header {*/
-	/*position: fixed;*/
-	/*top: 0;*/
-	/*left:0;*/
-	/*right:0;*/
-
-	/*height: 40px;*/
-	/*z-index: 100;*/
-
-	/*background-color: #282b2c;*/
-	/*padding: 20px 40px;*/
-	/*color: #fff;*/
-	/*box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);*/
-/*}*/
-
-/*header a, footer a {*/
-	/*color: #ffffff;*/
-	/*text-decoration: none;*/
-	/*margin: 5px;*/
-/*}*/
-
-/*header h2.tzine{
-	float: right;
-	opacity:0.9;
-}*/
-
-/*header a:hover{*/
-     /*cursor: pointer;*/
-/*}*/
-/*!**/
-/*header h2.tzine a{*/
-	/*font-size: 13px;*/
-	/*text-transform: uppercase;*/
-	/*display: inline-block;*/
-	/*padding: 12px 18px;*/
-	/*border-radius: 3px;*/
-	/*background-color: #5895DB;*/
-/*}*!*/
-
-
-/*@media (max-width: 500px){*/
-
-	/*header {*/
-		/*padding: 20px 15px;*/
-	/*}*/
-
-	/*header h1{*/
-		/*font-size: 24px;*/
-		/*margin: 0;*/
-	/*}*/
-
-/*}*/
-
-
-
-
 
 /*-----------------
 	The Footer
 ------------------*/
 
-footer {
-	position: relative;
-
-	/*left:0;
-	right:0;*/
-
-	height: 40px;
-	z-index: 100;
-
-	background-color: #282b2c;
-	padding: 40px;
-	color: #fff;
-	box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);
-}
-
-
-footer p {
-	color: #ffffff;
-	text-decoration: none;
-	font-size: 12px;
-}
 
 /*-----------------
 	Main Content
@@ -104,28 +27,43 @@ footer p {
 
 
 .main-content{
-	display: block;                     //
-	position: relative;               //
-    /*height: 70%;                       //*/
+	display: block;
+	position: relative;
+    /*height: 70%;                       /!*/
     width: 100%;
 
 	box-sizing: border-box;
 	text-align: center;
-	margin: 100px auto 60px;
-	padding: 0 40px;
+    margin-top: 60px;
+
 }
 
 
 
 /*-------------------
-	All LoginModel Page
+	all-news Page
 --------------------*/
 
-/*	Search Form	*/
+
+.all-news{
+    display: block;
+    margin: 80px auto;
+    list-style:none;
+    text-align: center;
+    /**/
+    transition: 1s;
+    pointer-events: auto;
+}
 
 .search-line {
-	/*display: block;*/
+	display: block;
 	text-align: left;
+}
+
+
+.search-line span {
+    color: #2B2E31;
+    font-size: large;
 }
 
 .search{
@@ -134,7 +72,7 @@ footer p {
 	vertical-align: center;
 
 	box-sizing: border-box;
-	padding: 10px;
+	padding: 0.2rem;
 	/*width: 400px;*/
 
 	background-color: #FFF;
@@ -143,43 +81,17 @@ footer p {
 	box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
 
 	color: #2B2E31;
-	/*opacity: 0;*/
-}
-
-.search-line span {
-    color: #1e7e34;
-    font-size: large;
-}
-
-
-/*	News List	*/
-
-/*.all-news h3{
-	opacity: 0;
-}*/
-
-.all-news{
-    /*display: block;*/
-	margin: 80px auto;
-	list-style:none;
-	/*max-width: 1400px;*/
-	text-align: center;
-	/*opacity: 0;*/
-
-
-    transition: 1s;
-    pointer-events: auto;
 }
 
 
 .news-list {
-    margin-top: 50px;
+    /*display: block;*/
+    list-style: none;
+    /*margin: 5px;*/
+    /*padding: 0px;*/
 }
 .news-list > li{
-	/*height: 505px;*/
-	/*width: 520px;*/
 	box-sizing:border-box;
-	display: inline-block;
 	cursor: pointer;
 	position: relative;
 	transition: 0.2s;
@@ -198,242 +110,44 @@ footer p {
 }
 
 
-
-.news-list > li.hidden{
-	opacity: 0.2;
-	pointer-events: none;
-}
-
-/* The product image */
+/* The news-list image */
 
 .news-list .news-photo{
+    display: block;
 	text-align: center;
 	box-sizing: border-box;
 }
 
-.news-list .news-photo img{
-	/*width: 510px;*/
-	/*height: 318px;*/
-}
 
-/* Product description */
+/* news-list description */
 
 .news-list .news-description{
-	margin: 20px;
+    display: block;
+    width: 100%;
 
 	color: #5d5d5d;
 	font-size: 14px;
 	line-height: 1.45;
 	white-space: normal;
 
-	/*height: 100px;*/
-	/*width: 460px;*/
-
-
 	list-style: none;
-}
-
-.news-list .news-description li{
-/*//inline-*/
-	/*display: block;*/
-	margin-right: 5px;
-}
-
-
-
-/* Price and order button */
-
-.news-list button{
-	/*position: absolute;*/
-	border-radius: 2px;
-	background-color:  #87bae1;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
-	border: 0;
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 13px;
-	cursor: pointer;
-
-	width: 95px;
-	height: 32px;
-}
-
-.news-list > li:hover .highlight{
-	opacity: 1;
-}
-
-
-
-/*---------------------------
-	Single Product Page
-----------------------------*/
-
-.single-news{
-	z-index: 100;
-}
-
-.overlay{
-    height: 100%;
-	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: #282b2c;
-	transition: 0.6s;
-	z-index: 100;
-}
-
-/*.single-news.visible .overlay{*/
-	/*height: 100%;*/
-/*}*/
-
-.preview-large{
-	box-sizing: border-box;
-	width: 560px;
-	height: 500px;
-	position: fixed;
-	left: 15%;
-	top: 5%;
-	pointer-events: none;
-
-	border-radius: 6px;
-	background-color:  #ffffff;
-
-	z-index: 102;
-	transition: 0.4s;
-
-}
-
-
-.single-news.visible .preview-large{
-	opacity: 1;
-	transition: 1.4s;
-	pointer-events: auto;
-}
-
-
-.preview-large img{
-	width: 100%;
-	height: 280px;
-	border-bottom: 3px solid #efefef;
-	border-radius: 5px 5px 0 0;
-}
-
-.preview-large p{
-	line-height: 23px;
-	padding: 50px 45px;
-}
-
-.close{
-	position: absolute;
-	right: 25px;
-	top: 15px;
-
-	font-size: 28px;
-	color: #b80c09;
-	cursor: pointer;
 }
 
 
 /*---------------------------
 	news Page
 ----------------------------*/
+
 .oneNews{
-	 z-index: 100;
+    margin-top: 60px;
  }
 
-.overlay{
-    height: 100%;
-	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: #282b2c;
-	transition: 0.6s;
-	z-index: 100;
-}
-
-/*.news.visible .overlay{*/
-	/*height: 100%;*/
-/*}*/
-
-.news-container{
-	box-sizing: border-box;
-	width: 760px;
-	height: 100%;
-	position: fixed;
-	left: 50%;
-	margin-left: -375px;
-	top: 50%;
-	margin-top: -275px;
-	pointer-events: none;
-    overflow-y: scroll;
-
-	border-radius: 6px;
-	background-color:  #ffffff;
-
-	z-index: 102;
-	transition: 0.4s;
-
-}
-
-.news.visible .news-container{
-	opacity: 1;
-	transition: 1.4s;
-	pointer-events: auto;
-}
-
-.news-container h3{
-	margin-top: 20px;
-}
-
-.news-container img{
-	width: 100%;
-	height: 380px;
-	border-bottom: 3px solid #efefef;
-	border-radius: 5px 5px 0 0;
-}
-
-.news-container p{
-	line-height: 23px;
-	padding: 50px 45px;
+.contentDate{
+    color: #6c757d;
 }
 
 
 
-/*---------------------------
-	Error Page
-----------------------------*/
-
-.error.page{
-	/*opacity: 0;                                      //*/
-	transition: 0.6s;
-	pointer-events: none;
-	position: absolute;
-	left: 0;
-	top: 100px;
-	width: 100%;
-}
-
-
-.error h3{
-	font-size: 40px;
-}
-
-
-/*------------------
-  ABOUT
------------------- */
-
-.about-container{
-    transition: 0.6s;
-    color: #000000;
-}
-
-.about-container.visible{
-    z-index: 500;
-    opacity: 1;
-}
 
 
 /*----------------
@@ -444,189 +158,131 @@ hide
 	display: none !important;
 }
 
-
-/*	Filter Form	*/
-
-.filters{
-	box-sizing: border-box;
-	padding: 5px 30px 30px;
-	width: 190px;
-	background-color: #FFF;
-	border: 1px solid #DBE3E7;
-	border-radius: 3px;
-	box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
-	position: fixed;
-	text-align: left;
-	color: #2B2E31;
-	opacity: 0;
-	pointer-events: none;
-}
-
-.filters .filter-criteria{
-	display: block;
-	margin: 10px 0 10px;
-}
-
-.filters span{
-	font-size:14px;
-	display: block;
-	margin-bottom: 12px;
-	font-weight: bold;
-	margin-top: 20px;
-}
-
-.filters label{
-	display: block;
-	line-height: 1.4;
-	font-size: 15px;
-}
-
-.filters label input{
-	margin-right: 10px;
-}
-
-.filters button{
-	border-radius: 2px;
-	background-color:  #4BC34B;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
-	border: 0;
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 13px;
-	cursor: pointer;
-
-	width: 95px;
-	height: 32px;
-	margin-top: 10px;
+.hidden{
+    opacity: 0.2;
 }
 
 
-/*	LoginModel List	*/
+/*---------------
+	products page
+------------------*/
 
 .products-list{
-	list-style:none;
-	margin-left:225px;
-	max-width: 1500px;
-	text-align: center;
-	padding: 0;
-	/*opacity: 0;*/
-	font-size: 0;
+    list-style:none;
+    /*margin-left:225px;*/
+    /*max-width: 1500px;*/
+    text-align: center;
+    padding: 0;
+    /*opacity: 0;*/
+    /*font-size: 0;*/
 }
 
-/*.all-products.visible .products-list,*/
-/*.all-products.visible .filters,*/
-/*.all-products.visible h3{*/
-	/*opacity: 1;*/
-	/*transition: 1s;*/
-	/*pointer-events: auto;*/
-/*}*/
-
 .products-list > li{
-	box-sizing:border-box;
-	display: inline-block;
-	cursor: pointer;
-	position: relative;
-	transition: 0.2s;
+    box-sizing:border-box;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
 
-	text-align:left;
-	font:normal 12px sans-serif;
+    text-align:left;
+    font:normal 12px sans-serif;
 
-	background-color:#ffffff;
-	border:1px solid #dbe3e7;
-	border-radius: 3px;
-	box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
+    background-color:#ffffff;
+    border:1px solid #dbe3e7;
+    border-radius: 3px;
+    box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
 
-	margin: 0 12px 14px 0;
-	padding: 25px;
+    margin: 0 12px 14px 0;
+    padding: 25px;
 }
 
 
 /* The product image */
 
 .products-list .product-photo{
-	display: block;
-	text-align: center;
-	box-shadow : 0 0 20px 8px #f3f3f3 inset;
+    /*display: block;*/
+    /*text-align: center;*/
+    /*box-shadow : 0 0 20px 8px #f3f3f3 inset;*/
 
-	/*width: 275px;*/
-	margin-bottom: 25px;
-	padding: 20px 0;
-	box-sizing: border-box;
+    /*!*width: 275px;*!*/
+    /*margin-bottom: 25px;*/
+    /*padding: 20px 0;*/
+    /*box-sizing: border-box;*/
 }
 
 /* The product name */
 
 .products-list h2{
-	/*display: block;*/
-	font-size: 18px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow:ellipsis;
-	max-width: 200px;
-	margin:0;
+    /*display: block;*/
+    /*font-size: 18px;*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    max-width: 100%;
+    margin:0;
 }
 
 .products-list h2 a{
-	text-decoration: none;
-	color: #2B2E31;
+    text-decoration: none;
+    color: #2B2E31;
 }
 
 /* Product description */
 
 .products-list .product-description{
-	margin-top: 20px;
+    margin-top: 20px;
 
-	color: #5d5d5d;
-	font-size: 14px;
-	line-height: 1.45;
-	white-space: normal;
+    color: #5d5d5d;
+    font-size: 14px;
+    line-height: 1.45;
+    white-space: normal;
 
-	max-width: 260px;
-	margin-bottom: 20px;
+    max-width: 260px;
+    margin-bottom: 20px;
 
-	list-style: none;
+    list-style: none;
 }
 
 .products-list .product-description li{
-	display: inline-block;
-	margin-right: 5px;
+    display: inline-block;
+    margin-right: 5px;
 }
 
 .products-list .product-description li:first-child{
-	display: block;
+    display: block;
 }
 
 .products-list .product-description li span{
-	font-weight: bold;
+    font-weight: bold;
 }
 
 /* Price and order button */
 
 .products-list button{
-	border-radius: 2px;
-	background-color:  #87bae1;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
-	border: 0;
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 13px;
-	cursor: pointer;
+    margin: 3px;
+    /*border-radius: 2px;*/
+    /*background-color:  #87bae1;*/
+    /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);*/
+    /*border: 0;*/
+    /*color: #ffffff;*/
+    /*font-weight: bold;*/
+    /*font-size: 13px;*/
+    /*cursor: pointer;*/
 
-	width: 95px;
-	height: 32px;
+    /*width: 95px;*/
+    /*height: 32px;*/
 }
 
 .products-list .product-price{
-	float: right;
+    float: right;
+    text-align: right;
+    color:  #4e4e4e;
+    font-weight: bold;
+    font-size: 20px;
 
-	color:  #4e4e4e;
-	font-weight: bold;
-	font-size: 20px;
-
-	padding-top: 6px;
-	margin: 0;
+    padding-top: 6px;
+    margin: 0;
 }
-
 
 
 /*-------------
@@ -652,6 +308,21 @@ button.viwButAddProdToCart{
 
 
 
+
+
+/*------------------
+  ABOUT
+------------------ */
+
+.about-container{
+    transition: 0.6s;
+    color: #000000;
+}
+
+.about-container.visible{
+    z-index: 500;
+    opacity: 1;
+}
 
 
 
@@ -819,4 +490,23 @@ button.viwButAddProdToCart{
     color: #dc3545;
 }
 
+
+/*---------------------------
+	Error Page
+----------------------------*/
+
+.error.page{
+    /*opacity: 0;                                      //*/
+    transition: 0.6s;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 100px;
+    width: 100%;
+}
+
+
+.error h3{
+    font-size: 40px;
+}
 

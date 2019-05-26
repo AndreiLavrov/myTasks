@@ -122,7 +122,7 @@ export class CartView extends EventEmitter {
 		 */
 		showUserAccountEmail(userLogName) {
 				if (userLogName) {
-						let name = document.querySelector('.nameLogUser')
+						let name = document.querySelector('.authorDisplay')
 						name.innerHTML = userLogName;
 				}
 		}
