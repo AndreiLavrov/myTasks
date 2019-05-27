@@ -4,6 +4,7 @@ export class LoginView extends EventEmitter {
 		constructor () {
 				super();
 				this.handlersAdded = false;
+				this.listenLoginOut();
 		}
 
 		/**
@@ -184,7 +185,29 @@ export class LoginView extends EventEmitter {
 
 		}
 
+		/**
+		 * draw in navbar userLogName
+		 * @param userLogName - (string) registered user name
+		 */
+		showUserAccountEmail(email) {
+				console.log(1);
+				if (email) {
+						console.log(2);
 
+						let name = document.querySelector('.authorDisplay')
+						name.innerHTML = email;
+						console.log(3);
+				}
+		}
+
+		listenLoginOut () {
+				let loginOut = document.querySelector('.loginOut');
+				loginOut.addEventListener('click', (e) => {
+						this.emit('loginOut');
+						let name = document.querySelector('.authorDisplay');
+						name.innerHTML = '';
+						});
+		};
 		// showUserStatusLogin (userStatusObj) {
 		//
 		// 		alert(`Ok. You logged under the email address ${userStatusObj.email}`);    //

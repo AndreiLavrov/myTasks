@@ -8,18 +8,24 @@ export class LoginModel extends EventEmitter{
 				this.methodsAJAX = new MethodsAJAX();
 				this.userLogEmail = false;
 				// localStorage.setItem('userLogName', JSON.stringify(this.userLogName) );
-				// this.checkUserLogName();
+				// this.checkIsUserRegistered();
 		}
 
 
-		// /**
-		//  * check is user registered
-		//  */
-		// checkUserLogName() {
-		// 		if ( localStorage.getItem('userLogName') != null) {
-		// 				this.userLogName = JSON.parse (localStorage.getItem('userLogName'));
-		// 		}
-		// }
+		/**
+		 * check is user registered
+		 */
+		checkIsUserRegistered() {
+				console.log(3);
+				if ( localStorage.getItem('userLogEmail') != null) {
+						console.log(4);
+
+						this.userLogEmail = JSON.parse (localStorage.getItem('userLogEmail'));
+						this.emit('userIsRegistered', this.userLogEmail);
+						console.log(this.userLogEmail);
+
+				}
+		}
 
 
 		/**
@@ -108,10 +114,15 @@ export class LoginModel extends EventEmitter{
 		userIsAuthorized(userObj) {
 				this.userLogEmail = userObj.email;
 				localStorage.setItem('userLogEmail', JSON.stringify(userObj.email) );
-
-				this.emit('userIsAuthorized', userObj);
+				this.checkIsUserRegistered();
+				this.emit('goToCart');
+				// window.location.hash = '#cart';
 		}
 
+		loginOut() {
+				localStorage.removeItem('cart');
+				localStorage.removeItem('userLogEmail');
+		}
 
 
 }

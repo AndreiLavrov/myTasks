@@ -116,15 +116,6 @@ export class CartView extends EventEmitter {
 		}
 
 
-		/**
-		 * draw in navbar userLogName
-		 * @param userLogName - (string) registered user name
-		 */
-		showUserAccountEmail(userLogName) {
-				if (userLogName) {
-						let name = document.querySelector('.authorDisplay')
-						name.innerHTML = userLogName;
-				}
-		}
+
 
 }

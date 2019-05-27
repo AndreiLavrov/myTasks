@@ -9,7 +9,7 @@ export class ProductsModel extends EventEmitter {
 		}
 
 		getProducts () {
-				if (this.allProducts.length > 0) {
+				if (this.allProducts.length && this.allProducts.length > 0) {
 						this.emit('productsReceived', this.allProducts);
 
 				} else {
@@ -24,8 +24,9 @@ export class ProductsModel extends EventEmitter {
 		getProdPromise () {
 				return this.methodsAJAX.getDataFetch('http://localhost:3006/products')
 						.then((products) => {
-
+								console.log(products);
 								this.allProducts = products;
+
 						});
 		}
 

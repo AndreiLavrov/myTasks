@@ -14,7 +14,10 @@ h1, h3{
 /*-----------------
 	The Header
 ------------------*/
-
+.authorDisplay{
+    color: #005cbf;
+    font-size: 1.2rem;
+}
 
 /*-----------------
 	The Footer
@@ -288,9 +291,9 @@ hide
 /*-------------
 button add prod to cart
 ------------- */
-
-button.viwButAddProdToCart{
-	background-color: #dc3545;
+button.hideButtonAddProd {
+    /*display: none;*/
+    opacity: 0.2;
 }
 
 

@@ -5,12 +5,12 @@ export class ProductsView extends EventEmitter {
 				super();
 		}
 
-		showProductsPage (allProducts, cartObgLS) {
+		showProductsPage (allProducts, userLogEmail) {
 				const list = document.querySelector('.products-list');
 				const page = document.querySelector('.all-products');
 
 				if (!this.savedProductsHtml) {
-						this.buildProductsPage(allProducts, list);
+						this.buildProductsPage(allProducts, list, userLogEmail);
 				}
 
 				document.querySelector('#spinnerMain')
@@ -19,33 +19,49 @@ export class ProductsView extends EventEmitter {
 				page.classList.remove('hider');
 		}
 
-		buildProductsPage (allProducts, list) {
+		buildProductsPage (allProducts, list, userLogEmail) {
 				const theTemplateScript = document.getElementById('products-template').innerHTML;
 				const theTemplate = Handlebars.compile(theTemplateScript);
 
 				this.savedProductsHtml = theTemplate(allProducts);
 				list.innerHTML = this.savedProductsHtml;
 
+
 				let buttonsAdd = document.querySelectorAll('.add-to-cart');
+				console.log(buttonsAdd);
+				if (userLogEmail) {
+						buttonsAdd.forEach((item) => {
+								item.classList.remove('hideButtonAddProd');
+						})
+				}
+				console.log(buttonsAdd);
+
 				buttonsAdd.forEach((but) => {
 
 						but.addEventListener('click', (e) => {
 
 								let idElem = e.target.getAttribute('id');
+								this.showButtAddedProduct(e.target, userLogEmail);
 								this.emit('addProdToCat', idElem);
-
-								this.showButtAddedProduct(e.target);
 						});
 				});
 		}
 
-		showButtAddedProduct(target) {
-				target.innerText = 'Added to cart';
-				target.classList.add('viwButAddProdToCart');
-				setTimeout(() => {
-						target.innerText = 'Add to cart';
-						target.classList.remove('viwButAddProdToCart');
-				}, 3000);
+		showButtAddedProduct(target, userLogEmail) {
+				console.log(userLogEmail);
+				if (userLogEmail) {
+						target.innerText = 'Added to cart';
+						setTimeout(() => {
+								target.innerText = 'to cart';
+						}, 2000);
+				}
+		}
+
+		addHideButtonAddProd() {
+				let buttonsAdd = document.querySelectorAll('.add-to-cart');
+						buttonsAdd.forEach((item) => {
+								item.classList.add('hideButtonAddProd');
+						})
 		}
 
 

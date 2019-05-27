@@ -5,74 +5,65 @@ export class CartModel extends EventEmitter{
 		constructor () {
 				super();
 				this.methodsAJAX = new MethodsAJAX();
-				// this.userLogEmail = false;
 
-				this.accountUserObg = {};
-				this.accountUserObg.cartObgLS = {};
-
-				// this.checkUserLogEmail();
-				// this.getUserObgFromServer(this.userLogEmail);
-
+				this.cart = {};
+				this.checkCart();
 		}
 
-		addAccountUserObg(accountUserObg) {
-				this.accountUserObg = accountUserObg;
-				if (!this.accountUserObg.cartObgLS) {
-						this.accountUserObg.cartObgLS = {};
+		checkCart() {
+				if (!localStorage.getItem('userLogEmail')){
+						console.log('return false');
+						return false;
 				}
-				this.setCartToLS();
+
+				if ( localStorage.getItem('cart')){
+						this.cart = JSON.parse (localStorage.getItem('cart'));
+				}
+				return true;
 		}
 
-		setCartToLS() {
-				localStorage.setItem(this.accountUserObg.email, JSON.stringify(this.accountUserObg.cartObgLS) );
-		};
-
-
-
-
-		addChangesToServer() {
-				this.methodsAJAX.changePost('http://localhost:3006/login', this.accountUserObg.id, this.accountUserObg)
-						.then(() => {
-
-								console.log('addedChangesToServer');                                              // //// change
-						})
-						.catch(err => alert(err));
-		}
 
 		addProductToCat(id) {
-				if (this.accountUserObg.cartObgLS[id] !== undefined) {
-						this.accountUserObg.cartObgLS[id]++;
-
-				} else {
-						this.accountUserObg.cartObgLS[id] = 1;
+				if (!this.checkCart()) {
+						return false;
 				}
 
-				localStorage.setItem(this.accountUserObg.email, JSON.stringify(this.accountUserObg.cartObgLS) );
-				this.addChangesToServer();
+				if (this.cart[id] !== undefined) {
+						this.cart[id]++;
+
+				} else {
+						this.cart[id] = 1;
+				}
+
+				localStorage.setItem('cart', JSON.stringify(this.cart) );
 		}
 
 		minusProduct(id) {
-				if (this.accountUserObg.cartObgLS[id] > 1) {
-						this.accountUserObg.cartObgLS[id] -= 1 ;
+				if (!this.checkCart() ) {
+						return false;
+				}
+				if (this.cart[id] > 1) {
+						this.cart[id] -= 1 ;
 				} else {
-						delete this.accountUserObg.cartObgLS[id];
+						delete this.cart[id];
 				}
 
-				localStorage.setItem(this.accountUserObg.email, JSON.stringify(this.accountUserObg.cartObgLS) );
-				this.addChangesToServer();
+				localStorage.setItem('cart', JSON.stringify(this.cart) );
 		}
 
 
 		delProduct(id) {
-				if (this.accountUserObg.cartObgLS[id] !== undefined) {
-						delete this.accountUserObg.cartObgLS[id];
+				if (!this.checkCart() ) {
+						return false;
+				}
+				if (this.cart[id] !== undefined) {
+						delete this.cart[id];
 
 				} else {
 						return null;
 				}
 
-				localStorage.setItem(this.accountUserObg.email, JSON.stringify(this.accountUserObg.cartObgLS) );
-				this.addChangesToServer();
+				localStorage.setItem('cart', JSON.stringify(this.cart) );
 		}
 
 		// checkCart() {

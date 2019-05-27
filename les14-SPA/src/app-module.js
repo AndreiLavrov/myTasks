@@ -48,7 +48,9 @@ export class AppModule {
 				loginModel.on('emailIsTaken', (userStatusObj) => this.emailIsTaken(userStatusObj));
 				loginView.on('getUserFormSignUp', (userObg) => this.signUp(userObg));
 				loginView.on('getUserFormSignIn', (userObj) => this.signIn(userObj));
-				loginModel.on('userIsAuthorized', (userObj) => this.userIsAuthorized(userObj));
+				loginModel.on('userIsRegistered', (email) => this.showUserAccountEmail(email));
+				loginView.on('loginOut', () => this.loginOut());
+				loginModel.on('goToCart', () => window.location.hash = '#cart');
 
 		}
 
@@ -93,7 +95,9 @@ export class AppModule {
 		init () {
 				this.initRoutes();
 				this.newsModel.getNews();                                                 // нужно ли каждый раз получать новости....? при обнновлении..
-				this.showUserAccountEmail();
+				setTimeout(() => {																												// после отрисовки логина
+						return this.loginModel.checkIsUserRegistered();
+				}, 1000);
 		}
 
 
@@ -143,22 +147,21 @@ export class AppModule {
 
 		showProductsPage(allProducts) {
 				// this.cartModel.checkUserLogEmail();                                                // fix not need
-				this.productsView.showProductsPage(allProducts, this.cartModel.accountUserObg.cartObgLS);
+				this.productsView.showProductsPage(allProducts, this.loginModel.userLogEmail);
 		}
 
 
 		renderCartPage() {
-				if (this.prodModel.allProducts.length) {
-						this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.accountUserObg.cartObgLS);
+				if (this.prodModel.allProducts.length && this.prodModel.allProducts.length > 0) {
+						this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cart);
 
 				} else {
 
 						this.prodModel.getProdPromise()
-								.then((products) => {
-
-										this.cartView.showCartPage(products, this.cartModel.accountUserObg.cartObgLS);
+								.then(() => {
+										this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cart);
 								})
-								.catch(e => alert(`.catch-showAccount ${e}`))                //
+								.catch(e => console.log(e))                                                //
 				}
 		}
 
@@ -171,17 +174,15 @@ export class AppModule {
 
 		minusProductFromCart(id) {
 				this.cartModel.minusProduct(id);
-				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.accountUserObg.cartObgLS);
+				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cart);
 		}
 
 		delProductFromCart(id) {
 				this.cartModel.delProduct(id);
-				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.accountUserObg.cartObgLS);
+				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cart);
 		}
 
-		showUserAccountEmail() {
-				this.cartView.showUserAccountEmail(this.cartModel.userLogEmail);
-		}
+
 
 
 
@@ -215,15 +216,21 @@ export class AppModule {
 		}
 
 
-		userIsAuthorized(userObg) {
-				this.cartView.showUserAccountEmail(userObg.email);
-				this.cartModel.addAccountUserObg(userObg);																				// || window.location.hash = '#cart';
-				window.location.hash = '#cart';
+		showUserAccountEmail(email) {
+
+				this.loginView.showUserAccountEmail(email);
+				console.log(15);
 		}
 
 		signIn(userObg) {
 				this.loginModel.signIn(userObg);
 		}
+
+		loginOut() {
+				this.loginModel.loginOut();
+				this.productsView.addHideButtonAddProd()
+;		}
+
 
 
 

@@ -50,13 +50,14 @@
                 <li class="nav-item">
                     <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link play">PLAY</a>
                 </li>
-                <!--<li class="nav-item">-->
-                    <!--<a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link login">LOGIN</a>-->
-                <!--</li>-->
+                <li class="nav-item">
+                    <a data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="nav-link login">LOGIN</a>
+                </li>
             </ul>
         </div>
         <div   class="row align-items-end">
-            <a  data-toggle="collapse" data-target="#navbarSupportContent" href="#" class="authorDisplay nav-link login">LOG IN</a>
+            <span class="mr-2 authorDisplay"></span>
+            <button class="btn btn-sm btn-outline-secondary loginOut">login out</button>
         </div>
         </nav>
 </header>
@@ -172,7 +173,7 @@
                                         data-target="#modalIsOutOfStock">buy...!</button>
                             </div>
                             <div class="col-6 col-md-12">
-                                <button class="add-to-cart btn btn-outline-success" id="{{id}}">to cart</button>
+                                <button class="add-to-cart btn btn-outline-success hideButtonAddProd" id="{{id}}">to cart</button>
                             </div>
                         </div>
                     </div>
