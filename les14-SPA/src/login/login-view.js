@@ -190,13 +190,9 @@ export class LoginView extends EventEmitter {
 		 * @param userLogName - (string) registered user name
 		 */
 		showUserAccountEmail(email) {
-				console.log(1);
 				if (email) {
-						console.log(2);
-
 						let name = document.querySelector('.authorDisplay')
 						name.innerHTML = email;
-						console.log(3);
 				}
 		}
 
@@ -208,15 +204,5 @@ export class LoginView extends EventEmitter {
 						name.innerHTML = '';
 						});
 		};
-		// showUserStatusLogin (userStatusObj) {
-		//
-		// 		alert(`Ok. You logged under the email address ${userStatusObj.email}`);    //
-		// 		// рсуем в навбаре имя ..
-		//
-		// 		window.location.hash = '#cart';
-		// 		// this.drawUserLogName(userStatusObj.userName);
-		// }
-
-
 
 }

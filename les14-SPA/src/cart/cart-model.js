@@ -12,7 +12,7 @@ export class CartModel extends EventEmitter{
 
 		checkCart() {
 				if (!localStorage.getItem('userLogEmail')){
-						console.log('return false');
+						this.cart = {};
 						return false;
 				}
 
@@ -65,43 +65,6 @@ export class CartModel extends EventEmitter{
 
 				localStorage.setItem('cart', JSON.stringify(this.cart) );
 		}
-
-		// checkCart() {
-		// 		localStorage.setItem(`${this.accountUserObg.email}`, JSON.stringify(`${this.accountUserObg.cartObgLS}`) );
-		//
-		// 		if ( localStorage.getItem(`${this.accountUserObg.email}`) {
-		// 				this.cartObgLS = JSON.parse (localStorage.getItem('cart'));
-		// 		}
-		// }
-
-		// *
-		//  * instead of processing on the server, we are taking objects here.
-		//  * @param userObj
-		// getUserObgFromServer(userLogEmail) {                                                     // add test on date fixed
-		// 		console.log(userLogEmail);
-		// 		this.methodsAJAX.getDataFetch('http://localhost:3006/login')
-		// 				.then((allUserObj) => {
-		//
-		// 						for (let i = 0; i < allUserObj.length; i++) {
-		//
-		// 								if (allUserObj[i].email === userLogEmail) {
-		//
-		// 										this.accountUserObg = allUserObj[i];
-		// 										console.log(this.accountUserObg);
-		//
-		// 										this.setCartToLS();
-		//
-		// 												// this.checkCart();
-		//
-		// 										//this.emit('creatAccountUserObg', this.accountUserObg);
-		//
-		// 										break;
-		// 								}
-		// 						}
-		// 				})
-		// 				.catch(err => alert(err));
-		// }
-
 
 }
 

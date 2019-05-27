@@ -7,8 +7,7 @@ export class LoginModel extends EventEmitter{
 
 				this.methodsAJAX = new MethodsAJAX();
 				this.userLogEmail = false;
-				// localStorage.setItem('userLogName', JSON.stringify(this.userLogName) );
-				// this.checkIsUserRegistered();
+				this.checkIsUserRegistered();
 		}
 
 
@@ -18,21 +17,18 @@ export class LoginModel extends EventEmitter{
 		checkIsUserRegistered() {
 				console.log(3);
 				if ( localStorage.getItem('userLogEmail') != null) {
-						console.log(4);
+						console.log('userLogEmail != null >> userIsRegistered');
 
 						this.userLogEmail = JSON.parse (localStorage.getItem('userLogEmail'));
 						this.emit('userIsRegistered', this.userLogEmail);
-						console.log(this.userLogEmail);
-
 				}
 		}
-
 
 		/**
 		 * Get an array objects of the server. Checking if there is an object
 		 * with such email. If true - there will be a validation error event
 		 * @param userObj - this is user data from the form
-		 * @returns {PromiseLike<T | never> | Promise<T | always> | *}                    // как правильно коментнуть ?
+		 * @returns {PromiseLike<T | never> | Promise<T | always> | *}
 		 */
 		checkIsTakenEmail(userObj) {
 				return this.methodsAJAX.getDataFetch('http://localhost:3006/login')
@@ -47,7 +43,7 @@ export class LoginModel extends EventEmitter{
 										}
 								}
 						})
-						.catch(err => alert(err));
+						.catch(err => console.log(err));
 		}
 
 		/**
@@ -64,7 +60,7 @@ export class LoginModel extends EventEmitter{
 										this.addNewUser(userObj);
 								}
 						})
-						.catch(err => alert(err));                 //
+						.catch(err => console.log(err));
 		}
 
 		/**
@@ -75,13 +71,10 @@ export class LoginModel extends EventEmitter{
 				this.methodsAJAX.sendData('http://localhost:3006/login', userObj)
 						.then(() => {
 
-								// this.emit('addedNewUser', userObj);
 								this.userIsAuthorized(userObj);
-
 								alert('addNewUser');
-
 						})
-						.catch(err => alert(err));                                   // not alert !!!!
+						.catch(err => console.log(err));
 		}
 
 		/**
@@ -97,14 +90,12 @@ export class LoginModel extends EventEmitter{
 										if (allUserObj[i].userName === userObj.userName
 												&& allUserObj[i].pass === userObj.pass
 												&& allUserObj[i].email === userObj.email) {
-
 												this.userIsAuthorized(allUserObj[i]);
 												break;
 										}
 								}
-
 						})
-						.catch(err => alert(err));
+						.catch(err => console.log(err));
 		}
 
 		/**
@@ -112,18 +103,18 @@ export class LoginModel extends EventEmitter{
 		 * @param userObj
 		 */
 		userIsAuthorized(userObj) {
+				this.loginOut();
 				this.userLogEmail = userObj.email;
 				localStorage.setItem('userLogEmail', JSON.stringify(userObj.email) );
 				this.checkIsUserRegistered();
-				this.emit('goToCart');
-				// window.location.hash = '#cart';
+				this.emit('goToCart');   // до эт метода нужно очистить корзину
 		}
 
 		loginOut() {
+				this.userLogEmail = false;
 				localStorage.removeItem('cart');
 				localStorage.removeItem('userLogEmail');
 		}
-
 
 }
 

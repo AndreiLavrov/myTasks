@@ -29,8 +29,7 @@ export class AppModule {
 				this.loginModel = loginModel;
 				this.loginView = loginView;
 
-				this.init();
-				this.initHeaderButtons();
+
 
 				newsModel.on('getNews', (news) => this.generateAllNewsHTML(news));
 				newsModel.on('filterNews', (news) => this.showFilterNews(news));
@@ -50,8 +49,11 @@ export class AppModule {
 				loginView.on('getUserFormSignIn', (userObj) => this.signIn(userObj));
 				loginModel.on('userIsRegistered', (email) => this.showUserAccountEmail(email));
 				loginView.on('loginOut', () => this.loginOut());
+				//loginModel.on('needEmptyCartObj', () => this.loginOut());
 				loginModel.on('goToCart', () => window.location.hash = '#cart');
 
+				this.init();
+				this.initHeaderButtons();
 		}
 
 
@@ -93,11 +95,9 @@ export class AppModule {
 
 
 		init () {
+				this.loginModel.checkIsUserRegistered();
 				this.initRoutes();
-				this.newsModel.getNews();                                                 // нужно ли каждый раз получать новости....? при обнновлении..
-				setTimeout(() => {																												// после отрисовки логина
-						return this.loginModel.checkIsUserRegistered();
-				}, 1000);
+				this.newsModel.getNews();
 		}
 
 
@@ -115,7 +115,7 @@ export class AppModule {
 
 		generateAllNewsHTML(news) {
 				this.newsView.generateAllNewsHTML(news);
-				window.dispatchEvent(new HashChangeEvent('hashchange'));             // ?
+				window.dispatchEvent(new HashChangeEvent('hashchange'));
 		}
 
 		renderHomePage () {
@@ -146,27 +146,25 @@ export class AppModule {
 
 
 		showProductsPage(allProducts) {
-				// this.cartModel.checkUserLogEmail();                                                // fix not need
 				this.productsView.showProductsPage(allProducts, this.loginModel.userLogEmail);
 		}
 
-
 		renderCartPage() {
 				if (this.prodModel.allProducts.length && this.prodModel.allProducts.length > 0) {
+						console.log(this.cartModel.cart);
+						console.log(this.prodModel.allProducts);
 						this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cart);
 
 				} else {
-
 						this.prodModel.getProdPromise()
 								.then(() => {
+										console.log(this.prodModel.allProducts);
+										console.log(this.cartModel.cart);
 										this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cart);
 								})
 								.catch(e => console.log(e))                                                //
 				}
 		}
-
-
-
 
 		addProdToCat(id) {
 				this.cartModel.addProductToCat(id);
@@ -182,22 +180,13 @@ export class AppModule {
 				this.cartView.showCartPage(this.prodModel.allProducts, this.cartModel.cart);
 		}
 
-
-
-
-
 		renderAboutPage () {
-
 				this.aboutModel.getAboutData();
-				// this.aboutView.showAboutPage();
 		}
-
 
 		showAboutPage(aboutData) {
 				this.aboutView.showAboutPage(aboutData);
 		}
-
-
 
 		renderLoginPage() {
 				this.loginView.showLoginPage();
@@ -215,11 +204,8 @@ export class AppModule {
 				this.loginModel.signUp(userObg);
 		}
 
-
 		showUserAccountEmail(email) {
-
 				this.loginView.showUserAccountEmail(email);
-				console.log(15);
 		}
 
 		signIn(userObg) {
@@ -227,13 +213,11 @@ export class AppModule {
 		}
 
 		loginOut() {
+				this.cartModel.cart = {};
 				this.loginModel.loginOut();
-				this.productsView.addHideButtonAddProd()
-;		}
-
-
-
-
+				this.productsView.addHideButtonAddProd();
+				this.cartView.emptyCartView();
+		}
 
 		renderErrorPage () {
 				const page = document.querySelector('.error');

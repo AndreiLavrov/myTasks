@@ -38,41 +38,57 @@ export class CartView extends EventEmitter {
 		drawCart (allProducts, cartObgLS, cartPage) {
 				for (let key in cartObgLS) {
 						let product;
-						for(let i = 0; i < allProducts.length; i++) {                           // можно применить хитрый цикл за один проход...
-								if (String(allProducts[i].id) === String(key)) { //
+						for(let i = 0; i < allProducts.length; i++) {
+								if (String(allProducts[i].id) === String(key)) {
 										product = allProducts[i];
 										break;
 								}
 						}
 
-						let viewCart = document.createElement('div');                      // здесь перениесу в html и шаблонизатором..
+						let viewCart = document.createElement('div');
 						viewCart.innerHTML = `
+<div class="col-12 prod prod-in-cart-${key}">		
+		<div class="row">
+				<div class="col-2 col-md-1">
+						<button type="button" class="btn btn-outline-danger btn-sm delete" data-art="${key}" >x</button>
+						<div class="col-11"></div>
+				</div>
+		</div>
+		<div class="row">
+				<div class="col-8 col-sm-7 col-md-4 col-lg-3"><img class="img-fluid" src="${product.image.small}"></div>
+				<div class="col-12 col-md-8 col-lg-9">
 						<div class="row">
-								<button type="button" class="col-1 btn btn-danger btn-sm delete" data-art="${key}" >x</button>
-								<div class="col-11"></div>
+								<span class="col-12 h5 mb-4 productName">${product.name}</span>
+								<div class="col-12 justify-content-around">${product.description}</div>
 						</div>
-						<div class="row">
-								<div class="col-6"><img class="img-fluid" src="${product.image.small}"></div>
-								<div class="col-6"></div>
-						</div>
-						<div class="row">
-								<span class="col-12 productName">${product.name}</span>
-						</div>
-						<div class="row">
-								<button type="button" class="col-2 btn btn-success minus" data-art="${key}">-</button>
-								<span class="col-3 productCount">${cartObgLS[key]}</span>
-								<button type="button" class="col-2 btn btn-success plus" data-art="${key}">+</button>
-								<span class="col-5 sumProductPrice" data-art="${product.price}">${cartObgLS[key] * product.price}</span>
-						</div>`;
+				</div>
+		</div>
+		<div class="row">
+				<div class="col-sm-7 totalAmount">
+						<span class="mr-sm-0 h5">Total amount of goods</span>
+				</div>
+				<div class="col-2 col-sm-1">		
+						<button type="button" class="btn btn-outline-success mr-sm-0 minus" data-art="${key}">-</button>
+				</div>
+				<div class="col-2 col-sm-2">	
+						<span class="productCount h5">${cartObgLS[key]}</span>
+				</div>
+				<div class="col-2 col-sm-2">	
+						<button type="button" class="btn btn-outline-success ml-sm-0 plus" data-art="${key}">+</button>
+				</div>
+				<div class="col-sm-8 priceForAll">	
+						<span class="h5">Price for all</span>
+				</div>
+				<div class="col-12 col-sm-4 justify-content-end">	
+						<span class="sumProductPrice" data-art="${product.price}">${cartObgLS[key] * product.price}</span>
+				</div>
+		</div>
+</div>`;
 
-						viewCart.classList.add(`prod-in-cart-${key}`);
-						viewCart.classList.add(`prod`);
-						viewCart.classList.add(`col-md-6`);
-						viewCart.classList.add(`col-lg-4`);
+						viewCart.classList.add('divViewCart');
 
 						cartPage.appendChild(viewCart);
 				}
-
 
 				let arrButPlus = document.querySelectorAll('.plus');
 				arrButPlus.forEach((item) => {
@@ -83,7 +99,7 @@ export class CartView extends EventEmitter {
 								this.emit('addProdToCat', id);
 
 								let productCount = document.querySelector(`.prod-in-cart-${id} .productCount`);
-								productCount.innerHTML = Number(productCount.innerHTML) + 1;                // нужна ли отдельная функция ?
+								productCount.innerHTML = Number(productCount.innerHTML) + 1;
 
 								let sumProductPrice = document.querySelector(`.prod-in-cart-${id} .sumProductPrice`);
 								let productPrice = sumProductPrice.getAttribute('data-art');
@@ -115,7 +131,10 @@ export class CartView extends EventEmitter {
 
 		}
 
-
-
+		emptyCartView() {
+				let cartPage = document.querySelector('.cart-page');
+				cartPage.innerHTML = 'Cart is empty!';
+				console.log('emptyCartView');
+		}
 
 }
